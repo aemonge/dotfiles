@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Compton
+GenericName=xcomprg
+Comment=Better Xcomgr Transparency manager
+Exec=compton -i 0.75 &
+Terminal=false
+Type=Application
+Icon=
+Categories=
+StartupNotify=false

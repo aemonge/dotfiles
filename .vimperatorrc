@@ -1,0 +1,39 @@
+set runtimepath+=~/.vimperator/vimperator-plugins
+loadplugins
+map C :firebug console-focus<cr>
+
+set noscrollbars
+set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
+set toolbars=noaddons,nobookmarks,nomenu,nonavigation,tabs
+set defsearch=duckduckgo
+:set defsearch=duckduckgo
+
+nmap <F2> :set toolbars=invtabs<CR>
+nmap <F3> :set toolbars=invnavigation<CR>
+map <silent> <F4> :js toggle_bottombar()<CR>
+
+" map <S-j> <C-p>
+" map <S-k> <C-n>
+map <C-w> :tabn<cr>
+map <C-S-w> :tabp<cr>
+
+map <C-1> b1<cr>
+map <C-2> b2<cr>
+map <C-3> b3<cr>
+map <C-4> b4<cr>
+map <C-5> b5<cr>
+map <C-6> b6<cr>
+map <C-7> b7<cr>
+map <C-8> b8<cr>
+map <C-9> b9<cr>
+map <c-m> gT
+
+
+:js << EOF
+function toggle_bottombar() {
+    var bb = document.getElementById('liberator-bottombar');
+    if (!bb)
+        return;
+    bb.style.height = (bb.style.height == '') ? '0px' : '';
+    bb.style.overflow = (bb.style.height == '') ? '' : 'hidden';
+}

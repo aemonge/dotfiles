@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Nitrogen
+GenericName=Multi Screen Wallpaper
+Comment=A default X11 simple multi screen wallpaper; better than LXDE wallpaper managment
+Exec=nitrogen --restore &
+Terminal=false
+Type=Application
+Icon=
+Categories=
+StartupNotify=false

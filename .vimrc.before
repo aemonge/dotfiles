@@ -1,0 +1,142 @@
+let mapleader = ","
+set t_Co=256
+if $SHELL =~ 'bin/fish'
+        set shell=/bin/bash
+endif
+
+" Vundle
+        """"""""""""""""""""""""""""
+        """""""" Vundle Main """""""
+        """"""""""""""""""""""""""""
+        " requiered opts
+        set nocompatible " be iMproved
+        filetype off " required!
+        set rtp+=~/.vim/bundle/vundle/
+        call vundle#rc()
+        Bundle 'gmarik/vundle'
+
+        """"""""""""""""""""""""""""
+        " Extend expected features "
+        """"""""""""""""""""""""""""
+                " Cycle Through words enumeration like True/False
+                Bundle 'zef/vim-cycle'
+                " Complete your search
+                Bundle 'SearchComplete'
+                " Move between camelCaseWords
+                Bundle 'bkad/CamelCaseMotion'
+                " Auto close () "" [] <p>
+                Bundle 'Townk/vim-autoclose'
+                Bundle 'HTML-AutoCloseTag'
+
+        """""""""""""""""""""""""""
+        """""""" IDE """""""""""""
+        """""""""""""""""""""""""""
+                " IDE like for git, svn, svk, ...
+                Bundle 'vcscommand.vim'
+
+        """""""""""""""""""""""""""
+        """"""" Fancy """"""""""""
+        """""""""""""""""""""""""""
+                " twitter
+                Bundle 'vim-scripts/TwitVim'
+                " Force terminal to use 256 colors
+                Bundle 'eudisd/vim-csapprox'
+                " Open a terminal in a Vim-buffer
+                Bundle 'carlobaldassi/ConqueTerm'
+                " Open a Scratch buffer, a anonymous buffer
+                Bundle 'duff/vim-scratch'
+                " Vim powerLine, make the status line more pretty and usefull. BUT
+                " they're a bit fattys
+                Bundle 'bling/vim-airline'
+                Bundle 'bling/vim-bufferline'
+
+        """""""""""""""""""""""""""
+        """"""" GUI """""""""""""""
+        """""""""""""""""""""""""""
+                " Undo tree navigator
+                Bundle 'sjl/gundo.vim'
+
+        """""""""""""""""""""""""""
+        """"""" Syntax """"""""""""
+        """""""""""""""""""""""""""
+                " Git
+                Bundle 'tpope/vim-git'
+                "" HTML5
+                Bundle 'othree/html5.vim'
+                "" Md, git markdown, git documentation, readme.md
+                Bundle 'tpope/vim-markdown'
+                Bundle 'nelstrom/vim-markdown-folding'
+                "" less/sass css syntax enhancers
+                Bundle 'groenewege/vim-less'
+                "" sql
+                Bundle 'vim-scripts/sql.vim'
+                Bundle 'vim-scripts/SQLComplete.vim'
+                "" JavaScript
+                Bundle 'pangloss/vim-javascript'
+                "" CSS3 new function syntax
+                Bundle 'mutewinter/vim-css3-syntax'
+                "" Python
+                Bundle 'olivierverdier/python-syntax.vim'
+                "" jQuery, backbone, mustache(templates) and more
+                Bundle 'othree/javascript-libraries-syntax.vim'
+                Bundle 'juvenn/mustache.vim'
+
+        """""""""""""""""""""""""""
+        """"""" Testing """""""""""
+        """""""""""""""""""""""""""
+                Bundle 'benmills/vimux'
+                Bundle 'robmiller/vim-movar'
+
+        """""""""""""""""""""""""""
+        """" Known fatties """""""
+        """""""""""""""""""""""""""
+                "Bundle 'Valloric/YouCompleteMe'
+                "Bundle 'skammer/vim-css-color'
+                "Bundle 'zaiste/tmux.vim' "
+                "Bundle 'spf13/PIV'
+
+        """""""""""""""""""""""""""
+        """" Known Useless  """""""
+        """""""""""""""""""""""""""
+                "" Yank tree navigation
+                "Bundle 'vim-scripts/YankRing.vim'
+
+        """""""""""""""""""""""""""
+        """" Janus Original """""""
+        """""""""""""""""""""""""""
+                "Bundle 'mileszs/ack.vim'
+                "Bundle 'kien/ctrlp.vim'
+                "Bundle 'ddollar/nerdcommenter'
+                "Bundle 'scrooloose/nerdtree'
+                "Bundle 'ervandew/supertab'
+                "Bundle 'scrooloose/syntastic'
+                "Bundle 'majutsushi/tagbar'
+                "Bundle 'garbas/vim-snipmate'
+                "Bundle 'Lokaltog/vim-easymotion'
+                "Bundle 'chrisbra/NrrwRgn'
+                "Bundle 'vim-scripts/ZoomWin'
+                "Bundle 'vim-scripts/ZoomWin'
+
+
+        filetype plugin indent on " required!filetype plugin indent on " required!
+
+" Disabling Plugins
+"call janus#disable_plugin('supertab')
+"call janus#disable_plugin('snipmate')
+
+call janus#disable_plugin('Unimpaired')
+"call janus#disable_plugin('fugitive')
+call janus#disable_plugin('vroom')
+call janus#disable_plugin('buffergator')
+
+" Must Declare before Janus
+        " powerLine Light
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline#extensions#tabline#show_buffers = 1
+        let g:airline#extensions#tabline#buf_min_count = 1
+        let g:airline#extensions#branch#enabled = 1
+        let g:airline#extensions#syntastic#enabled = 1
+        let g:airline#extensions#tagbar#enabled = 1
+        let g:airline#extensions#bufferline#enabled = 1
+        let g:airline#extensions#bufferline#overwrite_variables = 0
+        let g:airline_theme = 'ubaryd'
