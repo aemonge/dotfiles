@@ -76,7 +76,7 @@
         set foldlevelstart=0
         "set nofoldenable
         "set nonumber
-        set bufhidden=delete " Don't use hidden buffers, delete them when closing windows "
+        "set bufhidden=delete " Don't use hidden buffers, delete them when closing windows "
 
 
         """""""""""""""""
@@ -114,14 +114,31 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => THEME
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    set t_Co=256
-    let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
-        "colorscheme greyhouse
-        colorscheme twilight
-        hi LineNr ctermbg=black ctermfg=LightGrey
-        hi Folded ctermbg=00<cr>
-    "colorscheme soso, vylight, ironman, eclipse, proton
-    map <leader>cc :call ToggleColor()<CR>
+	" Old goodie twiglight
+		"set t_Co=256
+		"let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
+			""colorscheme greyhouse
+			"colorscheme twilight
+			"hi LineNr ctermbg=black ctermfg=LightGrey
+			"hi Folded ctermbg=00<cr>
+		""colorscheme soso, vylight, ironman, eclipse, proton
+		"map <leader>cc :call ToggleColor()<CR>
+
+	 " new solarized theme
+		set t_Co=256
+		let g:solarized_termcolors=256
+		let g:solarized_termtrans=1
+		let g:solarized_degrade=1
+		let g:solarized_visibility='low'
+		let g:solarized_contrast='high'
+		let g:solarized_hitrail=1
+		let g:solarized_bold=0
+		let g:solarized_italic=0
+		let g:solarized_underline=0
+		set background=dark
+		colorscheme solarized
+		call togglebg#map("<F6>")
+		"map <leader>cc :call ToggleColor()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MAPPINGS
@@ -170,14 +187,17 @@
                 map <leader>e :Errors<cr>
 
         " Complettions Shortcuts, <c-x> is very unconfortable
+				" Try to do completion as in bash
+				"imap <C-r> <C-x>
+
                 " Line Completion
-                imap <C-l> <c-x><C-l>
+				"imap <C-l> <c-x><C-l>
                 " Omni Completion
-                imap <C-k> <c-x><c-o>
+				"imap <C-k> <c-x><c-o>
                 " Spelling Completion
-                imap <C-h> <c-x>s
+                "imap <C-h> <c-x>s
                 " File Completion
-                imap <C-f> <c-x><c-f>
+                "imap <C-f> <c-x><c-f>
                 " CommandLine Completion not usefull
                 "imap <C-j> <c-x><c-v>
 
@@ -296,14 +316,14 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         " Color Scheme Toggle
         function! ToggleColor()
-                if g:colors_name == 'twilight'
-                        colorscheme greyhouse
-                else
-                        colorscheme twilight
-                        hi LineNr ctermbg=black ctermfg=LightGrey
-                        hi Folded ctermbg=00<cr>
-                endif
-                echo g:colors_name
+			if g:colors_name == 'twilight'
+					colorscheme greyhouse
+			else
+					colorscheme twilight
+					hi LineNr ctermbg=black ctermfg=LightGrey
+					hi Folded ctermbg=00<cr>
+			endif
+			echo g:colors_name
         endfunction
 
         "join all in a command. So when Unding it undo the DebugVar complete"
@@ -351,4 +371,3 @@
         set foldopen=hor,mark,percent,quickfix,search,tag,undo
         autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
         autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-

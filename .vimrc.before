@@ -90,7 +90,7 @@ endif
         """""""""""""""""""""""""""
         """" Known fatties """""""
         """""""""""""""""""""""""""
-                "Bundle 'Valloric/YouCompleteMe'
+				"Bundle 'Valloric/YouCompleteMe'
                 "Bundle 'skammer/vim-css-color'
                 "Bundle 'zaiste/tmux.vim' "
                 "Bundle 'spf13/PIV'
