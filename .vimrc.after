@@ -115,30 +115,33 @@
 " => THEME
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	" Old goodie twiglight
-		"set t_Co=256
-		"let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
-			""colorscheme greyhouse
-			"colorscheme twilight
-			"hi LineNr ctermbg=black ctermfg=LightGrey
-			"hi Folded ctermbg=00<cr>
-		""colorscheme soso, vylight, ironman, eclipse, proton
-		"map <leader>cc :call ToggleColor()<CR>
-
-	 " new solarized theme
 		set t_Co=256
-		let g:solarized_termcolors=256
-		let g:solarized_termtrans=1
-		let g:solarized_degrade=1
-		let g:solarized_visibility='low'
-		let g:solarized_contrast='high'
-		let g:solarized_hitrail=1
-		let g:solarized_bold=0
-		let g:solarized_italic=0
-		let g:solarized_underline=0
-		set background=dark
-		colorscheme solarized
-		call togglebg#map("<F6>")
-		"map <leader>cc :call ToggleColor()<CR>
+		let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
+			colorscheme twilight
+			Highlight LineNr guibg=black guifg=LightGrey
+			Highlight Folded guibg=black
+			Highlight Normal guifg=#96A2A4
+			Highlight Search guibg=#a0a000 gui=bold 
+
+			"Highlight Normal guibg=#C0C0C0
+		"colorscheme soso, vylight, ironman, eclipse, proton
+		map <leader>cc :call ToggleColor()<CR>
+
+	" new solarized theme
+		"set t_Co=256
+		"let g:solarized_termcolors=256
+		"let g:solarized_termtrans=1
+		"let g:solarized_degrade=1
+		"let g:solarized_visibility='low'
+		"let g:solarized_contrast='high'
+		""let g:solarized_hitrail=1
+		""let g:solarized_bold=0
+		""let g:solarized_italic=0
+		""let g:solarized_underline=0
+		"set background=dark
+		"colorscheme solarized
+		"call togglebg#map("<F6>")
+		""map <leader>cc :call ToggleColor()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MAPPINGS
@@ -191,15 +194,15 @@
 				"imap <C-r> <C-x>
 
                 " Line Completion
-				"imap <C-l> <c-x><C-l>
-                " Omni Completion
-				"imap <C-k> <c-x><c-o>
+				imap <C-l> <c-x><C-l>
+				" Omni Completion
+				imap <C-k> <c-x><c-o>
                 " Spelling Completion
-                "imap <C-h> <c-x>s
+				imap <C-h> <c-x>s
                 " File Completion
-                "imap <C-f> <c-x><c-f>
+				imap <C-f> <c-x><c-f>
                 " CommandLine Completion not usefull
-                "imap <C-j> <c-x><c-v>
+				imap <C-j> <c-x><c-v>
 
         " SmartShortCuts
                 imap :w <Esc>:w
@@ -256,7 +259,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-        " Vim Cycle WORDS
+	" Vim Cycle WORDS
         call AddCycleGroup(['set', 'get'])
         call AddCycleGroup(['even', 'odd'])
         call AddCycleGroup(['mas', 'menos'])
@@ -286,30 +289,32 @@
         call AddCycleGroup(['PROCEDURE', 'FUNCTION'])
         call AddCycleGroup(['DELETE', 'UPDATE', 'INSERT', 'SELECT', 'RETURN'])
 
-        " Vim NERDtree close when open (not preview)
+	" Vim NERDtree close when open (not preview)
         let NERDTreeQuitOnOpen = 1
 
-        " Indexer disable warnings
+	" Indexer disable warnings
         let g:indexer_disableCtagsWarning=1
 
-        " Jquery Syntaxis
+	" Jquery Syntaxis
         au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 
-        " Conque Options
+	" Conque Options
         let g:ConqueTerm_FastMode = 1
-
-        " CntrlP Fuzzy Find
-        let g:ctrlp_working_path_mode = 'wr'
-        let g:ctrlp_extensions = [ 'mixed', 'buffertag', 'undo', 'changes' ]
-
-        " YCM YouCompleteMe exit on esc " CANT GET IT WORKING
-        " inoremap <silent> <Esc> <C-r>=pumvisible() ? "\<C-y>" : "\<Esc>"<C-CR>
-
-        " ConqueTerm
         let g:ConqueTerm_InsertOnEnter = 0
         let g:ConqueTerm_CWInsert = 1
         let g:ConqueTerm_Color = 2
         let g:ConqueTerm_ReadUnfocused = 1 " update conqueterm buffer while we're not looking (for running tests)
+
+	" CntrlP Fuzzy Find
+        let g:ctrlp_working_path_mode = 'wr'
+        let g:ctrlp_extensions = [ 'mixed', 'buffertag', 'undo', 'changes' ]
+
+	" YCM YouCompleteMe exit on esc " CANT GET IT WORKING
+        " inoremap <silent> <Esc> <C-r>=pumvisible() ? "\<C-y>" : "\<Esc>"<C-CR>
+
+	" winRezier mode
+		let g:winresizer_vert_resize=1
+		let g:winresizer_horiz_resize=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS mine Aem
@@ -320,8 +325,11 @@
 					colorscheme greyhouse
 			else
 					colorscheme twilight
-					hi LineNr ctermbg=black ctermfg=LightGrey
-					hi Folded ctermbg=00<cr>
+					Highlight LineNr guibg=black guifg=LightGrey
+					Highlight Folded guibg=black
+					Highlight Normal guifg=#96A2A4
+					Highlight Search guibg=#a0a000 gui=bold 
+					Highlight Type   guifg=#B0A774
 			endif
 			echo g:colors_name
         endfunction

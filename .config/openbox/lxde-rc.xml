@@ -209,7 +209,7 @@
 		<!-- Fast access to Terminal -->
 		<keybind key="C-A-T">
 			<action name="Execute">
-				<command>lxterminal</command>
+				<command>urxvt</command>
 			</action>
 		</keybind>
 		<!-- Fast access to Nautilus -->

@@ -2,7 +2,7 @@
 Name=Compton
 GenericName=xcomprg
 Comment=Better Xcomgr Transparency manager
-Exec=compton -i 0.75 &
+Exec=compton
 Terminal=false
 Type=Application
 Icon=

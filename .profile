@@ -69,3 +69,8 @@ function _apparix_aliases ()
 # command to register the above to expand when the 'to' command's args are
 # being expanded
 complete -F _apparix_aliases to
+
+# Power Line
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
