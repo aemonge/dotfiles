@@ -154,7 +154,7 @@
                 " ConqueTerm
         map <leader>c :ConqueTerm zsh<cr>
         map <leader>p :ConqueTermSplit php -a<cr><Esc>:winc w<cr>
-        map <leader>s :ConqueTermVSplit /home/sandboxes/msb_5_1_65/use -uroot -pusuario<cr><cr>use D_Mine;<cr><Esc>:SQLSetType<cr><Esc>:winc W<cr>
+        map <leader>s :ConqueTermVSplit /home/sandboxes/msb_5_1_65/use -uroot -pusuario<cr><cr>use D_Mine;<cr><Esc>:SQLSetType<cr><Esc>:winc r<cr>
          nnoremap <Leader>st :sp<cr> :Scratch<cr>: SQLSetType<cr>
 
                  " Vim Scratch
