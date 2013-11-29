@@ -20,15 +20,11 @@ endif
 		""""""""""""""""""""""""""""
 				" Cycle Through words enumeration like True/False
 				Bundle 'zef/vim-cycle'
-				" Complete your search
-				Bundle 'SearchComplete'
 				" Move between camelCaseWords
 				Bundle 'bkad/CamelCaseMotion'
 				" Auto close () "" [] <p>
 				Bundle 'Townk/vim-autoclose'
 				Bundle 'HTML-AutoCloseTag'
-				" more modes (resize) " its nice plug-in, bur actually unecesarry
-				"Bundle 'jimsei/winresizer'
 
 		"""""""""""""""""""""""""""
 		"""""""" IDE """"""""""""""
@@ -50,8 +46,8 @@ endif
                 Bundle 'duff/vim-scratch'
                 " Vim powerLine, make the status line more pretty and usefull. BUT
                 " they're a bit fattys
-                Bundle 'bling/vim-airline'
-                Bundle 'bling/vim-bufferline'
+                "Bundle 'bling/vim-airline'
+                "Bundle 'bling/vim-bufferline'
 
 		"""""""""""""""""""""""""""
 		""""""" GUI """""""""""""""
@@ -89,6 +85,8 @@ endif
 		"""""""""""""""""""""""""""
                	Bundle 'benmills/vimux'
                	Bundle 'robmiller/vim-movar'
+				" Instead of using ranger or vifm use above
+				Bundle 'mbbill/VimExplorer'
 
 		"""""""""""""""""""""""""""
 		"""" Known fatties """""""
@@ -103,6 +101,14 @@ endif
         """""""""""""""""""""""""""
                 "" Yank tree navigation
                 "Bundle 'vim-scripts/YankRing.vim'
+				" more modes (resize) " its nice plug-in, but actually unecesarry
+				"Bundle 'jimsei/winresizer'
+
+        """""""""""""""""""""""""""
+        """" Known Buggies  """""""
+        """""""""""""""""""""""""""
+				" Complete your search
+				"Bundle 'SearchComplete'
 
         """""""""""""""""""""""""""
         """" Janus Original """""""

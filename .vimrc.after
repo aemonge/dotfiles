@@ -316,6 +316,11 @@
 		let g:winresizer_vert_resize=1
 		let g:winresizer_horiz_resize=1
 
+	" VimExplorer
+		let g:VEConf_showHiddenFiles=0
+		let g:VEConf_usingGnome=1
+		let g:VEConf_recyclePath='/home/aemonge/.local/share/Trash/files/'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS mine Aem
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

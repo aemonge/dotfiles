@@ -8,6 +8,9 @@ set toolbars=noaddons,nobookmarks,nomenu,nonavigation,tabs
 set defsearch=duckduckgo
 :set defsearch=duckduckgo
 
+" Make Firefox run faster by using JIT
+set! javascript.options.jit.chrome=true
+
 nmap <F2> :set toolbars=invtabs<CR>
 nmap <F3> :set toolbars=invnavigation<CR>
 map <silent> <F4> :js toggle_bottombar()<CR>
@@ -27,6 +30,10 @@ map <C-7> b7<cr>
 map <C-8> b8<cr>
 map <C-9> b9<cr>
 map <c-m> gT
+
+" Run :vimperatortoggle to enable or disable Vimperator as needed.
+javascript function vimperatortoggle() { if (is_vimperator_active) { liberator.execute(':disable') } else { liberator.execute(':enable') }; }
+command! vimperatortoggle javascript vimperatortoggle()
 
 
 :js << EOF
