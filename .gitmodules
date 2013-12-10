@@ -1,0 +1,6 @@
+[submodule "xmonad-ubuntu-conf"]
+	path = xmonad-ubuntu-conf
+	url = git://github.com/davidbrewer/xmonad-ubuntu-conf.git
+[submodule ".xmonad"]
+	path = .xmonad
+	url = git://github.com/davidbrewer/xmonad-ubuntu-conf.git
