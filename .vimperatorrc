@@ -1,6 +1,7 @@
 set runtimepath+=~/.vimperator/vimperator-plugins
 loadplugins
 map C :firebug console-focus<cr>
+source ~/.vimperator/vimperator-plugins/caret-hint.js
 
 set noscrollbars
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
@@ -19,6 +20,9 @@ map <silent> <F4> :js toggle_bottombar()<CR>
 " map <S-k> <C-n>
 map <C-w> :tabn<cr>
 map <C-S-w> :tabp<cr>
+
+map <C-h> :tabn<cr>
+map <C-g> :tabp<cr>
 
 map <C-1> b1<cr>
 map <C-2> b2<cr>

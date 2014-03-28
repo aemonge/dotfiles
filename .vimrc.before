@@ -31,15 +31,21 @@ endif
 		"""""""""""""""""""""""""""
                 " IDE like for git, svn, svk, ...
                 Bundle 'vcscommand.vim'
+								" Store the configuration in a single file for multi editors
+								" editorconfig.org
+								Bundle 'editorconfig/editorconfig-vim'
 
 		"""""""""""""""""""""""""""
 		""""""" Fancy """""""""""""
 		"""""""""""""""""""""""""""
+                " gtalk
+                "Bundle 'ironcamel/vimchat'
                 " twitter
                 Bundle 'vim-scripts/TwitVim'
                 " Force terminal to use 256 colors
 				Bundle 'vim-scripts/colorsupport.vim'
 				Bundle 'eudisd/vim-csapprox'
+				Bundle 'w0ng/vim-hybrid'
                 " Open a terminal in a Vim-buffer
                 Bundle 'carlobaldassi/ConqueTerm'
                 " Open a Scratch buffer, a anonymous buffer
@@ -79,6 +85,8 @@ endif
 				"" jQuery, backbone, mustache(templates) and more
 				Bundle 'othree/javascript-libraries-syntax.vim'
 				Bundle 'juvenn/mustache.vim'
+				" Jade templating
+				Bundle 'digitaltoad/vim-jade'
 
 		"""""""""""""""""""""""""""
 		""""""" Testing """""""""""

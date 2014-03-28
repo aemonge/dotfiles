@@ -16,7 +16,7 @@
 " => Temp Hack && fixes due experimental verions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         " Vim 7.4 regexp engine crashes syntax's
-        set regexpengine=1
+        " set regexpengine=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GENERAL OPTS
@@ -26,8 +26,8 @@
         """""""""""""""""
     set noexpandtab " don't use soft tabs
         set cindent
-        set tabstop=4 " tabs are 4 spaces width
-        set shiftwidth=4 " softtabs are 4 spaces width
+        set tabstop=2 " tabs are 4 spaces width
+        set shiftwidth=2 " softtabs are 4 spaces width
     set encoding=utf-8 " "
     set fileencoding=utf-8
         set spell
@@ -116,16 +116,19 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	" Old goodie twiglight
 		set t_Co=256
-		let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
-			colorscheme twilight
-			Highlight LineNr guibg=black guifg=LightGrey
-			Highlight Folded guibg=black
-			Highlight Normal guifg=#96A2A4
-			Highlight Search guibg=#a0a000 gui=bold 
+		let g:hybrid_use_Xresources = 1
+		ColorScheme hybrid
+
+		" let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
+			" colorscheme twilight
+			" Highlight LineNr guibg=black guifg=LightGrey
+			" Highlight Folded guibg=black
+			" Highlight Normal guifg=#96A2A4
+			" Highlight Search guibg=#a0a000 gui=bold 
 
 			"Highlight Normal guibg=#C0C0C0
 		"colorscheme soso, vylight, ironman, eclipse, proton
-		map <leader>cc :call ToggleColor()<CR>
+		"map <leader>cc :call ToggleColor()<CR>
 
 	" new solarized theme
 		"set t_Co=256
@@ -149,6 +152,7 @@
         " Local Work Mappings
                 map <leader>x :w<cr> :! export old=`pwd` ; cd /home/www/framework/trunk/dataBase ; ./buildprocedures.sh -m /home/sandboxes/msb_5_1_65/use -s Energy ; ./buildprocedures.sh -m /home/sandboxes/msb_5_1_65/use -s D_Mine ; cd $old; <cr>
                 map <leader>fe :set foldenable!<cr>
+				map <leader>ts :set spell!<cr>
 
     " Pluggin Mappings
                 " ConqueTerm
@@ -241,26 +245,19 @@
         nmap = :wincmd <<cr>
         nmap - :wincmd ><cr>
 
-        " nmap <S-Tab> gt
-        map <c-w>n gt<cr>
-        map <c-w>p gT<cr>
-        map <c-w>C :tabc<cr>
-                nmap t1 1gt<cr>
-                nmap t2 2gt<cr>
-                nmap t3 3gt<cr>
-                nmap t4 4gt<cr>
-                nmap t5 5gt<cr>
-                nmap t6 6gt<cr>
-                nmap t7 7gt<cr>
-                nmap t8 8gt<cr>
-                nmap t9 9gt<cr>
-                nmap t10 10gt<cr>
+		" Map C-[jk] to move between splits && C-[gh] to move between tabs
+				nmap <c-j> :wincmd w<cr>
+				nmap <c-k> :wincmd W<cr>
+				nmap <c-g> :tabprevious<cr>
+				nmap <c-h> :tabnext<cr>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	" Vim Cycle WORDS
         call AddCycleGroup(['set', 'get'])
+        call AddCycleGroup(['push', 'pop'])
         call AddCycleGroup(['even', 'odd'])
         call AddCycleGroup(['mas', 'menos'])
         call AddCycleGroup(['prev', 'next'])
@@ -325,19 +322,19 @@
 " => PLUG INS mine Aem
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         " Color Scheme Toggle
-        function! ToggleColor()
-			if g:colors_name == 'twilight'
-					colorscheme greyhouse
-			else
-					colorscheme twilight
-					Highlight LineNr guibg=black guifg=LightGrey
-					Highlight Folded guibg=black
-					Highlight Normal guifg=#96A2A4
-					Highlight Search guibg=#a0a000 gui=bold 
-					Highlight Type   guifg=#B0A774
-			endif
-			echo g:colors_name
-        endfunction
+        "function! ToggleColor()
+			"if g:colors_name == 'twilight'
+					"colorscheme greyhouse
+			"else
+					"colorscheme twilight
+					"Highlight LineNr guibg=black guifg=LightGrey
+					"Highlight Folded guibg=black
+					"Highlight Normal guifg=#96A2A4
+					"Highlight Search guibg=#a0a000 gui=bold 
+					"Highlight Type   guifg=#B0A774
+			"endif
+			"echo g:colors_name
+        "endfunction
 
         "join all in a command. So when Unding it undo the DebugVar complete"
         function! DebugVar()

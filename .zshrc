@@ -10,7 +10,8 @@ ZSH_THEME="agnoster"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vimfm="vim +VE\ `pwd`"
+#alias vimfm="vim +VE\ `pwd`"
+alias frontstack="~/lib/frontstack/bash.sh"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -41,7 +42,7 @@ alias vimfm="vim +VE\ `pwd`"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(coffee colorize cake debian gem git github git-flow git-extras history-substring-search rails rails3 rails4 python rake ruby svn tmux tmuxinator safe-paste vi-mode)
+plugins=(coffee colorize cake debian gem git github git-flow git-extras history-substring-search python rake ruby svn tmux tmuxinator safe-paste vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
