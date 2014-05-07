@@ -24,10 +24,10 @@
         """""""""""""""""
         " File realated "
         """""""""""""""""
-    set noexpandtab " don't use soft tabs
+    set expandtab " use spaces instead of tabs
         set cindent
-        set tabstop=2 " tabs are 4 spaces width
-        set shiftwidth=2 " softtabs are 4 spaces width
+        set tabstop=4 " tabs are 4 spaces width
+        set shiftwidth=4 " softtabs are 4 spaces width
     set encoding=utf-8 " "
     set fileencoding=utf-8
         set spell
@@ -114,55 +114,60 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => THEME
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	" Old goodie twiglight
-		set t_Co=256
-		let g:hybrid_use_Xresources = 1
-		ColorScheme hybrid
+    " Old goodie twiglight
+        set t_Co=256
+        let g:hybrid_use_Xresources = 1
+        ColorScheme hybrid
 
-		" let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
-			" colorscheme twilight
-			" Highlight LineNr guibg=black guifg=LightGrey
-			" Highlight Folded guibg=black
-			" Highlight Normal guifg=#96A2A4
-			" Highlight Search guibg=#a0a000 gui=bold 
+        " let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
+            " colorscheme twilight
+            " Highlight LineNr guibg=black guifg=LightGrey
+            " Highlight Folded guibg=black
+            " Highlight Normal guifg=#96A2A4
+            " Highlight Search guibg=#a0a000 gui=bold 
 
-			"Highlight Normal guibg=#C0C0C0
-		"colorscheme soso, vylight, ironman, eclipse, proton
-		"map <leader>cc :call ToggleColor()<CR>
+            "Highlight Normal guibg=#C0C0C0
+        "colorscheme soso, vylight, ironman, eclipse, proton
+        "map <leader>cc :call ToggleColor()<CR>
 
-	" new solarized theme
-		"set t_Co=256
-		"let g:solarized_termcolors=256
-		"let g:solarized_termtrans=1
-		"let g:solarized_degrade=1
-		"let g:solarized_visibility='low'
-		"let g:solarized_contrast='high'
-		""let g:solarized_hitrail=1
-		""let g:solarized_bold=0
-		""let g:solarized_italic=0
-		""let g:solarized_underline=0
-		"set background=dark
-		"colorscheme solarized
-		"call togglebg#map("<F6>")
-		""map <leader>cc :call ToggleColor()<CR>
+    " new solarized theme
+        "set t_Co=256
+        "let g:solarized_termcolors=256
+        "let g:solarized_termtrans=1
+        "let g:solarized_degrade=1
+        "let g:solarized_visibility='low'
+        "let g:solarized_contrast='high'
+        ""let g:solarized_hitrail=1
+        ""let g:solarized_bold=0
+        ""let g:solarized_italic=0
+        ""let g:solarized_underline=0
+        "set background=dark
+        "colorscheme solarized
+        "call togglebg#map("<F6>")
+        ""map <leader>cc :call ToggleColor()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         " Local Work Mappings
-                map <leader>x :w<cr> :! export old=`pwd` ; cd /home/www/framework/trunk/dataBase ; ./buildprocedures.sh -m /home/sandboxes/msb_5_1_65/use -s Energy ; ./buildprocedures.sh -m /home/sandboxes/msb_5_1_65/use -s D_Mine ; cd $old; <cr>
                 map <leader>fe :set foldenable!<cr>
-				map <leader>ts :set spell!<cr>
+                map <leader>ts :set spell!<cr>
+        " visual mode key-binding aid
+                vmap A $
+                vmap I ^
 
     " Pluggin Mappings
-                " ConqueTerm
-        map <leader>c :ConqueTerm zsh<cr>
-        map <leader>p :ConqueTermSplit php -a<cr><Esc>:winc w<cr>
-        map <leader>s :ConqueTermVSplit /home/sandboxes/msb_5_1_65/use -uroot -pusuario<cr><cr>use D_Mine;<cr><Esc>:SQLSetType<cr><Esc>:winc r<cr>
-         nnoremap <Leader>st :sp<cr> :Scratch<cr>: SQLSetType<cr>
+		" Align to be maniac vertically aligned
+		vmap a :Align 
+        " sql align type (right padding)
+		vmap A :Align! r
+        " ConqueTerm
+        "map <leader>c :ConqueTerm zsh<cr>
+        "map <leader>p :ConqueTermSplit php -a<cr><Esc>:winc w<cr>
+        nnoremap <Leader>st :sp<cr> :Scratch<cr>
 
-                 " Vim Scratch
-         nnoremap <Leader>rt :TagbarOpenAutoClose<cr>
+         " Vim Scratch
+         nnoremap <Leader>rt :TagbarpenAutoClose<cr>
 
                 " Vim Tag Bar better mapping
                 nnoremap <Leader>d :call DiffToggle()<cr>
@@ -194,19 +199,19 @@
                 map <leader>e :Errors<cr>
 
         " Complettions Shortcuts, <c-x> is very unconfortable
-				" Try to do completion as in bash
-				"imap <C-r> <C-x>
+                " Try to do completion as in bash
+                "imap <C-r> <C-x>
 
                 " Line Completion
-				imap <C-l> <c-x><C-l>
-				" Omni Completion
-				imap <C-k> <c-x><c-o>
+                imap <C-l> <c-x><C-l>
+                " Omni Completion
+                imap <C-k> <c-x><c-o>
                 " Spelling Completion
-				imap <C-h> <c-x>s
+                imap <C-h> <c-x>s
                 " File Completion
-				imap <C-f> <c-x><c-f>
+                imap <C-f> <c-x><c-f>
                 " CommandLine Completion not usefull
-				imap <C-j> <c-x><c-v>
+                imap <C-j> <c-x><c-v>
 
         " SmartShortCuts
                 imap :w <Esc>:w
@@ -236,6 +241,16 @@
                 nmap <leader>v :call DebugVar()<cr>
                 nmap <leader>V :call DebugVarDie()<cr>
 
+        " EasyMotion
+        "replace vim search with easymotion
+        map  / <Plug>(easymotion-sn)
+        omap / <Plug>(easymotion-tn)
+        nmap s <Plug>(easymotion-s)
+        nmap S <Plug>(easymotion-s2)
+        "map  n <Plug>(easymotion-next)
+        "map  N <Plug>(easymotion-prev)
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => TAB, SPLITS & NAVIGATIONS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -245,17 +260,17 @@
         nmap = :wincmd <<cr>
         nmap - :wincmd ><cr>
 
-		" Map C-[jk] to move between splits && C-[gh] to move between tabs
-				nmap <c-j> :wincmd w<cr>
-				nmap <c-k> :wincmd W<cr>
-				nmap <c-g> :tabprevious<cr>
-				nmap <c-h> :tabnext<cr>
+        " Map C-[jk] to move between splits && C-[gh] to move between tabs
+                nmap <c-j> :wincmd w<cr>
+                nmap <c-k> :wincmd W<cr>
+                nmap <c-g> :tabprevious<cr>
+                nmap <c-h> :tabnext<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	" Vim Cycle WORDS
+    " Vim Cycle WORDS
         call AddCycleGroup(['set', 'get'])
         call AddCycleGroup(['push', 'pop'])
         call AddCycleGroup(['even', 'odd'])
@@ -286,60 +301,63 @@
         call AddCycleGroup(['PROCEDURE', 'FUNCTION'])
         call AddCycleGroup(['DELETE', 'UPDATE', 'INSERT', 'SELECT', 'RETURN'])
 
-	" Vim NERDtree close when open (not preview)
+    " Vim NERDtree close when open (not preview)
         let NERDTreeQuitOnOpen = 1
 
-	" Indexer disable warnings
+    " Indexer disable warnings
         let g:indexer_disableCtagsWarning=1
 
-	" Jquery Syntaxis
+    " Jquery Syntaxis
         au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 
-	" Conque Options
-        let g:ConqueTerm_FastMode = 1
-        let g:ConqueTerm_InsertOnEnter = 0
-        let g:ConqueTerm_CWInsert = 1
-        let g:ConqueTerm_Color = 2
-        let g:ConqueTerm_ReadUnfocused = 1 " update conqueterm buffer while we're not looking (for running tests)
+    " Conque Options
+        "let g:ConqueTerm_FastMode = 1
+        "let g:ConqueTerm_InsertOnEnter = 0
+        "let g:ConqueTerm_CWInsert = 1
+        "let g:ConqueTerm_Color = 2
+        "let g:ConqueTerm_ReadUnfocused = 1 " update conqueterm buffer while we're not looking (for running tests)
 
-	" CntrlP Fuzzy Find
+    " CntrlP Fuzzy Find
         let g:ctrlp_working_path_mode = 'wr'
         let g:ctrlp_extensions = [ 'mixed', 'buffertag', 'undo', 'changes' ]
 
-	" YCM YouCompleteMe exit on esc " CANT GET IT WORKING
+    " YCM YouCompleteMe exit on esc " CANT GET IT WORKING
         " inoremap <silent> <Esc> <C-r>=pumvisible() ? "\<C-y>" : "\<Esc>"<C-CR>
 
-	" winRezier mode
-		let g:winresizer_vert_resize=1
-		let g:winresizer_horiz_resize=1
+    " winRezier mode
+        let g:winresizer_vert_resize=1
+        let g:winresizer_horiz_resize=1
 
-	" VimExplorer
-		let g:VEConf_showHiddenFiles=0
-		let g:VEConf_usingGnome=1
-		let g:VEConf_recyclePath='/home/aemonge/.local/share/Trash/files/'
+    " VimExplorer
+        let g:VEConf_showHiddenFiles=0
+        let g:VEConf_usingGnome=1
+        let g:VEConf_recyclePath='/home/aemonge/.local/share/Trash/files/'
+
+    " EasyMotion
+    let g:EasyMotion_smartcase = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS mine Aem
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         " Color Scheme Toggle
         "function! ToggleColor()
-			"if g:colors_name == 'twilight'
-					"colorscheme greyhouse
-			"else
-					"colorscheme twilight
-					"Highlight LineNr guibg=black guifg=LightGrey
-					"Highlight Folded guibg=black
-					"Highlight Normal guifg=#96A2A4
-					"Highlight Search guibg=#a0a000 gui=bold 
-					"Highlight Type   guifg=#B0A774
-			"endif
-			"echo g:colors_name
+            "if g:colors_name == 'twilight'
+                    "colorscheme greyhouse
+            "else
+                    "colorscheme twilight
+                    "Highlight LineNr guibg=black guifg=LightGrey
+                    "Highlight Folded guibg=black
+                    "Highlight Normal guifg=#96A2A4
+                    "Highlight Search guibg=#a0a000 gui=bold 
+                    "Highlight Type   guifg=#B0A774
+            "endif
+            "echo g:colors_name
         "endfunction
 
         "join all in a command. So when Unding it undo the DebugVar complete"
         function! DebugVar()
                 if &ft == 'javascript'
-                        exe "normal oconsole.log();"
+                        exe "normal oconsole.debug();"
                         exe "normal hhp"
                 elseif &ft == 'php'
                         exe "normal ovar_dump();"
