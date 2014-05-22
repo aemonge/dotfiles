@@ -5,7 +5,7 @@ source ~/.vimperator/vimperator-plugins/caret-hint.js
 
 set noscrollbars
 set gui=noaddons,nobookmarks,nomenu,tabs
-set toolbars=noaddons,nobookmarks,nomenu,nonavigation,tabs
+set toolbars=noaddons,nobookmarks,nomenu,navigation,tabs
 set defsearch=duckduckgo
 :set defsearch=duckduckgo
 

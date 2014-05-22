@@ -24,12 +24,13 @@
         """""""""""""""""
         " File realated "
         """""""""""""""""
-    set expandtab " use spaces instead of tabs
-        set cindent
-        set tabstop=4 " tabs are 4 spaces width
-        set shiftwidth=4 " softtabs are 4 spaces width
-    set encoding=utf-8 " "
-    set fileencoding=utf-8
+        set expandtab " use spaces instead of tabs
+            set cindent
+            set tabstop=4 " tabs are 4 spaces width
+            set shiftwidth=4 " softtabs are 4 spaces width
+        set encoding=utf-8 " "
+        set fileencoding=utf-8
+        set fileformat=unix
         set spell
         "set spl=es_es spell
         set spl=en_us spell
@@ -334,7 +335,10 @@
         let g:VEConf_recyclePath='/home/aemonge/.local/share/Trash/files/'
 
     " EasyMotion
-    let g:EasyMotion_smartcase = 1
+        let g:EasyMotion_smartcase = 1
+
+    " gem install bcat ( to preview files in html
+        map <leader>m :!markdown % \|bcat<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS mine Aem
