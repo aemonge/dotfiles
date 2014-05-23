@@ -100,6 +100,8 @@ endif
         Plugin 'digitaltoad/vim-jade'
         " JavaScript
         Plugin 'pangloss/vim-javascript'
+        Plugin 'marijnh/tern_for_vim'
+
         " jQuery, backbone, mustache(templates) and more
         Plugin 'othree/javascript-libraries-syntax.vim'
         Plugin 'juvenn/mustache.vim'
