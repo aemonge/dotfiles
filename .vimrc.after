@@ -1,275 +1,236 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => TIPS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" C-k snippet completion
-" tab word completion
-" C-l Real Tab
-" /<C-f> or :<C-f> to edit vim like the search | comands
-" :r !cmd PASTE the cmd output
-" Try g; and g,. They jump backward and forward in the inserted changelis
-" To correct the tabs and sapces :retab
-" Tabs gt gT to move around them
-" <leader>tw toggles wrap
-" c-l reload file & syntax's
+    " C-k snippet completion
+    " tab word completion
+    " C-l Reload Tab
+    " /<C-f> or :<C-f> to edit vim like the search | comands
+    " :r !cmd PASTE the cmd output
+    " Try g; and g,. They jump backward and forward in the inserted changelis
+    " To correct the tabs and sapces :retab
+    " Tabs gt gT to move around them
+    " <leader>tw toggles wrap
+    " c-l reload file & syntax's
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Temp Hack && fixes due experimental verions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-        " Vim 7.4 regexp engine crashes syntax's
-        " set regexpengine=1
+    " Vim 7.4 regexp engine crashes syntax's
+    " set regexpengine=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GENERAL OPTS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-        """""""""""""""""
-        " File realated "
-        """""""""""""""""
-        set expandtab " use spaces instead of tabs
+    """""""""""""""""
+    " File realated "
+    """""""""""""""""
+        set expandtab         " use spaces instead of tabs
             set cindent
-            set tabstop=4 " tabs are 4 spaces width
-            set shiftwidth=4 " softtabs are 4 spaces width
-        set encoding=utf-8 " "
+            set tabstop=4     " tabs are 4 spaces width
+            set shiftwidth=4  " softtabs are 4 spaces width
+        set encoding=utf-8
         set fileencoding=utf-8
         set fileformat=unix
         set spell
         "set spl=es_es spell
         set spl=en_us spell
 
-        """""""""""""""""
-        """" Search """""
-        """""""""""""""""
-    set showmatch
-    set hlsearch " Highlight search
-    set incsearch " start highlighting while searching
-    set scs                         " smartCase search
+    """""""""""""""""
+    """" Search """""
+    """""""""""""""""
+        set showmatch
+        set hlsearch  " Highlight search
+        set incsearch " start highlighting while searching
+        set scs       " smartCase search
 
-        """""""""""""""""
-        """" Mouse """"""
-        """""""""""""""""
+    """""""""""""""""
+    """" Mouse """"""
+    """""""""""""""""
         set mousehide                 " hide while typing
-    set mouse=a
+        set mouse=a
 
-        """""""""""""""""
-        """" GUI """"""""
-        """""""""""""""""
-    set showtabline=2
-    set cursorline
+    """""""""""""""""
+    """" GUI """"""""
+    """""""""""""""""
+        set showtabline=2
+        set cursorline
         set cursorcolumn
 
-        """""""""""""""""
-        """" Backups """"
-        """""""""""""""""
+    """""""""""""""""
+    """" Backups """"
+    """""""""""""""""
         set noswapfile
-    " Files, backups and undo
+        " Files, backups and undo
         set undofile
         set undodir=~/.vim/undodir
         " Create undo directory if it doesn't exist
         if !isdirectory(expand(&undodir))
                 call mkdir(expand(&undodir), 'p')
         endif
-    set undolevels=10000 "maximum number of changes that can be undone
+        set undolevels=10000 "maximum number of changes that can be undone
         set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
         set hid
         set clipboard=unnamed " Able to copy an paste between xwindows "
-    " set laststatus=1         " Enables the status line at the bottom of Vim Only when SPLIT
+        " set laststatus=1         " Enables the status line at the bottom of Vim Only when SPLIT
         set foldmethod=indent
         set foldlevelstart=0
         "set nofoldenable
         "set nonumber
         "set bufhidden=delete " Don't use hidden buffers, delete them when closing windows "
 
-
-        """""""""""""""""
-        "" Vim Faster! ""
-        """""""""""""""""
+    """""""""""""""""
+    "" Vim Faster! ""
+    """""""""""""""""
         set ttyfast                 " Faster Terminal, redraws stuff quicker!
         set linespace=0         " No extra spaces between text lines
         set lazyredraw                 " Don't update the display while executing macros
-    set timeoutlen=300
+        set timeoutlen=300
 
-
-        """""""""""""""""
-        """" VIM GUI """"
-        """""""""""""""""
-    " removes the gui options, and it makes them shy xD
-    set guioptions-=m         "remove menu bar
-    set guioptions-=T         "remove toolbar
-    set guioptions-=r         "remove right-hand scroll bar
-    set guioptions-=L         "remove left-hand scroll bar
-    set guioptions-=e         "remove gui tabbar. nongui stays
+    """""""""""""""""
+    """" VIM GUI """"
+    """""""""""""""""
+        " removes the gui options, and it makes them shy xD
+        set guioptions-=m         "remove menu bar
+        set guioptions-=T         "remove toolbar
+        set guioptions-=r         "remove right-hand scroll bar
+        set guioptions-=L         "remove left-hand scroll bar
+        set guioptions-=e         "remove gui tabbar. nongui stays
 
     " Set to auto read when a file is changed from the outside
     set autowrite
 
-        " Manual pages including PHP (pear install doc.php.net/pman)
-        "set keywordprg=pman\ -a
-        source $VIMRUNTIME/ftplugin/man.vim
-        nnoremap K :Man --manpath=/usr/share/doc/php5-common/PEAR/pman/ <cword><cr>
+    " Manual pages including PHP (pear install doc.php.net/pman)
+    "set keywordprg=pman\ -a
+    source $VIMRUNTIME/ftplugin/man.vim
+    nnoremap K :Man --manpath=/usr/share/doc/php5-common/PEAR/pman/ <cword><cr>
 
+    " split to right no left && down no up
+    set splitright
+    set splitbelow
 
-        " split to right no left && down no up
-        set splitright
-        set splitbelow
+    " Mantain fold when editing @origanl from vimTip
+    set foldopen=hor,mark,percent,quickfix,search,tag,undo
+    autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+    autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => THEME
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Old goodie twiglight
-        set t_Co=256
-        let g:hybrid_use_Xresources = 1
-        ColorScheme hybrid
-
-        " let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
-            " colorscheme twilight
-            " Highlight LineNr guibg=black guifg=LightGrey
-            " Highlight Folded guibg=black
-            " Highlight Normal guifg=#96A2A4
-            " Highlight Search guibg=#a0a000 gui=bold 
-
-            "Highlight Normal guibg=#C0C0C0
-        "colorscheme soso, vylight, ironman, eclipse, proton
-        "map <leader>cc :call ToggleColor()<CR>
-
-    " new solarized theme
-        "set t_Co=256
-        "let g:solarized_termcolors=256
-        "let g:solarized_termtrans=1
-        "let g:solarized_degrade=1
-        "let g:solarized_visibility='low'
-        "let g:solarized_contrast='high'
-        ""let g:solarized_hitrail=1
-        ""let g:solarized_bold=0
-        ""let g:solarized_italic=0
-        ""let g:solarized_underline=0
-        "set background=dark
-        "colorscheme solarized
-        "call togglebg#map("<F6>")
-        ""map <leader>cc :call ToggleColor()<CR>
+    set t_Co=256
+    let g:hybrid_use_Xresources = 1
+    ColorScheme hybrid
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-        " Local Work Mappings
-                map <leader>fe :set foldenable!<cr>
-                map <leader>ts :set spell!<cr>
-        " visual mode key-binding aid
-                vmap A $
-                vmap I ^
+    " Local Work Mappings
+            map <leader>fe :set foldenable!<cr>
+            map <leader>ts :set spell!<cr>
+    " visual mode key-binding aid
+            vmap A $
+            vmap I ^
 
-    " Pluggin Mappings
+    """"""""""""""""""""
+    " Pluggin Mappings "
+    """"""""""""""""""""
+        " Ag Grep, better than grep and ack
+        map <leader>f :Ag 
 		" Align to be maniac vertically aligned
 		vmap a :Align 
         " sql align type (right padding)
 		vmap A :Align! r
-        " ConqueTerm
-        "map <leader>c :ConqueTerm zsh<cr>
-        "map <leader>p :ConqueTermSplit php -a<cr><Esc>:winc w<cr>
+        " Scratcyh
         nnoremap <Leader>st :sp<cr> :Scratch<cr>
-
-         " Vim Scratch
-         nnoremap <Leader>rt :TagbarpenAutoClose<cr>
-
-                " Vim Tag Bar better mapping
-                nnoremap <Leader>d :call DiffToggle()<cr>
-
-                " Gundo
-                nnoremap <leader>u :GundoToggle<cr>
-                inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
-
-                " CtrlP
-                map <c-p> :CtrlPMixed<cr>
-                map <c-t> :CtrlPBufTagAll<cr>
-                map <leader>b :CtrlPBuffer<cr>
-
-                " CamelCase Motion
-                map w <Plug>CamelCaseMotion_w
-                map b <Plug>CamelCaseMotion_b
-                map e <Plug>CamelCaseMotion_e
-                sunmap w
-                sunmap b
-                sunmap e
-                omap iw <Plug>CamelCaseMotion_iw
-                xmap iw <Plug>CamelCaseMotion_iw
-                omap ib <Plug>CamelCaseMotion_ib
-                xmap ib <Plug>CamelCaseMotion_ib
-                omap ie <Plug>CamelCaseMotion_ie
-                xmap ie <Plug>CamelCaseMotion_ie
-
-                " Syntastic
-                map <leader>e :Errors<cr>
-
-        " Complettions Shortcuts, <c-x> is very unconfortable
-                " Try to do completion as in bash
-                "imap <C-r> <C-x>
-
-                " Line Completion
-                imap <C-l> <c-x><C-l>
-                " Omni Completion
-                imap <C-k> <c-x><c-o>
-                " Spelling Completion
-                imap <C-h> <c-x>s
-                " File Completion
-                imap <C-f> <c-x><c-f>
-                " CommandLine Completion not usefull
-                imap <C-j> <c-x><c-v>
-
-        " SmartShortCuts
-                imap :w <Esc>:w
-                imap ;; <C-o>A;<Esc>
-
-                vmap <leader>f :fo<cr>
-                vmap K k
-        nnoremap f: /<C-f>
-                map <leader>tn :set number!<cr>
-
-                " Copying pasting
-                imap <C-v> <C-o>"+P
-        vmap <C-p> "+p<cr>
-        vmap <C-C> "+y
-            vmap  "+y
-
-                " Gui menus
-        nnoremap <S-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
-        nnoremap <S-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
-        nnoremap <S-F3> :if &go=~#'e'<Bar>set go-=e<Bar>else<Bar>set go+=e<Bar>endif<CR>
-
-                " Clear screen clears search highlighting.
-                nnoremap <C-L> :nohl<CR><C-L>
-
-        " language quickInserts
-                " PHP
-                nmap <leader>v :call DebugVar()<cr>
-                nmap <leader>V :call DebugVarDie()<cr>
-
+         " TagBar
+         nnoremap <Leader>rt :TagbarToggle<cr>
+        " Gundo
+        nnoremap <leader>u :GundoToggle<cr>
+        inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
+        " CtrlP
+        map <c-p> :CtrlPMixed<cr>
+        map <c-t> :CtrlPBufTagAll<cr>
+        map <leader>b :CtrlPBuffer<cr>
+        " CamelCase Motion
+        map w <Plug>CamelCaseMotion_w
+        map b <Plug>CamelCaseMotion_b
+        map e <Plug>CamelCaseMotion_e
+        sunmap w
+        sunmap b
+        sunmap e
+        omap iw <Plug>CamelCaseMotion_iw
+        xmap iw <Plug>CamelCaseMotion_iw
+        omap ib <Plug>CamelCaseMotion_ib
+        xmap ib <Plug>CamelCaseMotion_ib
+        omap ie <Plug>CamelCaseMotion_ie
+        xmap ie <Plug>CamelCaseMotion_ie
+        " Syntastic
+        map <leader>e :Errors<cr>
+        " var dump
+        nmap <leader>v :call DebugVar()<cr>
+        nmap <leader>V :call DebugVarDie()<cr>
         " EasyMotion
         "replace vim search with easymotion
         map  / <Plug>(easymotion-sn)
         omap / <Plug>(easymotion-tn)
         nmap s <Plug>(easymotion-s)
         nmap S <Plug>(easymotion-s2)
-        "map  n <Plug>(easymotion-next)
-        "map  N <Plug>(easymotion-prev)
 
+    """"""""""""""""""""
+    """ Completions """"
+    """"""""""""""""""""
+        " Line Completion
+        imap <C-l> <c-x><C-l>
+        " Omni Completion
+        imap <C-k> <c-x><c-o>
+        " Spelling Completion
+        imap <C-h> <c-x>s
+        " File Completion
+        imap <C-f> <c-x><c-f>
+        " CommandLine Completion not usefull
+        imap <C-j> <c-x><c-v>
+
+    """"""""""""""""""""
+    "" SmartShortcuts ""
+    """"""""""""""""""""
+        imap :w <Esc>:w
+        imap ;; <C-o>A;<Esc>
+        vmap <leader>f :fo<cr>
+        vmap K k
+        nnoremap f: /<C-f>
+        map <leader>tn :set number!<cr>
+        " Copying pasting
+        imap <C-v> <C-o>"+P
+        vmap <C-p> "+p<cr>
+        vmap <C-C> "+y
+        vmap  "+y
+        " Gui menus
+        nnoremap <S-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+        nnoremap <S-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
+        nnoremap <S-F3> :if &go=~#'e'<Bar>set go-=e<Bar>else<Bar>set go+=e<Bar>endif<CR>
+        " Clear screen clears search highlighting.
+        nnoremap <C-L> :nohl<CR><C-L>
+
+    " gem install bcat ( to preview files in html
+        map <leader>m :!markdown % \|bcat<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => TAB, SPLITS & NAVIGATIONS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Splits Resize GUI and nongui
-        nmap _ :wincmd -<cr>
-        nmap + :wincmd +<cr>
-        nmap = :wincmd <<cr>
-        nmap - :wincmd ><cr>
+    nmap _ :wincmd -<cr>
+    nmap + :wincmd +<cr>
+    nmap = :wincmd <<cr>
+    nmap - :wincmd ><cr>
 
-        " Map C-[jk] to move between splits && C-[gh] to move between tabs
-                nmap <c-j> :wincmd w<cr>
-                nmap <c-k> :wincmd W<cr>
-                nmap <c-g> :tabprevious<cr>
-                nmap <c-h> :tabnext<cr>
-
+    " Map C-[jk] to move between splits && C-[gh] to move between tabs
+    nmap <c-j> :wincmd w<cr>
+    nmap <c-k> :wincmd W<cr>
+    nmap <c-g> :tabprevious<cr>
+    nmap <c-h> :tabnext<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => PLUG INS
+" => PLUG INS SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Vim Cycle WORDS
         call AddCycleGroup(['set', 'get'])
@@ -311,95 +272,53 @@
     " Jquery Syntaxis
         au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 
-    " Conque Options
-        "let g:ConqueTerm_FastMode = 1
-        "let g:ConqueTerm_InsertOnEnter = 0
-        "let g:ConqueTerm_CWInsert = 1
-        "let g:ConqueTerm_Color = 2
-        "let g:ConqueTerm_ReadUnfocused = 1 " update conqueterm buffer while we're not looking (for running tests)
-
     " CntrlP Fuzzy Find
-        let g:ctrlp_working_path_mode = 'wr'
-        let g:ctrlp_extensions = [ 'mixed', 'buffertag', 'undo', 'changes' ]
-
-    " YCM YouCompleteMe exit on esc " CANT GET IT WORKING
-        " inoremap <silent> <Esc> <C-r>=pumvisible() ? "\<C-y>" : "\<Esc>"<C-CR>
-
-    " winRezier mode
-        let g:winresizer_vert_resize=1
-        let g:winresizer_horiz_resize=1
-
-    " VimExplorer
-        let g:VEConf_showHiddenFiles=0
-        let g:VEConf_usingGnome=1
-        let g:VEConf_recyclePath='/home/aemonge/.local/share/Trash/files/'
+        let g:ctrlp_working_path_mode = 'ra'
+        let g:ctrlp_extensions = [ 'mixed', 'buffertag', 'undo', 'changes', 'tag', 'dir', 'line' ]
+        " try to get it faster
+        let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc"  -g ""'
 
     " EasyMotion
         let g:EasyMotion_smartcase = 1
 
-    " gem install bcat ( to preview files in html
-        map <leader>m :!markdown % \|bcat<cr>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS mine Aem
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-        " Color Scheme Toggle
-        "function! ToggleColor()
-            "if g:colors_name == 'twilight'
-                    "colorscheme greyhouse
-            "else
-                    "colorscheme twilight
-                    "Highlight LineNr guibg=black guifg=LightGrey
-                    "Highlight Folded guibg=black
-                    "Highlight Normal guifg=#96A2A4
-                    "Highlight Search guibg=#a0a000 gui=bold 
-                    "Highlight Type   guifg=#B0A774
-            "endif
-            "echo g:colors_name
-        "endfunction
+    function! DebugVar()
+            if &ft == 'javascript'
+                    exe "normal oconsole.debug();"
+                    exe "normal hhp"
+            elseif &ft == 'php'
+                    exe "normal ovar_dump();"
+                    exe "normal hhp"
+            elseif &ft == 'sql'
+                    exe "normal oselect ;"
+                    exe "normal hp"
+            else
+                    echo &ft
+                    echo "not implemente yet, please do"
+            endif
+    endfunction
 
-        "join all in a command. So when Unding it undo the DebugVar complete"
-        function! DebugVar()
-                if &ft == 'javascript'
-                        exe "normal oconsole.debug();"
-                        exe "normal hhp"
-                elseif &ft == 'php'
-                        exe "normal ovar_dump();"
-                        exe "normal hhp"
-                elseif &ft == 'sql'
-                        exe "normal oselect ;"
-                        exe "normal hp"
-                else
-                        echo &ft
-                        echo "not implemente yet, please do"
-                endif
-        endfunction
+    function! DebugVarDie()
+            if &ft == 'javascript'
+                    exe "normal oconsole.debug();"
+                    exe "normal hhp"
+                    exe "normal oalert();;"
+            elseif &ft == 'php'
+                    exe "normal opr();"
+                    exe "normal hhp"
+                    exe "normal odie;"
+            else
+                    echo &ft
+                    echo "not implemente yet, please do"
+            endif
+    endfunction
 
-        function! DebugVarDie()
-                if &ft == 'javascript'
-                        exe "normal oconsole.debug();"
-                        exe "normal hhp"
-                        exe "normal oalert();;"
-                elseif &ft == 'php'
-                        exe "normal opr();"
-                        exe "normal hhp"
-                        exe "normal odie;"
-                else
-                        echo &ft
-                        echo "not implemente yet, please do"
-                endif
-        endfunction
-
-        " Diff Toggle
-        function! DiffToggle()
-                if &diff
-                        diffoff
-                else
-                        diffthis
-                endif
-        endfunction
-
-        " Mantain fold when editing @origanl from vimTip
-        set foldopen=hor,mark,percent,quickfix,search,tag,undo
-        autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-        autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+    function! DiffToggle()
+            if &diff
+                    diffoff
+            else
+                    diffthis
+            endif
+    endfunction
