@@ -14,3 +14,7 @@ set fish_plugins git brew bundler extract localhost node php rails rake rbenv rv
 
 # Load oh-my-fish configuration.
 . $fish_path/oh-my-fish.fish
+
+# Aliases
+alias ls="tree -aL 1"
+alias ll="tree -aL 2"
