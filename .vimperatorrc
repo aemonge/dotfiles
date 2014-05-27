@@ -2,10 +2,11 @@ set runtimepath+=~/.vimperator/vimperator-plugins
 loadplugins
 map C :firebug console-focus<cr>
 source ~/.vimperator/vimperator-plugins/caret-hint.js
+map U :stylish toggle<cr>
 
-set noscrollbars
-set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
-set toolbars=noaddons,nobookmarks,nomenu,nonavigation,tabs
+" set noscrollbars
+set gui=noaddons,nobookmarks,nomenu,navigation,tabs
+set toolbars=noaddons,nobookmarks,navigation,nomenu,tabs
 set defsearch=duckduckgo
 :set defsearch=duckduckgo
 
@@ -13,8 +14,6 @@ set defsearch=duckduckgo
 set! javascript.options.jit.chrome=true
 
 nmap <F2> :set toolbars=invtabs<CR>
-nmap <F3> :set toolbars=invnavigation<CR>
-map <silent> <F4> :js toggle_bottombar()<CR>
 
 " map <S-j> <C-p>
 " map <S-k> <C-n>
@@ -36,15 +35,5 @@ map <C-9> b9<cr>
 map <c-m> gT
 
 " Run :vimperatortoggle to enable or disable Vimperator as needed.
-javascript function vimperatortoggle() { if (is_vimperator_active) { liberator.execute(':disable') } else { liberator.execute(':enable') }; }
-command! vimperatortoggle javascript vimperatortoggle()
-
-
-:js << EOF
-function toggle_bottombar() {
-    var bb = document.getElementById('liberator-bottombar');
-    if (!bb)
-        return;
-    bb.style.height = (bb.style.height == '') ? '0px' : '';
-    bb.style.overflow = (bb.style.height == '') ? '' : 'hidden';
-}
+" javascript function vimperatortoggle() { if (is_vimperator_active) { liberator.execute(':disable') } else { liberator.execute(':enable') }; }
+" command! vimperatortoggle javascript vimperatortoggle()

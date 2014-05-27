@@ -24,10 +24,10 @@
         """""""""""""""""
         " File realated "
         """""""""""""""""
-    set noexpandtab " don't use soft tabs
+    set expandtab " don't use soft tabs
         set cindent
-        set tabstop=2 " tabs are 4 spaces width
-        set shiftwidth=2 " softtabs are 4 spaces width
+        set tabstop=4 " tabs are 4 spaces width
+        set shiftwidth=4 " softtabs are 4 spaces width
     set encoding=utf-8 " "
     set fileencoding=utf-8
         set spell
@@ -118,6 +118,8 @@
 		set t_Co=256
 		let g:hybrid_use_Xresources = 1
 		ColorScheme hybrid
+        " Use no background so it can share urxvt transparency
+        hi Normal ctermbg=NONE
 
 		" let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
 			" colorscheme twilight

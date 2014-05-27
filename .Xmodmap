@@ -1,8 +1,8 @@
 ! !!!!!!!!!!! Swap Esc Caps !!!!!!!!!!!!!!!
-!remove Lock = Caps_Lock
-!keysym Escape = Caps_Lock
-!keysym Caps_Lock = Escape
-!add Lock = Caps_Lock
+remove Lock = Caps_Lock
+keysym Escape = Caps_Lock
+keysym Caps_Lock = Escape
+add Lock = Caps_Lock
 
 ! !!!!!!!!!!! Super binding !!!!!!!!!!!!!!!
 keycode 133 = Mode_switch
@@ -24,3 +24,9 @@ keysym semicolon = semicolon colon ntilde
 keysym comma = comma less grave
 keysym slash = slash question questiondown
 keysym 1 = 1 exclam exclamdown
+
+! !!!!!!!!!!!!!! Xmonad !!!!!!!!!!!!!!!!!!!
+! Use Left Alt to manage xmonad && Right Normal Alt
+remove Mod1 = Alt_L
+keycode 64 = Alt_L
+add Mod3 = Alt_L

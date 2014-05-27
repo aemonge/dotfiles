@@ -3,6 +3,7 @@
 xbacklight -set 60%;
 alias nautilus='nautilus --no-desktop'
 alias tm="tmux -2 attach || tmux -2 "
+export EDITOR=/usr/bin/vim
 
 
 # ############  ViMode  ###################
