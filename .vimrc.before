@@ -27,6 +27,8 @@ endif
         Plugin 'HTML-AutoCloseTag'
         " repeat
         Plugin 'tpope/vim-repeat'
+        " copy to tmux (tmux should handle ubuntu xclip)
+        Plugin 'lord-garbage/vimtux'
 
     """""""""""""""""""""""""""
     """""""" Performance  """""
@@ -43,6 +45,13 @@ endif
         " Store the configuration in a single file for multi editors
         " editorconfig.org
         Plugin 'editorconfig/editorconfig-vim'
+        " show git diff in number columns
+        Plugin 'airblade/vim-gitgutter'
+        " Git commands
+        Plugin 'tpope/vim-fugitive'
+        " Snips
+        Plugin 'SirVer/ultisnips'
+        Plugin 'honza/vim-snippets'
 
     """"""""""""""""""""""""""""
     """""""" Movements """""""""
@@ -63,7 +72,7 @@ endif
         "Plugin 'eudisd/vim-csapprox'
         Plugin 'w0ng/vim-hybrid'
         " Open a terminal in a Vim-buffer
-        "Plugin 'carlobaldassi/ConqueTerm'
+        Plugin 'carlobaldassi/ConqueTerm'
         " Open a Scratch buffer, a anonymous buffer
         Plugin 'duff/vim-scratch'
         " Vim powerLine, make the status line more pretty and usefull. BUT
@@ -95,12 +104,20 @@ endif
         " less/sass css syntax enhancers
         Plugin 'groenewege/vim-less'
         " CSS3 new function syntax
-        Plugin 'mutewinter/vim-css3-syntax'
+        Plugin 'hail2u/vim-css3-syntax'
+        " Stylus
+        Plugin 'vim-stylus'
         " Jade templating
         Plugin 'digitaltoad/vim-jade'
+        " Mustache / Handlebars
+        Plugin 'mustache/vim-mustache-handlebars'
         " JavaScript
         Plugin 'pangloss/vim-javascript'
         Plugin 'marijnh/tern_for_vim'
+        " JavaScript tests
+        Plugin 'claco/jasmine.vim'
+        " JavaScript jscs strict syntax checker
+        Plugin 'file:///home/aemonge/lib/jscs.vim'
 
         " jQuery, backbone, mustache(templates) and more
         Plugin 'othree/javascript-libraries-syntax.vim'
@@ -116,13 +133,12 @@ endif
     """""""""""""""""""""""""""
     """"""" Testing """""""""""
     """""""""""""""""""""""""""
-        Plugin 'benmills/vimux'
         Plugin 'robmiller/vim-movar'
 
     """""""""""""""""""""""""""
     """" Known fatties """""""
     """""""""""""""""""""""""""
-        "Plugin 'Valloric/YouCompleteMe'
+        Plugin 'Valloric/YouCompleteMe'
         "Plugin 'skammer/vim-css-color'
         "Plugin 'zaiste/tmux.vim' "
         "Plugin 'spf13/PIV'
@@ -138,6 +154,8 @@ endif
         "Plugin 'mbbill/VimExplorer'
         " Complete your search
         "Plugin 'SearchComplete'
+        " Use vimtux instead
+        "Plugin 'benmills/vimux'
 
     """""""""""""""""""""""""""
     """" Known Buggies  """""""
@@ -150,7 +168,7 @@ endif
         "Plugin 'kien/ctrlp.vim'
         "Plugin 'ddollar/nerdcommenter'
         "Plugin 'scrooloose/nerdtree'
-        "Plugin 'ervandew/supertab'
+        Plugin 'ervandew/supertab'
         "Plugin 'scrooloose/syntastic'
         "Plugin 'majutsushi/tagbar'
         "Plugin 'garbas/vim-snipmate'
@@ -161,8 +179,8 @@ endif
 
 filetype plugin indent on " required!filetype plugin indent on " required!
 " Disabling Plugins
-    "call janus#disable_plugin('supertab')
-    "call janus#disable_plugin('snipmate')
+    call janus#disable_plugin('supertab')
+    call janus#disable_plugin('snipmate')
 
     call janus#disable_plugin('ack.vim')
     call janus#disable_plugin('Unimpaired')

@@ -1,9 +1,3 @@
 set windows playlist,directory
 set window directory
 set nocolour
-set hlsearch
-set smartcase
-set incsearch
-set playonadd
-set searchwrap
-set singlequit

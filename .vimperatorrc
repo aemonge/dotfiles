@@ -12,6 +12,9 @@ set defsearch=duckduckgo
 " Make Firefox run faster by using JIT
 set! javascript.options.jit.chrome=true
 
+" Editor 
+:set editor="gnome-terminal --disable-factory -x vim"
+
 nmap <F2> :set toolbars=invtabs<CR>
 nmap <F3> :set toolbars=invnavigation<CR>
 map <silent> <F4> :js toggle_bottombar()<CR>

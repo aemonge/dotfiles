@@ -17,8 +17,7 @@ Xft.hintstyle:              hintslight
 
 URxvt.depth:                32
 URxvt.geometry:             90x30
-URxvt.transparent:          true
-URxvt.shading:              8
+URxvt.transparent:          false
 URxvt.fading:               0
 ! URxvt.urgentOnBell:         true
 ! URxvt.visualBell:           true
@@ -30,7 +29,7 @@ URxvt.lineSpace:            0
 ! Fonts
 !URxvt.allow_bold:           false
 !URxvt*boldfont: xft:Menlo for Powerline:pixelsize=14
-URxvt*font: xft:Menlo for Powerline:regular:size=12
+URxvt*font: xft:Menlo for Powerline:regular:size=10
 
 
 ! Fix font space
@@ -55,7 +54,7 @@ URxvt.pointerBlank:         true
 
 !!Source http://github.com/altercation/solarized
 
-background: #223344
+!*background: #181818
 !*foreground: #657b83
 !!!*fading: 40
 !*fadeColor: #00637D

@@ -26,14 +26,15 @@
     """""""""""""""""
         set expandtab         " use spaces instead of tabs
             set cindent
-            set tabstop=4     " tabs are 4 spaces width
-            set shiftwidth=4  " softtabs are 4 spaces width
+            set tabstop=2     " tabs are 4 spaces width
+            set shiftwidth=2  " softtabs are 4 spaces width
         set encoding=utf-8
         set fileencoding=utf-8
         set fileformat=unix
-        set spell
         "set spl=es_es spell
-        set spl=en_us spell
+        set spl=en_us,es spell
+        " visible column at 90 so we can knwo our limit
+        set cc=90
 
     """""""""""""""""
     """" Search """""
@@ -106,7 +107,7 @@
     nnoremap K :Man --manpath=/usr/share/doc/php5-common/PEAR/pman/ <cword><cr>
 
     " split to right no left && down no up
-    set splitright
+    "set splitright
     set splitbelow
 
     " Mantain fold when editing @origanl from vimTip
@@ -120,6 +121,9 @@
     set t_Co=256
     let g:hybrid_use_Xresources = 1
     ColorScheme hybrid
+    " set bad Spells to underlined
+    hi clear SpellBad
+    hi SpellBad cterm=underline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MAPPINGS
@@ -130,26 +134,27 @@
     " visual mode key-binding aid
             vmap A $
             vmap I ^
+            vmap s :s/
 
     """"""""""""""""""""
     " Pluggin Mappings "
     """"""""""""""""""""
         " Ag Grep, better than grep and ack
-        map <leader>f :Ag 
-		" Align to be maniac vertically aligned
-		vmap a :Align 
+        map <leader>f :Ag ''2h
+        " Align to be maniac vertically aligned
+        vmap t :Align 
         " sql align type (right padding)
-		vmap A :Align! r
+        vmap T :Align! r 
         " Scratcyh
-        nnoremap <Leader>st :sp<cr> :Scratch<cr>
-         " TagBar
-         nnoremap <Leader>rt :TagbarToggle<cr>
+        nnoremap <Leader>st :Scratch<cr>
+        " TagBar
+        nnoremap <Leader>rt :TagbarToggle<cr>
         " Gundo
         nnoremap <leader>u :GundoToggle<cr>
         inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
         " CtrlP
-        map <c-p> :CtrlPMixed<cr>
-        map <c-t> :CtrlPBufTagAll<cr>
+        map <leader>p :CtrlPMixed<cr>
+        map <leader>t :CtrlPBufTagAll<cr>
         map <leader>b :CtrlPBuffer<cr>
         " CamelCase Motion
         map w <Plug>CamelCaseMotion_w
@@ -175,20 +180,25 @@
         omap / <Plug>(easymotion-tn)
         nmap s <Plug>(easymotion-s)
         nmap S <Plug>(easymotion-s2)
+        " Fugitive (git)
+        nmap <leader>w :Gblame<cr>
+        nmap <leader>g :Gstatus<cr>
+        " Git Gutter
+        nmap <leader>tg :GitGutterToggle<cr>
 
     """"""""""""""""""""
     """ Completions """"
     """"""""""""""""""""
-        " Line Completion
+        "" Line Completion
         imap <C-l> <c-x><C-l>
-        " Omni Completion
-        imap <C-k> <c-x><c-o>
-        " Spelling Completion
+        "" Omni Completion
+        "imap <C-k> <c-x><c-o>
+        "" Spelling Completion
         imap <C-h> <c-x>s
-        " File Completion
-        imap <C-f> <c-x><c-f>
-        " CommandLine Completion not usefull
-        imap <C-j> <c-x><c-v>
+        "" File Completion
+        "imap <C-f> <c-x><c-f>
+        "" CommandLine Completion not useful
+        "imap <C-j> <c-x><c-v>
 
     """"""""""""""""""""
     "" SmartShortcuts ""
@@ -210,9 +220,12 @@
         nnoremap <S-F3> :if &go=~#'e'<Bar>set go-=e<Bar>else<Bar>set go+=e<Bar>endif<CR>
         " Clear screen clears search highlighting.
         nnoremap <C-L> :nohl<CR><C-L>
+        " a bit faster to get the q: and my own f:
+        nmap q; q:
+        nmap f; f:
 
     " gem install bcat ( to preview files in html
-        map <leader>m :!markdown % \|bcat<cr>
+        "map <leader>m :!markdown % \|bcat<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => TAB, SPLITS & NAVIGATIONS
@@ -226,8 +239,8 @@
     " Map C-[jk] to move between splits && C-[gh] to move between tabs
     nmap <c-j> :wincmd w<cr>
     nmap <c-k> :wincmd W<cr>
-    nmap <c-g> :tabprevious<cr>
-    nmap <c-h> :tabnext<cr>
+    nmap <c-p> :call TabOrBuffer(0)<cr>
+    nmap <c-n> :call TabOrBuffer(1)<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS SETTINGS
@@ -241,8 +254,10 @@
         call AddCycleGroup(['start', 'end'])
         call AddCycleGroup(['read', 'write'])
         call AddCycleGroup(['remove', 'add'])
+        call AddCycleGroup(['truthy', 'falsy'])
         call AddCycleGroup(['before', 'after'])
         call AddCycleGroup(['enable', 'disable'])
+        call AddCycleGroup(['hidden', 'visible'])
         call AddCycleGroup(['internal', 'external'])
         call AddCycleGroup(['short', 'normal', 'long'])
         call AddCycleGroup(['subscribe', 'unsubscribe'])
@@ -250,6 +265,7 @@
         call AddCycleGroup(['red', 'blue', 'green', 'yellow'])
         call AddCycleGroup(['tiny', 'small', 'medium', 'big', 'huge'])
         call AddCycleGroup(['pico', 'nano', 'micro', 'mili', 'kilo', 'mega', 'giga', 'tera', 'peta'])
+        call AddCycleGroup(['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday', 'saturday'])
         call AddCycleGroup(['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirdteen', 'fourteen', 'fifthteen', 'sixteen'])
         " Vim Cycle PHP
         call AddCycleGroup(['protected', 'private', 'public'])
@@ -262,6 +278,8 @@
         call AddCycleGroup(['LOW', 'HIGH'])
         call AddCycleGroup(['PROCEDURE', 'FUNCTION'])
         call AddCycleGroup(['DELETE', 'UPDATE', 'INSERT', 'SELECT', 'RETURN'])
+        " Lo-dash oposites
+        call AddCycleGroup(['filter', 'reject'])
 
     " Vim NERDtree close when open (not preview)
         let NERDTreeQuitOnOpen = 1
@@ -278,14 +296,68 @@
         " try to get it faster
         let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc"  -g ""'
 
+    " CntrlP cache and `ag` command
+        let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+        if executable('ag')
+          let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+        endif
+
     " EasyMotion
         let g:EasyMotion_smartcase = 1
+
+    " Syntastic Javascript enable both chekers
+        let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+
+    " Git Gutter, although it's been disabled by default
+        let g:gitgutter_enabled = 0
+        let g:gitgutter_realtime = 0
+
+    " YouCompleteMe
+        let g:ycm_collect_identifiers_from_comments_and_strings = 1
+        let g:ycm_seed_identifiers_with_syntax = 1
+        let g:ycm_collect_identifiers_from_tags_files = 1
+        " these ones might be very heavy
+        let g:ycm_add_preview_to_completeopt = 1 
+        let g:ycm_autoclose_preview_window_after_completion = 1
+        " just cicle with c-p c-n
+        let g:ycm_key_list_select_completion = ['<TAB>', '<C-p>']
+        let g:ycm_key_list_previous_completion = ['<S-TAB>', '<C-n>']
+
+        " make YCM compatible with UltiSnips (using supertab)
+        let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+        let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+        let g:SuperTabDefaultCompletionType = '<C-n>'
+
+        " better key bindings for UltiSnipsExpandTrigger
+        let g:UltiSnipsExpandTrigger = "<tab>"
+        let g:UltiSnipsJumpForwardTrigger = "<tab>"
+        let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+        " close on a single esc key
+        let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS mine Aem
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    function! TabOrBuffer(next)
+      let next=a:next
+      if (tabpagenr('$') == 1)
+        if ( next == 1 )
+          exec "bn"
+        else
+          exec "bp"
+        endif
+      else
+        if ( next == 1 )
+          exec "tabn"
+        else
+          exec "tabp"
+        endif
+      endif
+    endfunction
+
     function! DebugVar()
-            if &ft == 'javascript'
+            if &ft == 'javascript' || &ft == 'jasmine.javascript'
                     exe "normal oconsole.debug();"
                     exe "normal hhp"
             elseif &ft == 'php'
@@ -301,7 +373,7 @@
     endfunction
 
     function! DebugVarDie()
-            if &ft == 'javascript'
+            if &ft == 'javascript' || &ft == 'jasmine.javascript'
                     exe "normal oconsole.debug();"
                     exe "normal hhp"
                     exe "normal oalert();;"
@@ -322,3 +394,7 @@
                     diffthis
             endif
     endfunction
+
+    " the following line makes vim ignore camelCase and CamelCase words so they
+    " are not highlighted as spelling mistakes
+        autocmd Syntax * syn match CamelCase "\(\<\|_\)\%(\u\l*\)\{2,}\(\>\|_\)\|\<\%(\l\l*\)\%(\u\l*\)\{1,}\>" transparent containedin=.*Comment.*,.*String.*,VimwikiLink contains=@NoSpell contained
