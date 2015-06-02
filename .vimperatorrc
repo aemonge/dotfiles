@@ -1,53 +1,94 @@
-set runtimepath+=~/.vimperator/vimperator-plugins
-loadplugins
-map C :firebug console-focus<cr>
-source ~/.vimperator/vimperator-plugins/caret-hint.js
+" Plug-ins
+  set runtimepath+=~/.vimperator/vimperator-plugins
+  loadplugins
+  map C :firebug console-focus<cr>
+  source ~/.vimperator/plugins/caret-hint.js
+  source ~/.vimperator/plugins/auto-wildoptions.js
+  source ~/.vimperator/plugins/toggline.js
+  source ~/.vimperator/plugins/toggler.js
+  source ~/.vimperator/plugins/command_menu.js
+  source ~/.vimperator/plugins/inspector.js
+  source ~/.vimperator/plugins/jquery-loader.js
+  source ~/.vimperator/plugins/spellchecker.js
+  source ~/.vimperator/plugins/facebook.js
 
-set noscrollbars
-set gui=noaddons,nobookmarks,nomenu,tabs
-set toolbars=noaddons,nobookmarks,nomenu,navigation,tabs
-set defsearch=duckduckgo
-:set defsearch=duckduckgo
+" Minimal theme
+  set noscrollbars
+  set gui=noaddons,nobookmarks,nomenu,tabs
+  set toolbars=noaddons,nobookmarks,nomenu,navigation,tabs
+  colorscheme indigo-fx3
+
+" Set DDG
+  set defsearch=duckduckgo
+  :set defsearch=duckduckgo
 
 " Make Firefox run faster by using JIT
-set! javascript.options.jit.chrome=true
+  set! javascript.options.jit.chrome=true
+
+" Cancel special mode with insert
+noremap <Insert> <nop>
+
+" Safe vim keys
+noremap <C-Q> <nop>
 
 " Editor 
-:set editor="gnome-terminal --disable-factory -x vim"
+  :set editor="gnome-terminal --disable-factory -x vim"
 
-nmap <F2> :set toolbars=invtabs<CR>
-nmap <F3> :set toolbars=invnavigation<CR>
-map <silent> <F4> :js toggle_bottombar()<CR>
+" Mappings
+  nmap <F2> :set toolbars=invtabs<CR>
+  nmap <F3> :set toolbars=invnavigation<CR>
+  map <silent> <F4> :js toggle_bottombar()<CR>
 
-" map <S-j> <C-p>
-" map <S-k> <C-n>
-map <C-w> :tabn<cr>
-map <C-S-w> :tabp<cr>
+  " map <S-j> <C-p>
+  " map <S-k> <C-n>
+  map <C-w> :tabn<cr>
+  map <C-S-w> :tabp<cr>
 
-map <C-h> :tabn<cr>
-map <C-g> :tabp<cr>
+  map <C-h> :tabn<cr>
+  map <C-g> :tabp<cr>
 
-map <C-1> b1<cr>
-map <C-2> b2<cr>
-map <C-3> b3<cr>
-map <C-4> b4<cr>
-map <C-5> b5<cr>
-map <C-6> b6<cr>
-map <C-7> b7<cr>
-map <C-8> b8<cr>
-map <C-9> b9<cr>
-map <c-m> gT
+  map <C-1> b1<cr>
+  map <C-2> b2<cr>
+  map <C-3> b3<cr>
+  map <C-4> b4<cr>
+  map <C-5> b5<cr>
+  map <C-6> b6<cr>
+  map <C-7> b7<cr>
+  map <C-8> b8<cr>
+  map <C-9> b9<cr>
+  map <c-m> gT
 
-" Run :vimperatortoggle to enable or disable Vimperator as needed.
-javascript function vimperatortoggle() { if (is_vimperator_active) { liberator.execute(':disable') } else { liberator.execute(':enable') }; }
-command! vimperatortoggle javascript vimperatortoggle()
+" Javascript to hide statusbar
+  noremap <silent> <F8> :js toggle_bottombar()<CR>
+  noremap : :js toggle_bottombar('on')<CR>:
+  noremap o :js toggle_bottombar('on')<CR>o
+  noremap O :js toggle_bottombar('on')<CR>O
+  noremap t :js toggle_bottombar('on')<CR>t
+  noremap T :js toggle_bottombar('on')<CR>T
+  noremap w :js toggle_bottombar('on')<CR>w
+  noremap W :js toggle_bottombar('on')<CR>W
+  noremap / :js toggle_bottombar('on')<CR>/
+  noremap <S-Esc> :js toggle_bottombar('on')<CR><S-Esc>
+  cnoremap <CR> <CR>:js toggle_bottombar('off')<CR>
+  cnoremap <Esc> <Esc>:js toggle_bottombar('off')<CR>
 
-
-:js << EOF
-function toggle_bottombar() {
-    var bb = document.getElementById('liberator-bottombar');
-    if (!bb)
-        return;
-    bb.style.height = (bb.style.height == '') ? '0px' : '';
-    bb.style.overflow = (bb.style.height == '') ? '' : 'hidden';
-}
+  :js << EOF
+  function toggle_bottombar(p) {
+      var bb = document.getElementById('liberator-bottombar');
+      if (!bb)
+          return;
+      if (p == 'on'){
+          bb.style.height = '';
+          bb.style.overflow = '';
+          return;
+      }
+      if (p == 'off'){
+          bb.style.height = '0px';
+          bb.style.overflow = 'hidden';
+          return;
+      }
+      bb.style.height = (bb.style.height == '') ? '0px' : '';
+      bb.style.overflow = (bb.style.height == '') ? '' : 'hidden';
+  }
+  toggle_bottombar();
+  EOF

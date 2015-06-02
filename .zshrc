@@ -47,7 +47,7 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   apache2-macports, autoenv, autojump, autopep8, battery, bower, bundler, capistrano, chruby, cloudapp, coffee, colorize
-  , command-not-found, common-aliases, copydir, copyfile, cp, debian, dircycle, dirhistory, dirpersist, docker, emacs
+  , command-not-found, common-aliases, copydir, copyfile, cp, debian, dircycle, dirhistory, dirpersist, docker, emacs, gcloud-zsh-completion
   , encode64, fastfile, fbterm, forklift, frontend-search, gem, git-extras, git-flow-avh, git-flow, git-hubflow, git-prompt
   , git-remote-branch, git, gitfast, github, gitignore, glassfish, gnu-utils, heroku, history-substring-search, history, iwhois
   , jake-node, jira, jruby, jsontools, jump, lighthouse, mercurial, meteor, node, npm, nvm
@@ -55,7 +55,7 @@ plugins=(
   , redis-cli, repo, rsync, ruby, rvm, safe-paste, scd, sfffe, singlechar, sprunge, ssh-agent, sublime, sudo, supervisor, svn-fast-info, svn, symfony, symfony2, systemadmin, systemd
   , taskwarrior, terminalapp, themes, thor, tmux, tmuxinator, torrent, urltools, vagrant
   , vi-mode, vim-interaction, virtualenv, virtualenvwrapper, vundle, wakeonlan, wd, web-search, xcode, yii, yum, z, zeus, zsh_reload
-  , zsh-syntax-highlighting, zsh-autosuggestions
+  , zsh-syntax-highlighting, zsh-autosuggestions, mvn
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -80,6 +80,15 @@ export PATH="/home/aemonge/.nvm/v0.11.13/bin:/home/aemonge/local/bin:/home/aemon
    export EDITOR='mvim'
  fi
 
+# Load Google SDK
+autoload -U compinit compdef
+compinit
+source '/home/aemonge/lib/workTools/googleSdk/path.zsh.inc'
+source '/home/aemonge/lib/workTools/googleSdk/completion.zsh.inc'
+
+# Load Maven
+# export PATH=/home/aemonge/lib/workTools/apacheMaven/bin:$PATH
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -94,3 +103,9 @@ export PATH="/home/aemonge/.nvm/v0.11.13/bin:/home/aemonge/local/bin:/home/aemon
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+
+source ~/.xsh
+
+# BBVA-GAE-SSH
+ssh-add ~/.ssh/gae_id_rsa
