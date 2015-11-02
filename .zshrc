@@ -1,14 +1,18 @@
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+  export ZSH=/home/aemonge/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="fishy"
+ZSH_THEME="normi"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -26,7 +30,7 @@ ZSH_THEME="fishy"
 ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -58,42 +62,28 @@ plugins=(
   , zsh-syntax-highlighting, zsh-autosuggestions, mvn
 )
 
-source $ZSH/oh-my-zsh.sh
-
-# Vi mode
-set editing-mode vi
-set blink-matching-paren on
-set -o vi
-
 # User configuration
 
-export PATH="/home/aemonge/.nvm/v0.11.13/bin:/home/aemonge/local/bin:/home/aemonge/.rvm/gems/ruby-head/bin:/home/aemonge/.rvm/gems/ruby-head@global/bin:/home/aemonge/.rvm/rubies/ruby-head/bin:./node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/games:/usr/local/games:/home/aemonge/.rvm/bin"
+  export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/aemonge/.gem/ruby/2.2.0/bin/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+source $ZSH/oh-my-zsh.sh
+
 # You may need to manually set your language environment
- export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
-   export EDITOR='mvim'
- fi
-
-# Load Google SDK
-autoload -U compinit compdef
-compinit
-source '/home/aemonge/lib/workTools/googleSdk/path.zsh.inc'
-source '/home/aemonge/lib/workTools/googleSdk/completion.zsh.inc'
-
-# Load Maven
-# export PATH=/home/aemonge/lib/workTools/apacheMaven/bin:$PATH
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -101,11 +91,26 @@ source '/home/aemonge/lib/workTools/googleSdk/completion.zsh.inc'
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="vim ~/.zshrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
 
+# Vi mode
+set editing-mode vi
+set blink-matching-paren on
+set -o vi
 
-source ~/.xsh
+# TMUX
+if which tmux -2 >/dev/null 2>&1; then
+  # if no session is started, start a new session
+  test -z ${TMUX} && tmux
 
-# BBVA-GAE-SSH
-ssh-add ~/.ssh/gae_id_rsa
+  # when quitting tmux, try to attach
+  while test -z ${TMUX}; do
+    tmux -2 attach || break
+  done
+fi
+
+# Old User configuration
+# export PATH="/home/aemonge/.nvm/v0.11.13/bin:/home/aemonge/local/bin:/home/aemonge/.rvm/gems/ruby-head/bin:/home/aemonge/.rvm/gems/ruby-head@global/bin:/home/aemonge/.rvm/rubies/ruby-head/bin:./node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/games:/usr/local/games:/home/aemonge/.rvm/bin"
+# export MANPATH="/usr/local/man:$MANPATH"
+# export NODE_PATH=$NODE_PATH:/home/aemonge/.npm/lib/node_modules

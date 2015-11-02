@@ -13,7 +13,7 @@
   source ~/.vimperator/plugins/facebook.js
 
 " Minimal theme
-  set noscrollbars
+  " set noscrollbars
   set gui=noaddons,nobookmarks,nomenu,tabs
   set toolbars=noaddons,nobookmarks,nomenu,navigation,tabs
   colorscheme indigo-fx3

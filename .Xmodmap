@@ -8,11 +8,16 @@ add Lock = Caps_Lock
 keycode 133 = Mode_switch
 keycode 134 = Mode_switch
 
+! !!!!!!!!!!!!!! I3WM !!!!!!!!!!!!!!!!!!!!!
+! remove Mod1 = Alt_R
+! keycode 64 = Alt_R
+! add Mod3 = Alt_R
+
 ! !!!!!!!!!!!!!! Xmonad !!!!!!!!!!!!!!!!!!!
 ! Use Left Alt to manage xmonad && Right Normal Alt
-remove Mod1 = Alt_L
-keycode 64 = Alt_L
-add Mod3 = Alt_L
+! remove Mod1 = Alt_L
+! keycode 64 = Alt_L
+! add Mod3 = Alt_L
 
 ! !!!!! Navigation: Arrows && Regex !!!!!!!
 keysym u = u U percent Prior
