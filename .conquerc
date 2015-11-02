@@ -1,2 +1,0 @@
-alias vim='vim --servername LOCAL --remote-tab-silent'
-alias sfind='find $1 -not -ipath "*.svn/*"'
