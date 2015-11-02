@@ -98,15 +98,16 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 set editing-mode vi
 set blink-matching-paren on
 set -o vi
+alias tmux='tmux -2'
 
 # TMUX
-if which tmux -2 >/dev/null 2>&1; then
+if which tmux >/dev/null 2>&1; then
   # if no session is started, start a new session
   test -z ${TMUX} && tmux
 
   # when quitting tmux, try to attach
   while test -z ${TMUX}; do
-    tmux -2 attach || break
+    tmux attach || break
   done
 fi
 
