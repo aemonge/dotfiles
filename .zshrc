@@ -50,24 +50,23 @@ ENABLE_CORRECTION="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  apache2-macports, autoenv, autojump, autopep8, battery, bower, bundler, capistrano, chruby, cloudapp, coffee, colorize
-  , command-not-found, common-aliases, copydir, copyfile, cp, debian, dircycle, dirhistory, dirpersist, docker, emacs, gcloud-zsh-completion
-  , encode64, fastfile, fbterm, forklift, frontend-search, gem, git-extras, git-flow-avh, git-flow, git-hubflow, git-prompt
+  autoenv, autojump, autopep8, battery, bower, bundler, capistrano, chruby, cloudapp, coffee, colorize
+  , command-not-found, common-aliases, copydir, copyfile, cp, debian, dircycle, dirhistory, dirpersist, docker, gcloud-zsh-completion
+  , encode64, fastfile, forklift, gem, git-extras, git-flow-avh, git-flow, git-hubflow, git-prompt
   , git-remote-branch, git, gitfast, github, gitignore, glassfish, gnu-utils, heroku, history-substring-search, history, iwhois
-  , jake-node, jira, jruby, jsontools, jump, lighthouse, mercurial, meteor, node, npm, nvm
-  , perl, pip, pj, pod, postgres, pow, powder, powify, profiles, pyenv, pylint, python, rails, rails3, rails4, rake-fast, rake, rand-quote, rbenv, rbfu, rebar
-  , redis-cli, repo, rsync, ruby, rvm, safe-paste, scd, sfffe, singlechar, sprunge, ssh-agent, sublime, sudo, supervisor, svn-fast-info, svn, symfony, symfony2, systemadmin, systemd
-  , taskwarrior, terminalapp, themes, thor, tmux, tmuxinator, torrent, urltools, vagrant
-  , vi-mode, vim-interaction, virtualenv, virtualenvwrapper, vundle, wakeonlan, wd, web-search, xcode, yii, yum, z, zeus, zsh_reload
-  , zsh-syntax-highlighting, zsh-autosuggestions, mvn
+  , jsontools, jump, node, npm , perl, profiles
+  , repo, rsync, safe-paste, singlechar, ssh-agent, sudo, supervisor, systemadmin, systemd
+  , taskwarrior, terminalapp, themes, tmux, tmuxinator
+  , vi-mode, vim-interaction, vundle, wakeonlan, wd, web-search, zsh_reload
+  , zsh-syntax-highlighting, zsh-autosuggestions, mvn, git-flow-completion
 )
 
 # User configuration
 
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/aemonge/.gem/ruby/2.2.0/bin/"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/aemonge/.gem/ruby/2.2.0/bin/:/home/aemonge/user/projects/medianet/recochy/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8

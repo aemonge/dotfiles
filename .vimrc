@@ -36,8 +36,6 @@
     set cursorline                      " Display vertical and horizontal current line
     " Spelling
     set spl=en_us,es spell
-    hi clear SpellBad                   " Highlight bad spelled words
-    hi SpellBad cterm=underline
     " Backups
     set noswapfile                      " Don't use a .~ swap file
     set undofile                        " Use a directory to save undos
@@ -120,6 +118,8 @@
 
   " ==> Plugins
     Plugin 'Valloric/YouCompleteMe'
+      let g:ycm_collect_identifiers_from_comments_and_strings = 1
+      let g:ycm_collect_identifiers_from_tags_files = 1
     Plugin 'honza/vim-snippets'
     Plugin 'matthewsimo/angular-vim-snippets' " Angular Snippets
     Plugin 'justinj/vim-react-snippets' " React Snipps
@@ -182,274 +182,14 @@
     Plugin 'w0ng/vim-hybrid' " Colorscheme hybrid
     Plugin 'altercation/vim-colors-solarized'
 
-
     if !exists("g:hybrid_use_Xresources")
       let g:hybrid_use_Xresources = 0
     endif
 
     " Highlight clear
-
     if exists("syntax_on")
       syntax reset
     endif
-
-    " let s:_style = s:background
-
-    " let g:colors_name = "hybrid"
-
-
-    " let s:_palette = {'gui' : {} , 'cterm' : {}}
-
-    " let s:_palette.gui.background = { 'dark' : "#1d1f21", 'light' : "#e4e4e4" }
-    " let s:_palette.gui.foreground = { 'dark' : "#c5c8c6", 'light' : "#000000" }
-    " let s:_palette.gui.selection  = { 'dark' : "#373b41", 'light' : "#bcbcbc" }
-    " let s:_palette.gui.line       = { 'dark' : "#282a2e", 'light' : "#d0d0d0" }
-    " let s:_palette.gui.comment    = { 'dark' : "#707880", 'light' : "#5f5f5f" }
-    " let s:_palette.gui.red        = { 'dark' : "#cc6666", 'light' : "#5f0000" }
-    " let s:_palette.gui.orange     = { 'dark' : "#de935f", 'light' : "#875f00" }
-    " let s:_palette.gui.yellow     = { 'dark' : "#f0c674", 'light' : "#5f5f00" }
-    " let s:_palette.gui.green      = { 'dark' : "#b5bd68", 'light' : "#005f00" }
-    " let s:_palette.gui.aqua       = { 'dark' : "#8abeb7", 'light' : "#005f5f" }
-    " let s:_palette.gui.blue       = { 'dark' : "#81a2be", 'light' : "#00005f" }
-    " let s:_palette.gui.purple     = { 'dark' : "#b294bb", 'light' : "#5f005f" }
-    " let s:_palette.gui.window     = { 'dark' : "#303030", 'light' : "#9e9e9e" }
-    " let s:_palette.gui.darkcolumn = { 'dark' : "#1c1c1c", 'light' : "#808080" }
-    " let s:_palette.gui.addbg      = { 'dark' : "#5F875F", 'light' : "#d7ffd7" }
-    " let s:_palette.gui.addfg      = { 'dark' : "#d7ffaf", 'light' : "#005f00" }
-    " let s:_palette.gui.changebg   = { 'dark' : "#5F5F87", 'light' : "#d7d7ff" }
-    " let s:_palette.gui.changefg   = { 'dark' : "#d7d7ff", 'light' : "#5f005f" }
-    " let s:_palette.gui.delbg      = { 'dark' : "#cc6666", 'light' : "#ffd7d7" }
-    " let s:_palette.gui.darkblue   = { 'dark' : "#00005f", 'light' : "#d7ffd7" }
-    " let s:_palette.gui.darkpurple = { 'dark' : "#5f005f", 'light' : "#5f005f" }
-
-    " let s:_palette.cterm.background = { 'dark' : "234", 'light' : "254" }
-    " let s:_palette.cterm.window     = { 'dark' : "236", 'light' : "247" }
-    " let s:_palette.cterm.darkcolumn = { 'dark' : "234", 'light' : "244" }
-    " let s:_palette.cterm.addbg      = { 'dark' : "65" , 'light' : "194" }
-    " let s:_palette.cterm.addfg      = { 'dark' : "193", 'light' : "22"  }
-    " let s:_palette.cterm.changebg   = { 'dark' : "60" , 'light' : "189" }
-    " let s:_palette.cterm.changefg   = { 'dark' : "189", 'light' : "53"  }
-    " let s:_palette.cterm.darkblue   = { 'dark' : "17",  'light' : "194" }
-    " let s:_palette.cterm.darkcyan   = { 'dark' : "24",  'light' : "22" }
-    " let s:_palette.cterm.darkred    = { 'dark' : "52",  'light' : "189" }
-    " let s:_palette.cterm.darkpurple = { 'dark' : "53",  'light' : "53" }
-
-    " if g:hybrid_use_Xresources == 1
-      " let s:_palette.cterm.foreground = { 'dark' : "15" }  " White
-      " let s:_palette.cterm.selection  = { 'dark' : "8" }   " DarkGrey
-      " let s:_palette.cterm.line       = { 'dark' : "0" }   " Black
-      " let s:_palette.cterm.comment    = { 'dark' : "7" }   " LightGrey
-      " let s:_palette.cterm.red        = { 'dark' : "9" }   " LightRed
-      " let s:_palette.cterm.orange     = { 'dark' : "3" }   " DarkYellow
-      " let s:_palette.cterm.yellow     = { 'dark' : "11" }  " LightYellow
-      " let s:_palette.cterm.green      = { 'dark' : "10" }  " LightGreen
-      " let s:_palette.cterm.aqua       = { 'dark' : "14" }  " LightCyan
-      " let s:_palette.cterm.blue       = { 'dark' : "12" }  " LightBlue
-      " let s:_palette.cterm.purple     = { 'dark' : "13" }  " LightMagenta
-      " let s:_palette.cterm.delbg      = { 'dark' : "9" }   " LightRed
-    " else
-      " let s:_palette.cterm.foreground = { 'dark' : "250" }
-      " let s:_palette.cterm.selection  = { 'dark' : "237" }
-      " let s:_palette.cterm.line       = { 'dark' : "235" }
-      " let s:_palette.cterm.comment    = { 'dark' : "243" }
-      " let s:_palette.cterm.red        = { 'dark' : "167" }
-      " let s:_palette.cterm.orange     = { 'dark' : "173" }
-      " let s:_palette.cterm.yellow     = { 'dark' : "221" }
-      " let s:_palette.cterm.green      = { 'dark' : "143" }
-      " let s:_palette.cterm.aqua       = { 'dark' : "109" }
-      " let s:_palette.cterm.blue       = { 'dark' : "110" }
-      " let s:_palette.cterm.purple     = { 'dark' : "139" }
-      " let s:_palette.cterm.delbg      = { 'dark' : "167" }
-    " endif
-
-    " let s:_palette.cterm.foreground.light = "16"
-    " let s:_palette.cterm.selection.light  = "250"
-    " let s:_palette.cterm.line.light       = "252"
-    " let s:_palette.cterm.comment.light    = "59"
-    " let s:_palette.cterm.red.light        = "52"
-    " let s:_palette.cterm.orange.light     = "94"
-    " let s:_palette.cterm.yellow.light     = "58"
-    " let s:_palette.cterm.green.light      = "22"
-    " let s:_palette.cterm.aqua.light       = "23"
-    " let s:_palette.cterm.blue.light       = "17"
-    " let s:_palette.cterm.purple.light     = "53"
-    " let s:_palette.cterm.delbg.light      = "224"
-
-    " let s:_none   = "NONE"
-    " let s:_t_none = "NONE"
-    " let s:_n      = "NONE"
-    " let s:_c      = ",undercurl"
-    " let s:_r      = ",reverse"
-    " let s:_s      = ",standout"
-    " let s:_b      = ",bold"
-    " let s:_u      = ",underline"
-    " let s:_i      = ",italic"
-
-    " function! s:_build_prim(hi_elem, field)
-      " let l:vname = "s:_" . a:hi_elem . "_" . a:field " s:_bg_comment
-      " let l:gui_assign = "gui".a:hi_elem."=".s:_palette.gui[a:field][s:_style] " guibg=...
-      " let l:cterm_assign = "cterm".a:hi_elem."=".s:_palette.cterm[a:field][s:_style] " ctermbg=...
-      " exe "let " . l:vname . " = ' " . l:gui_assign . " " . l:cterm_assign . "'"
-    " endfunction
-
-    " let s:_bg_none = ' guibg=NONE ctermbg=NONE'
-    " call s:_build_prim('bg', 'foreground')
-    " call s:_build_prim('bg', 'background')
-    " call s:_build_prim('bg', 'selection')
-    " call s:_build_prim('bg', 'line')
-    " call s:_build_prim('bg', 'comment')
-    " call s:_build_prim('bg', 'red')
-    " call s:_build_prim('bg', 'orange')
-    " call s:_build_prim('bg', 'yellow')
-    " call s:_build_prim('bg', 'green')
-    " call s:_build_prim('bg', 'aqua')
-    " call s:_build_prim('bg', 'blue')
-    " call s:_build_prim('bg', 'purple')
-    " call s:_build_prim('bg', 'window')
-    " call s:_build_prim('bg', 'darkcolumn')
-    " call s:_build_prim('bg', 'addbg')
-    " call s:_build_prim('bg', 'addfg')
-    " call s:_build_prim('bg', 'changebg')
-    " call s:_build_prim('bg', 'changefg')
-    " call s:_build_prim('bg', 'delbg')
-    " call s:_build_prim('bg', 'darkblue')
-    " call s:_build_prim('bg', 'darkcyan')
-    " call s:_build_prim('bg', 'darkred')
-    " call s:_build_prim('bg', 'darkpurple')
-
-    " let s:_fg_none = ' guifg=NONE ctermfg=NONE'
-    " call s:_build_prim('fg', 'foreground')
-    " call s:_build_prim('fg', 'background')
-    " call s:_build_prim('fg', 'selection')
-    " call s:_build_prim('fg', 'line')
-    " call s:_build_prim('fg', 'comment')
-    " call s:_build_prim('fg', 'red')
-    " call s:_build_prim('fg', 'orange')
-    " call s:_build_prim('fg', 'yellow')
-    " call s:_build_prim('fg', 'green')
-    " call s:_build_prim('fg', 'aqua')
-    " call s:_build_prim('fg', 'blue')
-    " call s:_build_prim('fg', 'purple')
-    " call s:_build_prim('fg', 'window')
-    " call s:_build_prim('fg', 'darkcolumn')
-    " call s:_build_prim('fg', 'addbg')
-    " call s:_build_prim('fg', 'addfg')
-    " call s:_build_prim('fg', 'changebg')
-    " call s:_build_prim('fg', 'changefg')
-    " call s:_build_prim('fg', 'darkblue')
-    " call s:_build_prim('fg', 'darkcyan')
-    " call s:_build_prim('fg', 'darkred')
-    " call s:_build_prim('fg', 'darkpurple')
-
-    " exe "let s:_fmt_none = ' gui=NONE".          " cterm=NONE".          " term=NONE"        ."'"
-    " exe "let s:_fmt_bold = ' gui=NONE".s:_b.      " cterm=NONE".s:_b.      " term=NONE".s:_b    ."'"
-    " exe "let s:_fmt_bldi = ' gui=NONE".s:_b.      " cterm=NONE".s:_b.      " term=NONE".s:_b    ."'"
-    " exe "let s:_fmt_undr = ' gui=NONE".s:_u.      " cterm=NONE".s:_u.      " term=NONE".s:_u    ."'"
-    " exe "let s:_fmt_undb = ' gui=NONE".s:_u.s:_b.  " cterm=NONE".s:_u.s:_b.  " term=NONE".s:_u.s:_b."'"
-    " exe "let s:_fmt_undi = ' gui=NONE".s:_u.      " cterm=NONE".s:_u.      " term=NONE".s:_u    ."'"
-    " exe "let s:_fmt_curl = ' gui=NONE".s:_c.      " cterm=NONE".s:_c.      " term=NONE".s:_c    ."'"
-    " exe "let s:_fmt_ital = ' gui=NONE".s:_i.      " cterm=NONE".s:_i.      " term=NONE".s:_i    ."'"
-    " exe "let s:_fmt_stnd = ' gui=NONE".s:_s.      " cterm=NONE".s:_s.      " term=NONE".s:_s    ."'"
-    " exe "let s:_fmt_revr = ' gui=NONE".s:_r.      " cterm=NONE".s:_r.      " term=NONE".s:_r    ."'"
-    " exe "let s:_fmt_revb = ' gui=NONE".s:_r.s:_b.  " cterm=NONE".s:_r.s:_b.  " term=NONE".s:_r.s:_b."'"
-
-    " exe "let s:_sp_none       = ' guisp=".s:_none      ."'"
-    " exe "let s:_sp_foreground = ' guisp=". s:_palette.gui.foreground[s:_style] ."'"
-    " exe "let s:_sp_background = ' guisp=". s:_palette.gui.background[s:_style] ."'"
-    " exe "let s:_sp_selection  = ' guisp=". s:_palette.gui.selection[s:_style]  ."'"
-    " exe "let s:_sp_line       = ' guisp=". s:_palette.gui.line[s:_style]       ."'"
-    " exe "let s:_sp_comment    = ' guisp=". s:_palette.gui.comment[s:_style]    ."'"
-    " exe "let s:_sp_red        = ' guisp=". s:_palette.gui.red[s:_style]        ."'"
-    " exe "let s:_sp_orange     = ' guisp=". s:_palette.gui.orange[s:_style]     ."'"
-    " exe "let s:_sp_yellow     = ' guisp=". s:_palette.gui.yellow[s:_style]     ."'"
-    " exe "let s:_sp_green      = ' guisp=". s:_palette.gui.green[s:_style]      ."'"
-    " exe "let s:_sp_aqua       = ' guisp=". s:_palette.gui.aqua[s:_style]       ."'"
-    " exe "let s:_sp_blue       = ' guisp=". s:_palette.gui.blue[s:_style]       ."'"
-    " exe "let s:_sp_purple     = ' guisp=". s:_palette.gui.purple[s:_style]     ."'"
-    " exe "let s:_sp_window     = ' guisp=". s:_palette.gui.window[s:_style]     ."'"
-    " exe "let s:_sp_addbg      = ' guisp=". s:_palette.gui.addbg[s:_style]      ."'"
-    " exe "let s:_sp_addfg      = ' guisp=". s:_palette.gui.addfg[s:_style]      ."'"
-    " exe "let s:_sp_changebg   = ' guisp=". s:_palette.gui.changebg[s:_style]   ."'"
-    " exe "let s:_sp_changefg   = ' guisp=". s:_palette.gui.changefg[s:_style]   ."'"
-    " exe "let s:_sp_darkblue   = ' guisp=". s:_palette.gui.darkblue[s:_style]   ."'"
-    " exe "let s:_sp_darkcyan   = ' guisp=". s:_palette.gui.darkcyan[s:_style]   ."'"
-    " exe "let s:_sp_darkred    = ' guisp=". s:_palette.gui.darkred[s:_style]    ."'"
-    " exe "let s:_sp_darkpurple = ' guisp=". s:_palette.gui.darkpurple[s:_style] ."'"
-
-    " exe "Highlight! ColorColumn"   .s:_fg_none        .s:_bg_line        .s:_fmt_none
-    " exe "Highlight! CursorColumn"  .s:_fg_none        .s:_bg_line        .s:_fmt_none
-    " exe "Highlight! CursorLine"    .s:_fg_none        .s:_bg_line        .s:_fmt_none
-    " exe "Highlight! Directory"     .s:_fg_blue        .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! DiffAdd"       .s:_fg_addfg       .s:_bg_addbg       .s:_fmt_none
-    " exe "Highlight! DiffChange"    .s:_fg_changefg    .s:_bg_changebg    .s:_fmt_none
-    " exe "Highlight! DiffDelete"    .s:_fg_background  .s:_bg_delbg       .s:_fmt_none
-    " exe "Highlight! DiffText"      .s:_fg_background  .s:_bg_blue        .s:_fmt_none
-    " exe "Highlight! ErrorMsg"      .s:_fg_background  .s:_bg_red         .s:_fmt_stnd
-    " exe "Highlight! VertSplit"     .s:_fg_window      .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! Folded"        .s:_fg_comment     .s:_bg_darkcolumn  .s:_fmt_none
-    " exe "Highlight! FoldColumn"    .s:_fg_none        .s:_bg_darkcolumn  .s:_fmt_none
-    " exe "Highlight! SignColumn"    .s:_fg_none        .s:_bg_darkcolumn  .s:_fmt_none
-    " exe "Highlight! LineNr"        .s:_fg_selection   .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! CursorLineNr"  .s:_fg_yellow      .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! MatchParen"    .s:_fg_background  .s:_bg_changebg    .s:_fmt_none
-    " exe "Highlight! ModeMsg"       .s:_fg_green       .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! MoreMsg"       .s:_fg_green       .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! NonText"       .s:_fg_selection   .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! Pmenu"         .s:_fg_foreground  .s:_bg_selection   .s:_fmt_none
-    " exe "Highlight! PmenuSel"      .s:_fg_foreground  .s:_bg_selection   .s:_fmt_revr
-    " exe "Highlight! Question"      .s:_fg_green       .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! Search"        .s:_fg_background  .s:_bg_yellow      .s:_fmt_none
-    " exe "Highlight! SpecialKey"    .s:_fg_selection   .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! SpellCap"      .s:_fg_blue        .s:_bg_darkblue    .s:_fmt_undr
-    " exe "Highlight! SpellLocal"    .s:_fg_aqua        .s:_bg_darkcyan    .s:_fmt_undr
-    " exe "Highlight! SpellBad"      .s:_fg_red         .s:_bg_darkred     .s:_fmt_undr
-    " exe "Highlight! SpellRare"     .s:_fg_purple      .s:_bg_darkpurple  .s:_fmt_undr
-    " exe "Highlight! StatusLine"    .s:_fg_comment     .s:_bg_background  .s:_fmt_revr
-    " exe "Highlight! StatusLineNC"  .s:_fg_window      .s:_bg_comment     .s:_fmt_revr
-    " exe "Highlight! TabLine"       .s:_fg_foreground  .s:_bg_darkcolumn  .s:_fmt_revr
-    " exe "Highlight! Title"         .s:_fg_yellow      .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! Visual"        .s:_fg_none        .s:_bg_selection   .s:_fmt_none
-    " exe "Highlight! WarningMsg"    .s:_fg_red         .s:_bg_none        .s:_fmt_none
-    " Highlight LongLineWarning  guifg=NONE        guibg=#371F1C     gui=underline ctermfg=NONE        ctermbg=NONE        cterm=underline
-
-    " if !has('gui_running') || g:hybrid_use_Xresources != 1
-      " exe "Highlight! Normal"        .s:_fg_foreground  .s:_bg_background  .s:_fmt_none
-    " else
-      " exe "Highlight! Normal"        .s:_fg_foreground  .s:_bg_none        .s:_fmt_none
-    " endif
-
-    " exe "Highlight! Comment"         .s:_fg_comment     .s:_bg_none        .s:_fmt_none
-
-    " exe "Highlight! Constant"        .s:_fg_red         .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! String"          .s:_fg_green       .s:_bg_none        .s:_fmt_none
-
-    " exe "Highlight! Identifier"      .s:_fg_purple      .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! Function"        .s:_fg_yellow      .s:_bg_none        .s:_fmt_none
-
-    " exe "Highlight! Statement"       .s:_fg_blue        .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! Operator"        .s:_fg_aqua        .s:_bg_none        .s:_fmt_none
-
-    " exe "Highlight! PreProc"         .s:_fg_aqua        .s:_bg_none        .s:_fmt_none
-
-    " exe "Highlight! Type"            .s:_fg_orange      .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! Structure"       .s:_fg_aqua        .s:_bg_none        .s:_fmt_none
-
-    " exe "Highlight! Special"         .s:_fg_green       .s:_bg_none        .s:_fmt_none
-    " exe "Highlight! Underlined"      .s:_fg_blue        .s:_bg_none        .s:_fmt_none
-
-    " exe "Highlight! Ignore"          .s:_fg_none        .s:_bg_none        .s:_fmt_none
-
-    " exe "Highlight! Error"           .s:_fg_red         .s:_bg_darkred     .s:_fmt_undr
-
-    " exe "Highlight! Todo"            .s:_fg_addfg       .s:_bg_none        .s:_fmt_none
-
-    " exe "Highlight! qfLineNr"        .s:_fg_yellow      .s:_bg_none        .s:_fmt_none
-
-    " Highlight! link diffRemoved Constant
-    " Highlight! link diffAdded Special
-
-
-    " let s:background = s:_style
 
     Plugin 'bling/vim-airline'
       let g:hybrid_use_Xresources = 1
@@ -460,7 +200,6 @@
       let g:airline#extensions#branch#enabled = 1
       let g:airline#extensions#tagbar#enabled = 1
     Plugin 'mhinz/vim-startify' " Smart starup ! just staring
-    Plugin 'kshenoy/vim-signature' " Just as the Numbers, and gitGutter will show vertically the marks.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => IDE
@@ -478,6 +217,8 @@
       let g:ctrlp_map = '<c-p>'
       let g:ctrlp_cmd = 'CtrlPMixed'
       nmap <c-b> :CtrlPBuffer<cr>
+      " Below is the MacOsX iTerm2 Version of above mapping
+      nmap [5~ :CtrlPBuffer<cr>
       nmap <c-c> :CtrlPChangeAll<cr>
     Plugin 'scrooloose/nerdcommenter'       " NERD commenter
       let NERDSpaceDelims=1
@@ -499,7 +240,7 @@
     "Plugin 'Raimondi/delimitMate'          " Closing of quotes
     "Plugin 'tpope/vim-abolish'             " Abolish
     Plugin 'tpope/vim-surround'             " Surround
-    "Plugin 'godlygeek/tabular'             " Tabular
+    Plugin 'godlygeek/tabular'              " Tabular
     "Plugin 'AndrewRadev/splitjoin.vim'     " Splitjoin
     "Plugin 'Keithbsmiley/investigate.vim'  " Helper
     "Plugin 'wellle/targets.vim'            " Text objects
@@ -509,6 +250,8 @@
       map <leader>st :Sscratch<cr>
     Plugin 'editorconfig/editorconfig-vim'
       let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+    Plugin 'LucHermitte/lh-vim-lib'         " Dependency of local_vimrc
+    Plugin 'LucHermitte/local_vimrc'        " The aim of local_vimrc is to apply settings on files from a same project.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Expected Enhancements
@@ -551,6 +294,13 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " ==> Hacking
+    " DUE TO Google Polymer disable awesome feature ........
+    " au BufRead,BufNewFile,BufReadPost *.html set syntax=html
+    " au BufRead,BufNewFile,BufReadPost *.html set filetype=html
+    " au BufRead,BufNewFile,BufReadPost *.html setfiletype=html
+    " au BufRead,BufNewFile,BufReadPost *.html setfiletype=html
+
   " ==> Plugins
     Plugin 'digitaltoad/vim-jade'
     Plugin 'groenewege/vim-less'
@@ -585,14 +335,15 @@
       let g:javascript_conceal_static     = "•"
       let g:javascript_conceal_super      = "Ω"
     Plugin 'scrooloose/syntastic' " Syntax checking
-      map <leader>e :Errors<cr>
+      map <leader>e :SyntasticToggleMode<cr>
       let g:airline#extensions#syntastic#enabled = 1
       let g:syntastic_scss_checkers = ['scss_lint']
       set statusline+=%{SyntasticStatuslineFlag()}
       let g:syntastic_ignore_files = ['-spec.js$']
-      let g:syntastic_html_checkers=['']
-      let g:syntastic_javascript_checkers = ['eslint']
-      let g:syntastic_javascript_eslint_exec = 'eslint_d'
+      let g:syntastic_html_checkers=['jshint']
+      " let g:syntastic_html_jshint_exec='/usr/local/bin/jshint --extract=auto'
+      let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+      " let g:syntastic_javascript_eslint_exec = 'eslint_d'
       let g:syntastic_check_on_open=1
       let g:syntastic_aggregate_errors=1
       let g:syntastic_auto_jump=1
@@ -601,9 +352,10 @@
       let g:syntastic_style_error_symbol = '✠'
       let g:syntastic_warning_symbol = '∆'
       let g:syntastic_style_warning_symbol = '≈'
+      let g:ycm_show_diagnostics_ui = 0  " Make compatible with YCM
       " Disable Sytnastic
-      let g:syntastic_mode="pasive"
-      let g:syntastic_check_on_open=0
+      " let g:syntastic_mode="pasive"
+      " let g:syntastic_check_on_open=0
     Plugin 'xolox/vim-easytags'   " Javascript Tags made easy ;)
       let g:easytags_cmd = 'ctags'
       let g:easytags_dynamic_files = 1
@@ -612,7 +364,7 @@
       let g:easytags_events = ['BufWritePost']
       set tags=./tags
       Plugin 'xolox/vim-misc'
-    " Plugin 'gabrielelana/vim-markdown'
+    Plugin 'plasticboy/vim-markdown'
     Plugin 'othree/javascript-libraries-syntax.vim'
       let g:used_javascript_libs = 'jQuery,underscore,angularjs,angularui,angularuirouter,react,requirejs'
     Plugin 'bendavis78/vim-polymer'
@@ -744,7 +496,7 @@
       echo "not implemente yet, please do"
     endif
   endfunction
-    nmap <leader>v :call DebugVar()<cr>
+  nmap <leader>v :call DebugVar()<cr>
 
   function! ReloadVimRc()
     source $HOME/.vimrc
@@ -752,8 +504,12 @@
     :PluginInstall
     :syntax enable
     :set background=dark
-    :colorscheme solarized
-    :colorscheme hybrid
+    " :colorscheme solarized
+    :ColorScheme hybrid
+    " colorscheme hybrid
+    " Simply change the bad spell for a underline
+    :hi clear SpellBad
+    :hi SpellBad cterm=underline
     :AirlineRefresh
   endfunction
 
@@ -766,6 +522,8 @@
   set background=dark
   colorscheme solarized
   colorscheme hybrid
+  hi clear SpellBad
+  hi SpellBad cterm=underline
 
   Plugin 'zef/vim-cycle'
   " call AddCycleGroup(['set', 'get'])
@@ -787,3 +545,6 @@
     " \ ,['pico', 'nano', 'micro', 'mili', 'kilo', 'mega', 'giga', 'tera', 'peta']
     " \ ,['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday', 'saturday']
     " \ )
+
+  " ==> Last Hacks
+    " au BufRead,BufNewFile,BufReadPost *.html set filetype=html
