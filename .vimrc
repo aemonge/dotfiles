@@ -191,7 +191,8 @@
       syntax reset
     endif
 
-    Plugin 'bling/vim-airline'
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
       let g:hybrid_use_Xresources = 1
       let g:airline_theme = 'ubaryd'
       let g:airline#extensions#tabline#enabled = 1
@@ -340,7 +341,7 @@
       let g:syntastic_scss_checkers = ['scss_lint']
       set statusline+=%{SyntasticStatuslineFlag()}
       let g:syntastic_ignore_files = ['-spec.js$']
-      let g:syntastic_html_checkers=['jshint']
+      let g:syntastic_html_checkers=['jshint', 'jscs']
       " let g:syntastic_html_jshint_exec='/usr/local/bin/jshint --extract=auto'
       let g:syntastic_javascript_checkers = ['jshint', 'jscs']
       " let g:syntastic_javascript_eslint_exec = 'eslint_d'
@@ -352,7 +353,7 @@
       let g:syntastic_style_error_symbol = '✠'
       let g:syntastic_warning_symbol = '∆'
       let g:syntastic_style_warning_symbol = '≈'
-      let g:ycm_show_diagnostics_ui = 0  " Make compatible with YCM
+      let g:ycm_show_diagnostics_ui = 0  " Compabillity with YCM
       " Disable Sytnastic
       " let g:syntastic_mode="pasive"
       " let g:syntastic_check_on_open=0
