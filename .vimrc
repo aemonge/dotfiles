@@ -121,11 +121,11 @@
       let g:ycm_collect_identifiers_from_comments_and_strings = 1
       let g:ycm_collect_identifiers_from_tags_files = 1
     Plugin 'honza/vim-snippets'
-    Plugin 'matthewsimo/angular-vim-snippets' " Angular Snippets
-    Plugin 'justinj/vim-react-snippets' " React Snipps
-      Plugin 'MarcWeber/vim-addon-mw-utils' " Dependacy of above
-      Plugin 'tomtom/tlib_vim' " Dependacy of above
-      Plugin 'garbas/vim-snipmate' " Dependacy of above
+    " Plugin 'matthewsimo/angular-vim-snippets' " Angular Snippets
+    " Plugin 'justinj/vim-react-snippets' " React Snipps
+      " Plugin 'MarcWeber/vim-addon-mw-utils' " Dependacy of above
+      " Plugin 'tomtom/tlib_vim' " Dependacy of above
+      " Plugin 'garbas/vim-snipmate' " Dependacy of above
     Plugin 'sirver/ultisnips' " Snippet engine
       let g:UltiSnipsExpandTrigger="<C-K>"
       let g:UltiSnipsJumpForwardTrigger="<Tab>"
@@ -200,7 +200,7 @@
       let g:airline#extensions#tabline#buf_min_count = 1
       let g:airline#extensions#branch#enabled = 1
       let g:airline#extensions#tagbar#enabled = 1
-    Plugin 'mhinz/vim-startify' " Smart starup ! just staring
+    " Plugin 'mhinz/vim-startify' " Smart starup ! just staring
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => IDE
@@ -251,8 +251,8 @@
       map <leader>st :Sscratch<cr>
     Plugin 'editorconfig/editorconfig-vim'
       let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-    Plugin 'LucHermitte/lh-vim-lib'         " Dependency of local_vimrc
     Plugin 'LucHermitte/local_vimrc'        " The aim of local_vimrc is to apply settings on files from a same project.
+      Plugin 'LucHermitte/lh-vim-lib'         " Dependency of local_vimrc
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Expected Enhancements
@@ -303,22 +303,22 @@
     " au BufRead,BufNewFile,BufReadPost *.html setfiletype=html
 
   " ==> Plugins
-    Plugin 'digitaltoad/vim-jade'
+    " Plugin 'digitaltoad/vim-jade'
     Plugin 'groenewege/vim-less'
     Plugin 'hail2u/vim-css3-syntax'
     Plugin 'elzr/vim-json'
-    Plugin 'juvenn/mustache.vim'
-    Plugin 'mustache/vim-mustache-handlebars'
+    " Plugin 'juvenn/mustache.vim'
+    " Plugin 'mustache/vim-mustache-handlebars'
     Plugin 'kaihendry/vim-html5'
-    Plugin 'vim-stylus'
-    Plugin 'tpope/vim-rails' " Rails
-    Plugin 'mattn/emmet-vim' " Emmet
-      let g:user_emmet_leader_key='<C-K>'
-      let g:user_emmet_settings={'indentation':'    '}
-      let g:use_emmet_complete_tag=1
-    Plugin 'LaTeX-Box-Team/LaTeX-Box' " LaTex
+    " Plugin 'vim-stylus'
+    " Plugin 'tpope/vim-rails' " Rails
+    " Plugin 'mattn/emmet-vim' " Emmet
+      " let g:user_emmet_leader_key='<C-K>'
+      " let g:user_emmet_settings={'indentation':'    '}
+      " let g:use_emmet_complete_tag=1
+    " Plugin 'LaTeX-Box-Team/LaTeX-Box' " LaTex
     Plugin 'sheerun/vim-polyglot' " Language Support
-    Plugin 'mxw/vim-jsx' " JsX ReactJS language
+    " Plugin 'mxw/vim-jsx' " JsX ReactJS language
     Plugin 'marijnh/tern_for_vim'
       autocmd FileType javascript nmap K :TernDoc<cr>
       autocmd FileType !javascript unmap K :TernDoc<cr>
