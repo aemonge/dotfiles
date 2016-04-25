@@ -11,7 +11,12 @@
   " let Vundle manage Vundle, required
   Plugin 'gmarik/Vundle.vim'
   " Relaod VimRc when modified
-  autocmd! bufwritepost .vimrc :call ReloadVimRc()
+    function! PluginAll()
+      :PluginClean
+      :PluginInstall
+      :PluginUpdate
+    endfunction
+  autocmd! bufwritepost .vimrc :source ~/.vimrc | exec PluginAll()
 
 "------------------------------------------------
 " => General
@@ -126,7 +131,7 @@
       " Plugin 'MarcWeber/vim-addon-mw-utils' " Dependacy of above
       " Plugin 'tomtom/tlib_vim' " Dependacy of above
       " Plugin 'garbas/vim-snipmate' " Dependacy of above
-    Plugin 'sirver/ultisnips' " Snippet engine
+    Plugin 'SirVer/ultisnips'
       let g:UltiSnipsExpandTrigger="<C-K>"
       let g:UltiSnipsJumpForwardTrigger="<Tab>"
       let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
@@ -181,6 +186,13 @@
     Plugin 'vim-scripts/colorsupport.vim'
     Plugin 'w0ng/vim-hybrid' " Colorscheme hybrid
     Plugin 'altercation/vim-colors-solarized'
+      function! SetTheme()
+        set background=dark
+        colorscheme solarized
+        colorscheme hybrid
+        hi clear SpellBad
+        hi SpellBad cterm=underline
+      endfunction
 
     if !exists("g:hybrid_use_Xresources")
       let g:hybrid_use_Xresources = 0
@@ -266,7 +278,7 @@
     Plugin 'kristijanhusak/vim-multiple-cursors' " Multiple cursors
     Plugin 'Raimondi/delimitMate'                " Closing of quotes
     Plugin 'edsono/vim-matchit'                  " Match it
-    Plugin 'sickill/vim-pasta'                   " Paste Aligned to context
+    " Plugin 'sickill/vim-pasta'                   " Paste Aligned to context
     Plugin 'Valloric/MatchTagAlways'             " Force to math the HTML tag
 
 
@@ -384,10 +396,10 @@
   " ==> Vim Settings
     set splitbelow
   " Splits Resize GUI and nongui
-    nmap _ :wincmd -<cr>
-    nmap + :wincmd +<cr>
-    nmap = :wincmd <<cr>
-    nmap - :wincmd ><cr>
+    nmap _ :2wincmd -<cr>
+    nmap + :3wincmd +<cr>
+    nmap = :3wincmd <<cr>
+    nmap - :2wincmd ><cr>
 
   " Map C-[jk] to move between splits move tab like firefox
     nmap <C-j> :wincmd w<cr>
@@ -408,9 +420,6 @@
   " quick tab move [ tab, and shift tab ]
     nmap <S-Tab> :call TabOrBuffer(0)<cr>
     " nmap <Tab> :call TabOrBuffer(1)<cr>
-
-  " ==> Plugins
-    Plugin 'jkramer/vim-narrow'
 
 "-------------------------------------------------
 " => Internal Eficenty
@@ -499,53 +508,34 @@
   endfunction
   nmap <leader>v :call DebugVar()<cr>
 
-  function! ReloadVimRc()
-    source $HOME/.vimrc
-    :PluginClean
-    :PluginInstall
-    :syntax enable
-    :set background=dark
-    " :colorscheme solarized
-    :ColorScheme hybrid
-    " colorscheme hybrid
-    " Simply change the bad spell for a underline
-    :hi clear SpellBad
-    :hi SpellBad cterm=underline
-    :AirlineRefresh
-  endfunction
-
 "-------------------------------------------------
 " => Finizalization
 "-------------------------------------------------
   call vundle#end()            " required
   filetype plugin indent on    " required
   syntax enable
-  set background=dark
-  colorscheme solarized
-  colorscheme hybrid
-  hi clear SpellBad
-  hi SpellBad cterm=underline
+
+  " Theme Should be at last I don't know why
+  exec SetTheme()
 
   Plugin 'zef/vim-cycle'
-  " call AddCycleGroup(['set', 'get'])
-  " call AddCycleGroup(['set', 'get']
-    " \ ,['push', 'pop']
-    " \ ,['mas', 'menos']
-    " \ ,['prev', 'next']
-    " \ ,['start', 'end']
-    " \ ,['read', 'write']
-    " \ ,['truthy', 'falsy']
-    " \ ,['filter', 'reject']
-    " \ ,['internal', 'external']
-    " \ ,['short', 'normal', 'long']
-    " \ ,['subscribe', 'unsubscribe']
-    " \ ,['header', 'body', 'footer']
-    " \ ,['protected', 'private', 'public']
-    " \ ,['red', 'blue', 'green', 'yellow']
-    " \ ,['tiny', 'small', 'medium', 'big', 'huge']
-    " \ ,['pico', 'nano', 'micro', 'mili', 'kilo', 'mega', 'giga', 'tera', 'peta']
-    " \ ,['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday', 'saturday']
-    " \ )
+  autocmd VimEnter call AddCycleGroup(['set', 'get'])
+  autocmd VimEnter call AddCycleGroup(['push', 'pop'])
+  autocmd VimEnter call AddCycleGroup(['mas', 'menos'])
+  autocmd VimEnter call AddCycleGroup(['prev', 'next'])
+  autocmd VimEnter call AddCycleGroup(['start', 'end'])
+  autocmd VimEnter call AddCycleGroup(['read', 'write'])
+  autocmd VimEnter call AddCycleGroup(['truthy', 'falsy'])
+  autocmd VimEnter call AddCycleGroup(['filter', 'reject'])
+  autocmd VimEnter call AddCycleGroup(['internal', 'external'])
+  autocmd VimEnter call AddCycleGroup(['short', 'normal', 'long'])
+  autocmd VimEnter call AddCycleGroup(['subscribe', 'unsubscribe'])
+  autocmd VimEnter call AddCycleGroup(['header', 'body', 'footer'])
+  autocmd VimEnter call AddCycleGroup(['protected', 'private', 'public'])
+  autocmd VimEnter call AddCycleGroup(['red', 'blue', 'green', 'yellow'])
+  autocmd VimEnter call AddCycleGroup(['tiny', 'small', 'medium', 'big', 'huge'])
+  autocmd VimEnter call AddCycleGroup(['pico', 'nano', 'micro', 'mili', 'kilo', 'mega', 'giga', 'tera', 'peta'])
+  autocmd VimEnter call AddCycleGroup(['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday', 'saturday'])
 
   " ==> Last Hacks
     " au BufRead,BufNewFile,BufReadPost *.html set filetype=html
