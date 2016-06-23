@@ -214,6 +214,9 @@
       let g:airline#extensions#tagbar#enabled = 1
     " Plugin 'mhinz/vim-startify' " Smart starup ! just staring
 
+    " Highlight current parragraph, great for making presentations
+    Plugin 'junegunn/limelight.vim'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => IDE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -273,14 +276,18 @@
     set clipboard=unnamed " Able to copy an paste between xwindows                       "
     set laststatus=1      " Enables the status line at the bottom of Vim Only when SPLIT
 
+  " ==> Vim Mappings
+    " When pasting don't replace the current register.
+    xnoremap p pgvy
+
   " ==> Plugins
     Plugin 'tpope/vim-repeat'                    " Repeat
     Plugin 'kristijanhusak/vim-multiple-cursors' " Multiple cursors
     Plugin 'Raimondi/delimitMate'                " Closing of quotes
     Plugin 'edsono/vim-matchit'                  " Match it
-    " Plugin 'sickill/vim-pasta'                   " Paste Aligned to context
+    Plugin 'sickill/vim-pasta'                   " Paste Aligned to context
     Plugin 'Valloric/MatchTagAlways'             " Force to math the HTML tag
-
+    Plugin 'vim-scripts/ReplaceWithRegister'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Motions
@@ -366,9 +373,9 @@
       let g:syntastic_warning_symbol = '∆'
       let g:syntastic_style_warning_symbol = '≈'
       let g:ycm_show_diagnostics_ui = 0  " Compabillity with YCM
-      " Disable Sytnastic
-      " let g:syntastic_mode="pasive"
-      " let g:syntastic_check_on_open=0
+      " Disable Sytnastic on load
+      let g:syntastic_mode="pasive"
+      let g:syntastic_check_on_open=0
     Plugin 'xolox/vim-easytags'   " Javascript Tags made easy ;)
       let g:easytags_cmd = 'ctags'
       let g:easytags_dynamic_files = 1
@@ -381,6 +388,8 @@
     Plugin 'othree/javascript-libraries-syntax.vim'
       let g:used_javascript_libs = 'jQuery,underscore,angularjs,angularui,angularuirouter,react,requirejs'
     Plugin 'bendavis78/vim-polymer'
+    Plugin 'millermedeiros/vim-esformatter' " ECMAScript code beautifier/formatter. `npm install -g esformatter`
+      nnoremap <silent> <leader>c :EsformatterVisual<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc Plugins
@@ -454,7 +463,7 @@
 " => Search
 "-------------------------------------------------
   " ==> Vim Settings
-    set ignorecase
+    " set ignorecase
     set smartcase " Case sensitive when uc present
     set hlsearch  " Highlight search terms
     set incsearch " Find as you type search
@@ -520,10 +529,12 @@
 
   Plugin 'zef/vim-cycle'
   autocmd VimEnter call AddCycleGroup(['set', 'get'])
+  autocmd VimEnter call AddCycleGroup(['form', 'to'])
   autocmd VimEnter call AddCycleGroup(['push', 'pop'])
   autocmd VimEnter call AddCycleGroup(['mas', 'menos'])
   autocmd VimEnter call AddCycleGroup(['prev', 'next'])
   autocmd VimEnter call AddCycleGroup(['start', 'end'])
+  autocmd VimEnter call AddCycleGroup(['open', 'close'])
   autocmd VimEnter call AddCycleGroup(['read', 'write'])
   autocmd VimEnter call AddCycleGroup(['truthy', 'falsy'])
   autocmd VimEnter call AddCycleGroup(['filter', 'reject'])
