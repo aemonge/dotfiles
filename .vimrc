@@ -190,8 +190,20 @@
         set background=dark
         colorscheme solarized
         colorscheme hybrid
+      endfunction
+
+      function! FixTheme()
         hi clear SpellBad
+        hi clear SpellCap
         hi SpellBad cterm=underline
+        hi SpellCap cterm=underline
+        hi NonText ctermbg=none
+        hi Normal ctermbg=none
+        hi Folded ctermbg=none
+        hi CursorLine ctermbg=none
+        hi CursorLine cterm=bold
+        hi CursorColumn ctermbg=none
+        hi CursorColumn cterm=bold
       endfunction
 
     if !exists("g:hybrid_use_Xresources")
@@ -213,9 +225,7 @@
       let g:airline#extensions#branch#enabled = 1
       let g:airline#extensions#tagbar#enabled = 1
     " Plugin 'mhinz/vim-startify' " Smart starup ! just staring
-
-    " Highlight current parragraph, great for making presentations
-    Plugin 'junegunn/limelight.vim'
+    Plugin 'junegunn/limelight.vim'         " Highlight current parragraph, great for making presentations
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => IDE
@@ -267,7 +277,8 @@
     Plugin 'editorconfig/editorconfig-vim'
       let g:EditorConfig_exclude_patterns = ['fugitive://.*']
     Plugin 'LucHermitte/local_vimrc'        " The aim of local_vimrc is to apply settings on files from a same project.
-      Plugin 'LucHermitte/lh-vim-lib'         " Dependency of local_vimrc
+      Plugin 'LucHermitte/lh-vim-lib'       " Dependency of local_vimrc
+    " Plugin 'vim-scripts/YankRing.vim'       " It's a cool feature but messes with all key maps DONT USE
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Expected Enhancements
@@ -520,13 +531,6 @@
 "-------------------------------------------------
 " => Finizalization
 "-------------------------------------------------
-  call vundle#end()            " required
-  filetype plugin indent on    " required
-  syntax enable
-
-  " Theme Should be at last I don't know why
-  exec SetTheme()
-
   Plugin 'zef/vim-cycle'
   autocmd VimEnter call AddCycleGroup(['set', 'get'])
   autocmd VimEnter call AddCycleGroup(['form', 'to'])
@@ -550,3 +554,11 @@
 
   " ==> Last Hacks
     " au BufRead,BufNewFile,BufReadPost *.html set filetype=html
+
+  call vundle#end()            " required
+  filetype plugin indent on    " required
+  syntax enable
+
+  " Theme Should be at last I don't know why
+    exec SetTheme()
+    au BufRead,BufNewFile,BufReadPost * exec FixTheme()
