@@ -1,6 +1,6 @@
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Initialization (Vundle)
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   set nocompatible              " be iMproved, required
   filetype off                  " required
 
@@ -16,57 +16,57 @@
       :PluginInstall
       :PluginUpdate
     endfunction
-  autocmd! bufwritepost .vimrc :source ~/.vimrc | exec PluginAll()
+  autocmd! BufUnload .vimrc :source ~/.vimrc | exec PluginAll()
 
-"------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
-"------------------------------------------------
-  " ==> Vim Settings
-    let mapleader=','                   " Change the mapleader
-    let maplocalleader='\'              " Change the maplocalleader
-    set timeoutlen=500                  " Time to wait for a command
-    set noautochdir                     " Don't change Dir on file open
-    set autoread                        " Set autoread when a file is changed outside
-    set autowrite                       " Write on make/shell commands
-    au FileChangedShell * echo          " Warning: File changed on disk
-    set hidden                          " Turn on hidden
-    set modeline                        " Turn on modeline
-    set encoding=utf-8                  " Set utf-8 encoding
-    set completeopt+=longest            " Optimize auto complete
-    set completeopt-=preview            " Optimize auto complete
-    set noerrorbells                    " No sound on errors
-    set novisualbell                    " No sound on errors
-    set t_vb=                           " No sound on errors
-    set cursorcolumn                    " Display vertical and horizontal current line
-    set cursorline                      " Display vertical and horizontal current line
-    " Spelling
-    set spl=en_us,es spell
-    " Backups
-    set noswapfile                      " Don't use a .~ swap file
-    set undofile                        " Use a directory to save undos
-    set undodir=~/.vim/undodir
-    set backupdir=~/.vim/backup
-    " Create undo directory if it doesn't exist
-    if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), 'p')
-    endif
-    " Create backup directory if it doesn't exist
-    if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), 'p')
-    endif
-    set history=1000                    " Increase the lines of history
-    set undolevels=10000                " maximum number of changes that can be undone
-    set undoreload=10000                " maximum number lines to save for undo on a buffer reload
-    set mousehide                       " hide while typing
-    set mouse=a                         " Mouse can click over buffers, but just that.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " ==> Vim Settings
+      let mapleader=','                   " Change the mapleader
+      let maplocalleader='\'              " Change the maplocalleader
+      set timeoutlen=500                  " Time to wait for a command
+      set noautochdir                     " Don't change Dir on file open
+      set autoread                        " Set autoread when a file is changed outside
+      set autowrite                       " Write on make/shell commands
+      au FileChangedShell * echo          " Warning: File changed on disk
+      set hidden                          " Turn on hidden
+      set modeline                        " Turn on modeline
+      set encoding=utf-8                  " Set utf-8 encoding
+      set completeopt+=longest            " Optimize auto complete
+      set completeopt-=preview            " Optimize auto complete
+      set noerrorbells                    " No sound on errors
+      set novisualbell                    " No sound on errors
+      set t_vb=                           " No sound on errors
+      set cursorcolumn                    " Display vertical and horizontal current line
+      set cursorline                      " Display vertical and horizontal current line
+      " Spelling
+      set spl=en_us,es spell
+      " Backups
+      set noswapfile                      " Don't use a .~ swap file
+      set undofile                        " Use a directory to save undos
+      set undodir=~/.vim/undodir
+      set backupdir=~/.vim/backup
+      " Create undo directory if it doesn't exist
+      if !isdirectory(expand(&undodir))
+      call mkdir(expand(&undodir), 'p')
+      endif
+      " Create backup directory if it doesn't exist
+      if !isdirectory(expand(&backupdir))
+      call mkdir(expand(&backupdir), 'p')
+      endif
+      set history=1000                    " Increase the lines of history
+      set undolevels=10000                " maximum number of changes that can be undone
+      set undoreload=10000                " maximum number lines to save for undo on a buffer reload
+      set mousehide                       " hide while typing
+      set mouse=a                         " Mouse can click over buffers, but just that.
 
-  " ==> Vim Mappings
-    map <leader>ts :set spell!<cr>
-    map <leader>tw :set wrap!<cr>
+    " ==> Vim Mappings
+      map <leader>ts :set spell!<cr>
+      map <leader>tw :set wrap!<cr>
 
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Smart Mappings (aka vim tune, with no plugins)
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Make j and k work the way you expect
     nnoremap j gj
     nnoremap k gk
@@ -108,9 +108,9 @@
     nmap q; q:
     nmap f; f:
 
-"------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Completions
-"------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Vim Settings
     "" Line Completion
     imap <C-l> <c-x><C-l>
@@ -136,9 +136,9 @@
       let g:UltiSnipsJumpForwardTrigger="<Tab>"
       let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fold Related
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Vim Settings
     set foldlevelstart=0 " Start with all folds closed
     set foldmethod=indent
@@ -152,9 +152,9 @@
     autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
     autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fancy
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Vim Settings
     set t_Co=256                                                 " Set current terminal to 256 colors
     set title                                                    " Set title
@@ -371,10 +371,8 @@
       let g:syntastic_scss_checkers = ['scss_lint']
       set statusline+=%{SyntasticStatuslineFlag()}
       let g:syntastic_ignore_files = ['-spec.js$']
-      let g:syntastic_html_checkers=['jshint', 'jscs']
-      " let g:syntastic_html_jshint_exec='/usr/local/bin/jshint --extract=auto'
-      let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-      " let g:syntastic_javascript_eslint_exec = 'eslint_d'
+      let g:syntastic_html_checkers=['eslint']
+      let g:syntastic_javascript_checkers = ['eslint']
       let g:syntastic_check_on_open=1
       let g:syntastic_aggregate_errors=1
       let g:syntastic_auto_jump=1
@@ -397,10 +395,11 @@
       Plugin 'xolox/vim-misc'
     Plugin 'plasticboy/vim-markdown'
     Plugin 'othree/javascript-libraries-syntax.vim'
-      let g:used_javascript_libs = 'jQuery,underscore,angularjs,angularui,angularuirouter,react,requirejs'
+      let g:used_javascript_libs = 'jQuery,underscore,lo-dash,angularjs,angularui,angularuirouter,react,requirejs'
     Plugin 'bendavis78/vim-polymer'
     Plugin 'millermedeiros/vim-esformatter' " ECMAScript code beautifier/formatter. `npm install -g esformatter`
       nnoremap <silent> <leader>c :EsformatterVisual<CR>
+    Plugin 'kylef/apiblueprint.vim'         " syntax highlighting and linting for API Blueprint @see https://apiblueprint.org/
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc Plugins
@@ -441,9 +440,9 @@
     nmap <S-Tab> :call TabOrBuffer(0)<cr>
     " nmap <Tab> :call TabOrBuffer(1)<cr>
 
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Internal Eficenty
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   set ttyfast                 " Faster Terminal, redraws stuff quicker!
   set linespace=0         " No extra spaces between text lines
   set lazyredraw                 " Don't update the display while executing macros
@@ -454,9 +453,9 @@
       nmap <leader>f :AgFromSearch<cr>
       vmap <leader>f y:Ag! ''2hp<cr>
 
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Indent
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Vim Settings
     set autoindent " Preserve current indent on new lines
     set cindent " set C style indent
@@ -470,9 +469,9 @@
     Plugin 'Align'
       vmap t :Align
 
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Search
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Vim Settings
     " set ignorecase
     set smartcase " Case sensitive when uc present
@@ -528,9 +527,9 @@
   endfunction
   nmap <leader>v :call DebugVar()<cr>
 
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Finizalization
-"-------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   Plugin 'zef/vim-cycle'
   autocmd VimEnter call AddCycleGroup(['set', 'get'])
   autocmd VimEnter call AddCycleGroup(['form', 'to'])
