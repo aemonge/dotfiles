@@ -251,6 +251,8 @@
       let NERDRemoveExtraSpaces=1
       map <leader>/ <plug>NERDCommenterToggle
     " Plugin 'mbbill/undotree'              " Undo tree
+    Plugin 'sjl/gundo.vim'                  " Better Undo tree
+      nnoremap <leader>u :GundoToggle<CR>
     Plugin 'scrooloose/nerdtree'            " NERD tree
       map <leader>N :NERDTreeToggle<cr>
       map <leader>n :NERDTreeFind<cr>
@@ -279,6 +281,10 @@
     Plugin 'LucHermitte/local_vimrc'        " The aim of local_vimrc is to apply settings on files from a same project.
       Plugin 'LucHermitte/lh-vim-lib'       " Dependency of local_vimrc
     " Plugin 'vim-scripts/YankRing.vim'       " It's a cool feature but messes with all key maps DONT USE
+    Plugin 'jaxbot/browserlink.vim'         " live browser editing plugin for Vim.
+      nnoremap <leader>w :BLConsole<cr>
+      let g:bl_no_autoupdate = 1
+      let g:bl_no_mappings = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Expected Enhancements
@@ -299,6 +305,7 @@
     Plugin 'sickill/vim-pasta'                   " Paste Aligned to context
     Plugin 'Valloric/MatchTagAlways'             " Force to math the HTML tag
     Plugin 'vim-scripts/ReplaceWithRegister'
+    Plugin 'zef/vim-cycle'                       " Add more synonyms to loop from, not only numbers ;)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Motions
@@ -530,7 +537,14 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Finizalization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  Plugin 'zef/vim-cycle'
+  " ==> Last Hacks
+    " au BufRead,BufNewFile,BufReadPost *.html set filetype=html
+
+  call vundle#end()            " required
+  filetype plugin indent on    " required
+  syntax enable
+
+  " Plugin 'zef/vim-cycle
   autocmd VimEnter call AddCycleGroup(['set', 'get'])
   autocmd VimEnter call AddCycleGroup(['form', 'to'])
   autocmd VimEnter call AddCycleGroup(['push', 'pop'])
@@ -550,13 +564,6 @@
   autocmd VimEnter call AddCycleGroup(['tiny', 'small', 'medium', 'big', 'huge'])
   autocmd VimEnter call AddCycleGroup(['pico', 'nano', 'micro', 'mili', 'kilo', 'mega', 'giga', 'tera', 'peta'])
   autocmd VimEnter call AddCycleGroup(['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday', 'saturday'])
-
-  " ==> Last Hacks
-    " au BufRead,BufNewFile,BufReadPost *.html set filetype=html
-
-  call vundle#end()            " required
-  filetype plugin indent on    " required
-  syntax enable
 
   " Theme Should be at last I don't know why
     exec SetTheme()
