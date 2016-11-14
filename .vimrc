@@ -23,7 +23,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " ==> Vim Settings
       let mapleader=','                   " Change the mapleader
-      let maplocalleader='\'              " Change the maplocalleader
       set timeoutlen=500                  " Time to wait for a command
       set noautochdir                     " Don't change Dir on file open
       set autoread                        " Set autoread when a file is changed outside
@@ -63,6 +62,7 @@
     " ==> Vim Mappings
       map <leader>ts :set spell!<cr>
       map <leader>tw :set wrap!<cr>
+      map <leader>x :!!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Smart Mappings (aka vim tune, with no plugins)
@@ -83,13 +83,6 @@
   " Select entire buffer
     nnoremap vaa ggvGg_
 
-  " Strip all trailing whitespace in the current file
-    " autocmd BufWritePre * :%s/\s\+$//<CR>:let @/=''<CR>
-    autocmd BufWritePre * :%s/\s\+$//e
-
-  " Modify all the indents
-    nnoremap <leader>= gg=G
-
   " Misc
     " save file when accidently trying to save in insermode
     imap :w <Esc>:w
@@ -100,7 +93,10 @@
     " simil to quick exec on find
     nnoremap f: /<C-f>
     " Copying pasting
-    imap <C-v> <C-o>"+p
+      " Mac Osx Support
+      imap <C-v> <Esc>:set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
+      " Linux support
+      " imap <C-v> <C-o>"+p
     vmap <C-p> "+p<cr>
     vmap <C-C> "+y
     vmap  "+y
@@ -226,6 +222,11 @@
       let g:airline#extensions#tagbar#enabled = 1
     " Plugin 'mhinz/vim-startify' " Smart starup ! just staring
     Plugin 'junegunn/limelight.vim'         " Highlight current parragraph, great for making presentations
+      let g:limelight_conceal_ctermfg = '243'
+      let g:limelight_paragraph_span = 2
+      nmap <Leader>l :Limelight<cr>
+      nmap <Leader>ll :Limelight!<cr>
+      xmap <Leader>l <Plug>(Limelight)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => IDE
@@ -301,11 +302,13 @@
     Plugin 'tpope/vim-repeat'                    " Repeat
     Plugin 'kristijanhusak/vim-multiple-cursors' " Multiple cursors
     Plugin 'Raimondi/delimitMate'                " Closing of quotes
-    Plugin 'edsono/vim-matchit'                  " Match it
+    Plugin 'vim-scripts/matchit'                 " Match it
     Plugin 'sickill/vim-pasta'                   " Paste Aligned to context
     Plugin 'Valloric/MatchTagAlways'             " Force to math the HTML tag
     Plugin 'vim-scripts/ReplaceWithRegister'
     Plugin 'zef/vim-cycle'                       " Add more synonyms to loop from, not only numbers ;)
+    Plugin 'othree/eregex.vim'                   " Use the Perl/Ruby(/JavaScript) Regex engine.
+      let g:eregex_default_enable = 0            " Disable eregex, on search use it with :%S// for searchNReplace
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Motions
@@ -354,15 +357,16 @@
       " let g:user_emmet_settings={'indentation':'    '}
       " let g:use_emmet_complete_tag=1
     " Plugin 'LaTeX-Box-Team/LaTeX-Box' " LaTex
-    Plugin 'sheerun/vim-polyglot' " Language Support
+    Plugin 'sheerun/vim-polyglot'                " Language Support
     " Plugin 'mxw/vim-jsx' " JsX ReactJS language
+      let g:jsx_ext_required = 1
     Plugin 'marijnh/tern_for_vim'
       autocmd FileType javascript nmap K :TernDoc<cr>
       autocmd FileType !javascript unmap K :TernDoc<cr>
       let g:tern_show_argument_hints = 'on_hold'
       let g:tern_show_signature_in_pum = 1
     Plugin 'jelera/vim-javascript-syntax'
-    Plugin 'pangloss/vim-javascript' " Extend JS syntas with know libraries
+    Plugin 'pangloss/vim-javascript'            " Extend JS syntas with know libraries
       let g:javascript_conceal_function   = "ƒ"
       let g:javascript_conceal_null       = "ø"
       let g:javascript_conceal_this       = "@"
@@ -372,7 +376,9 @@
       let g:javascript_conceal_prototype  = "¶"
       let g:javascript_conceal_static     = "•"
       let g:javascript_conceal_super      = "Ω"
-    Plugin 'scrooloose/syntastic' " Syntax checking
+    Plugin 'stgpetrovic/syntastic-async'        " Fork from syntastic, but with Async functionalities.
+      Plugin 'pydave/AsyncCommand'
+      " Plugin 'scrooloose/syntastic'           " Syntax checking
       map <leader>e :SyntasticToggleMode<cr>
       let g:airline#extensions#syntastic#enabled = 1
       let g:syntastic_scss_checkers = ['scss_lint']
@@ -392,21 +398,22 @@
       " Disable Sytnastic on load
       let g:syntastic_mode="pasive"
       let g:syntastic_check_on_open=0
-    Plugin 'xolox/vim-easytags'   " Javascript Tags made easy ;)
-      let g:easytags_cmd = 'ctags'
-      let g:easytags_dynamic_files = 1
-      let g:easytags_file = '~/.vim/tags'
-      let g:easytags_always_enabled = 1
-      let g:easytags_events = ['BufWritePost']
-      set tags=./tags
-      Plugin 'xolox/vim-misc'
+    " Plugin 'xolox/vim-easytags'   " Javascript Tags made easy ;)
+      " let g:easytags_cmd = 'ctags'
+      " let g:easytags_dynamic_files = 1
+      " let g:easytags_file = '~/.vim/tags'
+      " let g:easytags_always_enabled = 1
+      " let g:easytags_events = ['BufWritePost']
+      " set tags=./tags
+      " Plugin 'xolox/vim-misc'
     Plugin 'plasticboy/vim-markdown'
     Plugin 'othree/javascript-libraries-syntax.vim'
       let g:used_javascript_libs = 'jQuery,underscore,lo-dash,angularjs,angularui,angularuirouter,react,requirejs'
     Plugin 'bendavis78/vim-polymer'
-    Plugin 'millermedeiros/vim-esformatter' " ECMAScript code beautifier/formatter. `npm install -g esformatter`
+    Plugin 'millermedeiros/vim-esformatter'      " ECMAScript code beautifier/formatter. `npm install -g esformatter`
       nnoremap <silent> <leader>c :EsformatterVisual<CR>
-    Plugin 'kylef/apiblueprint.vim'         " syntax highlighting and linting for API Blueprint @see https://apiblueprint.org/
+    Plugin 'kylef/apiblueprint.vim'              " syntax highlighting and linting for API Blueprint @see https://apiblueprint.org/
+    Plugin 'tpope/vim-git'                       " syntax highlighting for git
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc Plugins
@@ -450,18 +457,20 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Internal Eficenty
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  set ttyfast                 " Faster Terminal, redraws stuff quicker!
-  set linespace=0         " No extra spaces between text lines
-  set lazyredraw                 " Don't update the display while executing macros
+  set ttyfast                     " Faster Terminal, redraws stuff quicker!
+  set linespace=0                 " No extra spaces between text lines
+  set lazyredraw                  " Don't update the display while executing macros
   set timeoutlen=300
 
   " ==> Plugins
-    Plugin 'rking/ag.vim' " Use Ag instead of Grep, is faster
+    Plugin 'rking/ag.vim'         " Use Ag instead of Grep, is faster
       nmap <leader>f :AgFromSearch<cr>
       vmap <leader>f y:Ag! ''2hp<cr>
 
+    Plugin 'tpope/vim-dispatch'   " Run commands in the background with :Dispatch ``
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Indent
+" => Indent and formating
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Vim Settings
     set autoindent " Preserve current indent on new lines
@@ -475,12 +484,16 @@
   " ==> Plugins
     Plugin 'Align'
       vmap t :Align
+    Plugin 'Chiel92/vim-autoformat'
+      " nnoremap <leader>= gg=G
+      " autocmd BufWritePre * :%s/\s\+$//e
+      " https://github.com/beautify-web/js-beautify
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Search
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Vim Settings
-    " set ignorecase
+    set ignorecase
     set smartcase " Case sensitive when uc present
     set hlsearch  " Highlight search terms
     set incsearch " Find as you type search
@@ -491,7 +504,7 @@
     vmap s :s/
     " double // to search selected text ;)
     vnorem // y/<c-r>"<cr>
-    vnorem <C-H> y:<C-f>pI%s/<Esc>A//gic<Esc>hhhi
+    vnorem <C-H> y:<C-f>pI%S/<Esc>A//gic<Esc>hhhi
     " Use ,Space to toggle the highlight search
     nnoremap <Leader><Space> :set hlsearch!<CR>
 
