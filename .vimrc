@@ -129,16 +129,11 @@
     Plugin 'Valloric/YouCompleteMe'
       let g:ycm_collect_identifiers_from_comments_and_strings = 1
       let g:ycm_collect_identifiers_from_tags_files = 1
-    Plugin 'honza/vim-snippets'
-    " Plugin 'matthewsimo/angular-vim-snippets' " Angular Snippets
-    " Plugin 'justinj/vim-react-snippets' " React Snipps
-      " Plugin 'MarcWeber/vim-addon-mw-utils' " Dependacy of above
-      " Plugin 'tomtom/tlib_vim' " Dependacy of above
-      " Plugin 'garbas/vim-snipmate' " Dependacy of above
     Plugin 'SirVer/ultisnips'
+      Plugin 'honza/vim-snippets'
       let g:UltiSnipsExpandTrigger="<C-K>"
-      let g:UltiSnipsJumpForwardTrigger="<Tab>"
-      let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+      let g:UltiSnipsJumpForwardTrigger="<C-F>"
+      let g:UltiSnipsJumpBackwardTrigger="<C-B>"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fold Related
@@ -228,72 +223,33 @@
       let g:airline#extensions#tabline#buf_min_count = 1
       let g:airline#extensions#branch#enabled = 1
       let g:airline#extensions#tagbar#enabled = 1
-    " Plugin 'mhinz/vim-startify' " Smart starup ! just staring
-    Plugin 'junegunn/limelight.vim'         " Highlight current parragraph, great for making presentations
-      let g:limelight_conceal_ctermfg = '243'
-      let g:limelight_paragraph_span = 1
-      nmap <Leader>l :Limelight<cr>
-      nmap <Leader>ll :Limelight!<cr>
-      xmap <Leader>l <Plug>(Limelight)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => IDE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Plugins
-    Plugin 'kien/Ctrlp.vim'                 " Fuzzy file opener
-      let g:ctrlp_working_path_mode = 'ra'
-      let g:ctrlp_extensions = [ 'mixed', 'buffertag', 'undo', 'changes', 'tag', 'dir', 'line' ]
-      " try to get it faster
-      let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc"  -g ""'
-      let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-      if executable('ag')
-        let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-      endif
-      let g:ctrlp_map = '<c-p>'
-      let g:ctrlp_cmd = 'CtrlPMixed'
-      nmap <c-b> :CtrlPBuffer<cr>
-      " Below is the MacOsX iTerm2 Version of above mapping
-      nmap [5~ :CtrlPBuffer<cr>
-      nmap <c-c> :CtrlPChangeAll<cr>
-    Plugin 'scrooloose/nerdcommenter'       " NERD commenter
+    Plugin 'wincent/command-t'                    " Fuzzy file opener
+      nmap <silent> <C-P> <Plug>(CommandT)
+      nmap <silent> <C-B>b <Plug>(CommandTBuffer)
+    Plugin 'scrooloose/nerdcommenter'             " NERD commenter
       let NERDSpaceDelims=1
       let NERDRemoveExtraSpaces=1
       map <leader>/ <plug>NERDCommenterToggle
-    " Plugin 'mbbill/undotree'              " Undo tree
-    Plugin 'sjl/gundo.vim'                  " Better Undo tree
-      nnoremap <leader>u :GundoToggle<CR>
-    Plugin 'scrooloose/nerdtree'            " NERD tree
-      map <leader>N :NERDTreeToggle<cr>
-      map <leader>n :NERDTreeFind<cr>
+    Plugin 'scrooloose/nerdtree'                  " NERD tree
+      map <leader>n :NERDTreeToggle<cr>
       let NERDTreeDirArrows=1
       let NERDTreeQuitOnOpen = 1
-      " Plugin 'jistr/vim-nerdtree-tabs' " NERD tree tabs. To keep the nerdTree Window UNIQ
-    Plugin 'tpope/vim-fugitive'             " Git wrapper
+    Plugin 'tpope/vim-fugitive'                   " Git wrapper
       nmap <leader>g :Gstatus<cr>
-    Plugin 'airblade/vim-gitgutter'         " Git diff sign
+    Plugin 'airblade/vim-gitgutter'               " Git diff sign
       nmap <leader>tg :GitGutterToggle<cr>
       nmap [h <Plug>GitGutterPrevHunk
       nmap ]h <Plug>GitGutterNextHunk
-    "Plugin 'Raimondi/delimitMate'          " Closing of quotes
-    "Plugin 'tpope/vim-abolish'             " Abolish
-    Plugin 'tpope/vim-surround'             " Surround
-    Plugin 'godlygeek/tabular'              " Tabular
-    "Plugin 'AndrewRadev/splitjoin.vim'     " Splitjoin
-    "Plugin 'Keithbsmiley/investigate.vim'  " Helper
-    "Plugin 'wellle/targets.vim'            " Text objects
-    Plugin 'majutsushi/tagbar'              " Tag bar
+    Plugin 'tpope/vim-surround'                   " Surround
+    Plugin 'majutsushi/tagbar'                    " Tag bar
       nmap <c-t> :TagbarToggle<cr>
-    Plugin 'vim-scripts/scratch.vim'        " Open a new file as scratch
-      map <leader>st :Sscratch<cr>
     Plugin 'editorconfig/editorconfig-vim'
       let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-    Plugin 'LucHermitte/local_vimrc'        " The aim of local_vimrc is to apply settings on files from a same project.
-      Plugin 'LucHermitte/lh-vim-lib'       " Dependency of local_vimrc
-    " Plugin 'vim-scripts/YankRing.vim'       " It's a cool feature but messes with all key maps DONT USE
-    Plugin 'jaxbot/browserlink.vim'         " live browser editing plugin for Vim.
-      nnoremap <leader>w :BLConsole<cr>
-      let g:bl_no_autoupdate = 1
-      let g:bl_no_mappings = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Expected Enhancements
@@ -308,11 +264,10 @@
 
   " ==> Plugins
     Plugin 'tpope/vim-repeat'                    " Repeat
-    Plugin 'kristijanhusak/vim-multiple-cursors' " Multiple cursors
+    " Plugin 'kristijanhusak/vim-multiple-cursors' " Multiple cursors
     Plugin 'Raimondi/delimitMate'                " Closing of quotes
     Plugin 'tmhedberg/matchit'                   " Match it
     Plugin 'sickill/vim-pasta'                   " Paste Aligned to context
-    Plugin 'Valloric/MatchTagAlways'             " Force to math the HTML tag
     Plugin 'vim-scripts/ReplaceWithRegister'
     Plugin 'zef/vim-cycle'                       " Add more synonyms to loop from, not only numbers ;)
     Plugin 'othree/eregex.vim'                   " Use the Perl/Ruby(/JavaScript) Regex engine.
@@ -322,7 +277,6 @@
 " => Motions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Plugins
-    " Plugin 'tpope/vim-unimpaired' " Pairs of mappings
     Plugin 'Lokaltog/vim-easymotion' " Easy motion
       let g:EasyMotion_smartcase = 1
       map  <Plug>(easymotion-sn)
@@ -343,49 +297,15 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " ==> Hacking
-    " DUE TO Google Polymer disable awesome feature ........
-    " au BufRead,BufNewFile,BufReadPost *.html set syntax=html
-    " au BufRead,BufNewFile,BufReadPost *.html set filetype=html
-    " au BufRead,BufNewFile,BufReadPost *.html setfiletype=html
-    " au BufRead,BufNewFile,BufReadPost *.html setfiletype=html
-
   " ==> Plugins
-    " Plugin 'digitaltoad/vim-jade'
-    Plugin 'groenewege/vim-less'
-    Plugin 'hail2u/vim-css3-syntax'
-    Plugin 'elzr/vim-json'
-    " Plugin 'juvenn/mustache.vim'
-    " Plugin 'mustache/vim-mustache-handlebars'
-    Plugin 'kaihendry/vim-html5'
-    " Plugin 'vim-stylus'
-    " Plugin 'tpope/vim-rails' " Rails
-    " Plugin 'mattn/emmet-vim' " Emmet
-      " let g:user_emmet_leader_key='<C-K>'
-      " let g:user_emmet_settings={'indentation':'    '}
-      " let g:use_emmet_complete_tag=1
-    " Plugin 'LaTeX-Box-Team/LaTeX-Box' " LaTex
-    Plugin 'sheerun/vim-polyglot'                " Language Support
-    " Plugin 'mxw/vim-jsx' " JsX ReactJS language
-      let g:jsx_ext_required = 1
-    Plugin 'marijnh/tern_for_vim'
+    Plugin 'sheerun/vim-polyglot'                 " Language Support a TON
+    Plugin 'marijnh/tern_for_vim'                 " JavaScript Libraries support
       autocmd FileType javascript nmap K :TernDoc<cr>
       autocmd FileType !javascript unmap K :TernDoc<cr>
       let g:tern_show_argument_hints = 'on_hold'
       let g:tern_show_signature_in_pum = 1
-    Plugin 'jelera/vim-javascript-syntax'
-    Plugin 'pangloss/vim-javascript'            " Extend JS syntas with know libraries
-      let g:javascript_conceal_function   = "ƒ"
-      let g:javascript_conceal_null       = "ø"
-      let g:javascript_conceal_this       = "@"
-      let g:javascript_conceal_return     = "⇚"
-      let g:javascript_conceal_undefined  = "¿"
-      let g:javascript_conceal_NaN        = "ℕ"
-      let g:javascript_conceal_prototype  = "¶"
-      let g:javascript_conceal_static     = "•"
-      let g:javascript_conceal_super      = "Ω"
-    " Plugin 'stgpetrovic/syntastic-async'        " Fork from syntastic, but with Async functionalities.
-    Plugin 'vim-syntastic/syntastic'
+
+    Plugin 'vim-syntastic/syntastic'              " Syntax Checker
       " Plugin 'pydave/AsyncCommand'
       " Plugin 'scrooloose/syntastic'           " Syntax checking
       map <leader>e :SyntasticToggleMode<cr>
@@ -406,30 +326,17 @@
       " Disable Sytnastic on load
       let g:syntastic_mode="pasive"
       let g:syntastic_check_on_open=0
-    Plugin 'xolox/vim-easytags'   " Javascript Tags made easy ;)
-      let g:easytags_cmd = 'ctags'
-      let g:easytags_dynamic_files = 1
-      let g:easytags_file = '~/.vim/tags'
-      let g:easytags_always_enabled = 1
-      let g:easytags_events = ['BufWritePost']
-      set tags=./tags
-      Plugin 'xolox/vim-misc'
-    Plugin 'plasticboy/vim-markdown'
-    Plugin 'othree/javascript-libraries-syntax.vim'
-      let g:used_javascript_libs = 'jQuery,underscore,lo-dash,angularjs,angularui,angularuirouter,react,requirejs,polymer'
-    Plugin 'bendavis78/vim-polymer'
+
     Plugin 'millermedeiros/vim-esformatter'      " ECMAScript code beautifier/formatter. `npm install -g esformatter`
       nnoremap <silent> <leader>c :EsformatterVisual<CR>
-    Plugin 'kylef/apiblueprint.vim'              " syntax highlighting and linting for API Blueprint @see https://apiblueprint.org/
-    Plugin 'tpope/vim-git'                       " syntax highlighting for git
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Social Plugins
-    Plugin 'vim-scripts/TwitVim'
+    " Plugin 'vim-scripts/TwitVim'
   " Text Plugins
-    Plugin 'vim-scripts/loremipsum'
+    " Plugin 'vim-scripts/loremipsum'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => TAB, SPLITS & NAVIGATIONS
@@ -470,13 +377,6 @@
   set lazyredraw                  " Don't update the display while executing macros
   set timeoutlen=300
 
-  " ==> Plugins
-    Plugin 'rking/ag.vim'         " Use Ag instead of Grep, is faster
-      nmap <leader>f :AgFromSearch<cr>
-      vmap <leader>f y:Ag! ''2hp<cr>
-
-    Plugin 'tpope/vim-dispatch'   " Run commands in the background with :Dispatch ``
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Indent and formating
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -488,14 +388,6 @@
     set softtabstop=2 " Indentation levels every four columns
     set shiftwidth=2 " Indent/outdent by four columns
     set shiftround " Indent/outdent to nearest tabstop
-
-  " ==> Plugins
-    Plugin 'Align'
-      vmap t :Align
-    Plugin 'Chiel92/vim-autoformat'
-      " nnoremap <leader>= gg=G
-      " autocmd BufWritePre * :%s/\s\+$//e
-      " https://github.com/beautify-web/js-beautify
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Search
@@ -515,8 +407,6 @@
     vnorem <C-H> y:<C-f>pI%S/<Esc>A//gic<Esc>hhhi
     " Use ,Space to toggle the highlight search
     nnoremap <Leader><Space> :set hlsearch!<CR>
-
-  " ==> Plugins
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS mine Aem
