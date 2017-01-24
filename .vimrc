@@ -228,15 +228,17 @@
 " => IDE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Plugins
-    Plugin 'wincent/command-t'                    " Fuzzy file opener
-      nmap <silent> <C-P> <Plug>(CommandT)
-      nmap <silent> <C-B>b <Plug>(CommandTBuffer)
+    Plugin 'ctrlpvim/ctrlp.vim'                           " Fuzzy file opener
+      let g:ctrlp_map = '<c-p>'
+      let g:ctrlp_cmd = 'CtrlP'
+      let g:ctrlp_working_path_mode = 'ra'
     Plugin 'scrooloose/nerdcommenter'             " NERD commenter
       let NERDSpaceDelims=1
       let NERDRemoveExtraSpaces=1
       map <leader>/ <plug>NERDCommenterToggle
     Plugin 'scrooloose/nerdtree'                  " NERD tree
       map <leader>n :NERDTreeToggle<cr>
+      map <leader>N :NERDTreeFind<cr>
       let NERDTreeDirArrows=1
       let NERDTreeQuitOnOpen = 1
     Plugin 'tpope/vim-fugitive'                   " Git wrapper
