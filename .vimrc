@@ -77,6 +77,14 @@
     nnoremap & :&&<CR>
     xnoremap & :&&<CR>
 
+
+  " Strip all trailing whitespace in the current file
+    " autocmd BufWritePre * :%s/\s\+$//<CR>:let @/=''<CR>
+    autocmd BufWritePre * :%s/\s\+$//e
+
+  " Modify all the indents
+    nnoremap <leader>= gg=G
+
   " Keep the cursor in place while joining lines
     nnoremap J mzJ`z
 
@@ -223,7 +231,7 @@
     " Plugin 'mhinz/vim-startify' " Smart starup ! just staring
     Plugin 'junegunn/limelight.vim'         " Highlight current parragraph, great for making presentations
       let g:limelight_conceal_ctermfg = '243'
-      let g:limelight_paragraph_span = 2
+      let g:limelight_paragraph_span = 1
       nmap <Leader>l :Limelight<cr>
       nmap <Leader>ll :Limelight!<cr>
       xmap <Leader>l <Plug>(Limelight)
@@ -302,7 +310,7 @@
     Plugin 'tpope/vim-repeat'                    " Repeat
     Plugin 'kristijanhusak/vim-multiple-cursors' " Multiple cursors
     Plugin 'Raimondi/delimitMate'                " Closing of quotes
-    Plugin 'vim-scripts/matchit'                 " Match it
+    Plugin 'tmhedberg/matchit'                   " Match it
     Plugin 'sickill/vim-pasta'                   " Paste Aligned to context
     Plugin 'Valloric/MatchTagAlways'             " Force to math the HTML tag
     Plugin 'vim-scripts/ReplaceWithRegister'
@@ -376,12 +384,12 @@
       let g:javascript_conceal_prototype  = "¶"
       let g:javascript_conceal_static     = "•"
       let g:javascript_conceal_super      = "Ω"
-    Plugin 'stgpetrovic/syntastic-async'        " Fork from syntastic, but with Async functionalities.
-      Plugin 'pydave/AsyncCommand'
+    " Plugin 'stgpetrovic/syntastic-async'        " Fork from syntastic, but with Async functionalities.
+    Plugin 'vim-syntastic/syntastic'
+      " Plugin 'pydave/AsyncCommand'
       " Plugin 'scrooloose/syntastic'           " Syntax checking
       map <leader>e :SyntasticToggleMode<cr>
       let g:airline#extensions#syntastic#enabled = 1
-      let g:syntastic_scss_checkers = ['scss_lint']
       set statusline+=%{SyntasticStatuslineFlag()}
       let g:syntastic_ignore_files = ['-spec.js$']
       let g:syntastic_html_checkers=['eslint']
@@ -398,17 +406,17 @@
       " Disable Sytnastic on load
       let g:syntastic_mode="pasive"
       let g:syntastic_check_on_open=0
-    " Plugin 'xolox/vim-easytags'   " Javascript Tags made easy ;)
-      " let g:easytags_cmd = 'ctags'
-      " let g:easytags_dynamic_files = 1
-      " let g:easytags_file = '~/.vim/tags'
-      " let g:easytags_always_enabled = 1
-      " let g:easytags_events = ['BufWritePost']
-      " set tags=./tags
-      " Plugin 'xolox/vim-misc'
+    Plugin 'xolox/vim-easytags'   " Javascript Tags made easy ;)
+      let g:easytags_cmd = 'ctags'
+      let g:easytags_dynamic_files = 1
+      let g:easytags_file = '~/.vim/tags'
+      let g:easytags_always_enabled = 1
+      let g:easytags_events = ['BufWritePost']
+      set tags=./tags
+      Plugin 'xolox/vim-misc'
     Plugin 'plasticboy/vim-markdown'
     Plugin 'othree/javascript-libraries-syntax.vim'
-      let g:used_javascript_libs = 'jQuery,underscore,lo-dash,angularjs,angularui,angularuirouter,react,requirejs'
+      let g:used_javascript_libs = 'jQuery,underscore,lo-dash,angularjs,angularui,angularuirouter,react,requirejs,polymer'
     Plugin 'bendavis78/vim-polymer'
     Plugin 'millermedeiros/vim-esformatter'      " ECMAScript code beautifier/formatter. `npm install -g esformatter`
       nnoremap <silent> <leader>c :EsformatterVisual<CR>
