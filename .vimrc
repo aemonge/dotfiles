@@ -300,16 +300,18 @@
 " => Syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Plugins
-    Plugin 'sheerun/vim-polyglot'                 " Language Support a TON
-    Plugin 'marijnh/tern_for_vim'                 " JavaScript Libraries support
+    Plugin 'sheerun/vim-polyglot'                        " Language Support a TON
+      " Plugin 'webdesus/polymer-ide.vim'                " Since Polymer Project is so new, there's not yet a support for it
+      Plugin 'bendavis78/vim-polymer'                    " Since Polymer Project is so new, there's not yet a support for it
+    Plugin 'marijnh/tern_for_vim'                        " JavaScript Libraries support
       autocmd FileType javascript nmap K :TernDoc<cr>
       autocmd FileType !javascript unmap K :TernDoc<cr>
       let g:tern_show_argument_hints = 'on_hold'
       let g:tern_show_signature_in_pum = 1
 
-    Plugin 'vim-syntastic/syntastic'              " Syntax Checker
+    Plugin 'vim-syntastic/syntastic'                     " Syntax Checker
       " Plugin 'pydave/AsyncCommand'
-      " Plugin 'scrooloose/syntastic'           " Syntax checking
+      " Plugin 'scrooloose/syntastic'                    " Syntax checking
       map <leader>e :SyntasticToggleMode<cr>
       let g:airline#extensions#syntastic#enabled = 1
       set statusline+=%{SyntasticStatuslineFlag()}
@@ -324,12 +326,12 @@
       let g:syntastic_style_error_symbol = '✠'
       let g:syntastic_warning_symbol = '∆'
       let g:syntastic_style_warning_symbol = '≈'
-      let g:ycm_show_diagnostics_ui = 0  " Compabillity with YCM
-      " Disable Sytnastic on load
+      let g:ycm_show_diagnostics_ui = 0                  " Compabillity with YCM
+                                                         " Disable Sytnastic on load
       let g:syntastic_mode="pasive"
       let g:syntastic_check_on_open=0
 
-    Plugin 'millermedeiros/vim-esformatter'      " ECMAScript code beautifier/formatter. `npm install -g esformatter`
+    Plugin 'millermedeiros/vim-esformatter'              " ECMAScript code beautifier/formatter. `npm install -g esformatter`
       nnoremap <silent> <leader>c :EsformatterVisual<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -341,7 +343,7 @@
     " Plugin 'vim-scripts/loremipsum'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => TAB, SPLITS & NAVIGATIONS
+" => Tab, Splits & Navigations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Vim Settings
     set splitbelow
@@ -372,7 +374,7 @@
     " nmap <Tab> :call TabOrBuffer(1)<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Internal Eficenty
+" => Internal Efficiency
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   set ttyfast                     " Faster Terminal, redraws stuff quicker!
   set linespace=0                 " No extra spaces between text lines
@@ -380,7 +382,7 @@
   set timeoutlen=300
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Indent and formating
+" => Indent and formatting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Vim Settings
     set autoindent " Preserve current indent on new lines
@@ -390,6 +392,13 @@
     set softtabstop=2 " Indentation levels every four columns
     set shiftwidth=2 " Indent/outdent by four columns
     set shiftround " Indent/outdent to nearest tabstop
+
+  " ==> Plugins
+    Plugin 'godlygeek/tabular'                " Sometimes, it's useful to line up text
+      nmap <Leader>a :Tab<CR>
+      vmap <Leader>a :Tab<CR>
+      nmap <Leader>t :Tabularize /
+      vmap <Leader>t :Tabularize /
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Search
@@ -409,6 +418,14 @@
     vnorem <C-H> y:<C-f>pI%S/<Esc>A//gic<Esc>hhhi
     " Use ,Space to toggle the highlight search
     nnoremap <Leader><Space> :set hlsearch!<CR>
+
+  " ==> Plugins
+    Plugin 'mileszs/ack.vim'      " Search in the whole project (folder)
+      nnoremap <Leader>f :Ack!<Space>
+      vnoremap <Leader>f :Ack! <cword><Space>
+      if executable('ag')
+        let g:ackprg = 'ag --vimgrep'
+      endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PLUG INS mine Aem
