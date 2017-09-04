@@ -1,3 +1,0 @@
-[submodule ".xmonad"]
-	path = .xmonad
-	url = git://github.com/aemonge/xmonad-ubuntu-conf.git
