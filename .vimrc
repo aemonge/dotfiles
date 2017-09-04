@@ -6,20 +6,15 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   set nocompatible              " be iMproved, required
   filetype off                  " required
+  call plug#begin('~/.vim/plugged')
 
-  " set the runtime path to include Vundle and initialize
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-
-  " let Vundle manage Vundle, required
-  Plugin 'gmarik/Vundle.vim'
   " Relaod VimRc when modified
-    function! PluginAll()
-      :PluginClean
-      :PluginInstall
-      :PluginUpdate
+    function! PlugAll()
+      :PlugClean
+      :PlugInstall
+      :PlugUpdate
     endfunction
-  autocmd! BufUnload .vimrc :source ~/.vimrc | exec PluginAll()
+  autocmd! BufUnload .vimrc :source ~/.vimrc | exec PlugAll()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -134,11 +129,11 @@
     imap <C-f> <c-x><c-f>
 
   " ==> Plugins
-    Plugin 'Valloric/YouCompleteMe'
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
       let g:ycm_collect_identifiers_from_comments_and_strings = 1
       let g:ycm_collect_identifiers_from_tags_files = 1
-    Plugin 'SirVer/ultisnips'
-      Plugin 'honza/vim-snippets'
+    Plug 'SirVer/ultisnips'
+      Plug 'honza/vim-snippets'
       let g:UltiSnipsExpandTrigger="<C-K>"
       let g:UltiSnipsJumpForwardTrigger="<C-F>"
       let g:UltiSnipsJumpBackwardTrigger="<C-B>"
@@ -190,9 +185,9 @@
     set cc=120                                                   " visible column at 120 so we can knwo our limit
 
   " ==> Plugins
-    Plugin 'vim-scripts/colorsupport.vim'
-    Plugin 'w0ng/vim-hybrid' " Colorscheme hybrid
-    Plugin 'altercation/vim-colors-solarized'
+    Plug 'vim-scripts/colorsupport.vim'
+    Plug 'w0ng/vim-hybrid' " Colorscheme hybrid
+    Plug 'altercation/vim-colors-solarized'
       function! SetTheme()
         set background=dark
         colorscheme solarized
@@ -222,8 +217,8 @@
       syntax reset
     endif
 
-    Plugin 'vim-airline/vim-airline'
-    Plugin 'vim-airline/vim-airline-themes'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
       let g:hybrid_use_Xresources = 1
       let g:airline_theme = 'ubaryd'
       let g:airline#extensions#tabline#enabled = 1
@@ -232,7 +227,7 @@
       let g:airline#extensions#branch#enabled = 1
       let g:airline#extensions#tagbar#enabled = 1
 
-    Plugin 'junegunn/limelight.vim'
+    Plug 'junegunn/limelight.vim'
       map <leader>l :Limelight!!<cr>
       let g:limelight_conceal_ctermfg = '243' " Comments color
       let g:limelight_paragraph_span = 2
@@ -241,33 +236,44 @@
 " => IDE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Plugins
-    Plugin 'ctrlpvim/ctrlp.vim'                           " Fuzzy file opener
+    Plug 'ctrlpvim/ctrlp.vim'                           " Fuzzy file opener
       let g:ctrlp_map = '<c-p>'
       let g:ctrlp_cmd = 'CtrlP'
       let g:ctrlp_working_path_mode = 'ra'
-    Plugin 'scrooloose/nerdcommenter'             " NERD commenter
+    Plug 'scrooloose/nerdcommenter'             " NERD commenter
       let NERDSpaceDelims=1
       let NERDRemoveExtraSpaces=1
       map <leader>/ <plug>NERDCommenterToggle
-    Plugin 'scrooloose/nerdtree'                  " NERD tree
+    Plug 'scrooloose/nerdtree'                  " NERD tree
       map <leader>N :NERDTreeToggle<cr>
       map <leader>n :NERDTreeFind<cr>
       let NERDTreeDirArrows=1
       let NERDTreeQuitOnOpen = 1
-    Plugin 'tpope/vim-fugitive'                   " Git wrapper
+    Plug 'tpope/vim-fugitive'                   " Git wrapper
       nmap <leader>g :Gstatus<cr>
-    Plugin 'airblade/vim-gitgutter'               " Git diff sign
+      function! s:vimplug_load_fugitive()
+        if exists('b:git_dir')
+          call plug#load('vim-fugitive')
+          autocmd! vimplug_load_fugitive
+          call fugitive#detect(expand('%:p'))
+        endif
+      endfunction
+      augroup vimplug_load_fugitive
+        au!
+        au BufWinEnter * call s:vimplug_load_fugitive()
+      augroup END
+    Plug 'airblade/vim-gitgutter'               " Git diff sign
       nmap <leader>tg :GitGutterToggle<cr>
       nmap [h <Plug>GitGutterPrevHunk
       nmap ]h <Plug>GitGutterNextHunk
-    Plugin 'tpope/vim-surround'                   " Surround
-    Plugin 'majutsushi/tagbar'                    " Tag bar
+    Plug 'tpope/vim-surround'                   " Surround
+    Plug 'majutsushi/tagbar'                    " Tag bar
       nmap <c-t> :TagbarToggle<cr>
-    Plugin 'editorconfig/editorconfig-vim'
+    Plug 'editorconfig/editorconfig-vim'
       let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-    Plugin 'mtth/scratch.vim'                     " A simple Scratch window for tooling
+    Plug 'mtth/scratch.vim'                     " A simple Scratch window for tooling
       nmap <leader>st :Scratch<cr>
-    Plugin 'simnalamburt/vim-mundo'               " See the undo history graphically
+    Plug 'simnalamburt/vim-mundo'               " See the undo history graphically
       nnoremap <leader>u :MundoToggle<CR>
 
 
@@ -283,24 +289,24 @@
     xnoremap p pgvy
 
   " ==> Plugins
-    Plugin 'tpope/vim-repeat'                    " Repeat
-    " Plugin 'kristijanhusak/vim-multiple-cursors' " Multiple cursors
-    Plugin 'Raimondi/delimitMate'                " Closing of quotes
-    Plugin 'tmhedberg/matchit'                   " Match it
-    Plugin 'sickill/vim-pasta'                   " Paste Aligned to context
-    Plugin 'vim-scripts/ReplaceWithRegister'
-    Plugin 'zef/vim-cycle'                       " Add more synonyms to loop from, not only numbers ;)
-    Plugin 'othree/eregex.vim'                   " Use the Perl/Ruby(/JavaScript) Regex engine.
+    Plug 'tpope/vim-repeat'                    " Repeat
+    " Plug 'kristijanhusak/vim-multiple-cursors' " Multiple cursors
+    Plug 'Raimondi/delimitMate'                " Closing of quotes
+    Plug 'tmhedberg/matchit'                   " Match it
+    Plug 'sickill/vim-pasta'                   " Paste Aligned to context
+    Plug 'vim-scripts/ReplaceWithRegister'
+    Plug 'zef/vim-cycle'                       " Add more synonyms to loop from, not only numbers ;)
+    Plug 'othree/eregex.vim'                   " Use the Perl/Ruby(/JavaScript) Regex engine.
       let g:eregex_default_enable = 0            " Disable eregex, on search use it with :%S// for searchNReplace
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Motions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Plugins
-    Plugin 'Lokaltog/vim-easymotion' " Easy motion
+    Plug 'Lokaltog/vim-easymotion' " Easy motion
       let g:EasyMotion_smartcase = 1
       map  <Plug>(easymotion-sn)
-    Plugin 'bkad/CamelCaseMotion' " Camel case motion
+    Plug 'bkad/CamelCaseMotion' " Camel case motion
       map w <Plug>CamelCaseMotion_w
       map b <Plug>CamelCaseMotion_b
       map e <Plug>CamelCaseMotion_e
@@ -318,14 +324,14 @@
 " => Syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Plugins
-    Plugin 'sheerun/vim-polyglot'                        " Language Support a TON
-      " Plugin 'bendavis78/vim-polymer'
-      Plugin 'webdesus/polymer-ide.vim'                  " Since Polymer Project is so new, there's not yet a support for it
+    Plug 'sheerun/vim-polyglot'                        " Language Support a TON
+      " Plug 'bendavis78/vim-polymer'
+      Plug 'webdesus/polymer-ide.vim', { 'do': 'npm install' }                  " Since Polymer Project is so new, there's not yet a support for it
         " Polymer files are always HTML, but heavy in JS
         let g:NERDCustomDelimiters = {
             \ 'html': { 'left': '//' }
         \ }
-    Plugin 'marijnh/tern_for_vim'                        " JavaScript Libraries support
+    Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }                        " JavaScript Libraries support
       autocmd FileType javascript nmap K :TernDoc<cr>
       autocmd FileType !javascript unmap K :TernDoc<cr>
       let g:tern_show_argument_hints = 'on_hold'
@@ -337,9 +343,9 @@
       " set ft=html.javascript_tern
       " set ft=html.javascript
 
-    Plugin 'q0LoCo/syntastic'                     " Syntax Checker with Async (vim-syntastic/syntastic)
-      " Plugin 'pydave/AsyncCommand'
-      " Plugin 'scrooloose/syntastic'                    " Syntax checking
+    Plug 'q0LoCo/syntastic'                     " Syntax Checker with Async (vim-syntastic/syntastic)
+      " Plug 'pydave/AsyncCommand'
+      " Plug 'scrooloose/syntastic'                    " Syntax checking
       " Permormance of the plugin
       let g:syntastic_enable_async = 1
       let g:syntastic_async_tmux_if_possible = 1
@@ -366,9 +372,9 @@
       let g:syntastic_mode="pasive"
       let g:syntastic_check_on_open=0
 
-    Plugin 'millermedeiros/vim-esformatter'              " ECMAScript code beautifier/formatter. `npm install -g esformatter`
+    Plug 'millermedeiros/vim-esformatter', { 'do': 'npm install esformatter' }              " ECMAScript code beautifier/formatter. `npm install -g esformatter`
       nnoremap <silent> <leader>c :EsformatterVisual<CR>
-    Plugin 'Chiel92/vim-autoformat'                      " Try to format with eslint
+    Plug 'Chiel92/vim-autoformat'                      " Try to format with eslint
       let g:formatdef_eslint = '"eslint-formatter"'
       let g:formatters_javascript = ['eslint']
 
@@ -376,9 +382,9 @@
 " => Misc Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Social Plugins
-    " Plugin 'vim-scripts/TwitVim'
+    " Plug 'vim-scripts/TwitVim'
   " Text Plugins
-    " Plugin 'vim-scripts/loremipsum'
+    " Plug 'vim-scripts/loremipsum'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Tab, Splits & Navigations
@@ -432,7 +438,7 @@
     set shiftround " Indent/outdent to nearest tabstop
 
   " ==> Plugins
-    Plugin 'godlygeek/tabular'                " Sometimes, it's useful to line up text
+    Plug 'godlygeek/tabular'                " Sometimes, it's useful to line up text
       nmap <Leader>a :Tab<CR>
       vmap <Leader>a :Tab<CR>
       nmap <Leader>t :Tabularize /
@@ -458,7 +464,7 @@
     nnoremap <Leader><Space> :set hlsearch!<CR>
 
   " ==> Plugins
-    Plugin 'mileszs/ack.vim'      " Search in the whole project (folder)
+    Plug 'mileszs/ack.vim'      " Search in the whole project (folder)
       nnoremap <Leader>f :Ack!<Space>
       vnoremap <Leader>f y:Ack! <C-r>=fnameescape(@")<CR><CR>
       if executable('ag')
@@ -514,11 +520,7 @@
   " ==> Last Hacks
     " au BufRead,BufNewFile,BufReadPost *.html set filetype=html
 
-  call vundle#end()            " required
-  filetype plugin indent on    " required
-  syntax enable
-
-  " Plugin 'zef/vim-cycle
+  " Plug 'zef/vim-cycle
   autocmd VimEnter call AddCycleGroup(['set', 'get'])
   autocmd VimEnter call AddCycleGroup(['form', 'to'])
   autocmd VimEnter call AddCycleGroup(['push', 'pop'])
@@ -539,6 +541,9 @@
   autocmd VimEnter call AddCycleGroup(['tiny', 'small', 'medium', 'big', 'huge'])
   autocmd VimEnter call AddCycleGroup(['pico', 'nano', 'micro', 'mili', 'kilo', 'mega', 'giga', 'tera', 'peta'])
   autocmd VimEnter call AddCycleGroup(['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday', 'saturday'])
+
+  " Finish Plug system
+  call plug#end()
 
   " Theme Should be at last I don't know why
     exec SetTheme()
