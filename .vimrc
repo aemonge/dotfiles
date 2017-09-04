@@ -1,4 +1,7 @@
+" => Reminders
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " * Standard Vim protocol for quickfixing is to show you the output of the command then jump to the first result automatically. You can cycle through the results with :cn[ext] and :cp[rev].
+
 " => Initialization (Vundle)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   set nocompatible              " be iMproved, required
@@ -38,6 +41,8 @@
       set t_vb=                           " No sound on errors
       set cursorcolumn                    " Display vertical and horizontal current line
       set cursorline                      " Display vertical and horizontal current line
+      " Since vim looses highlight colors sometimes
+      nnoremap U :syntax sync fromstart<cr>:redraw!<cr>
       " Spelling
       set spl=en_us,es spell
       " Backups
@@ -58,6 +63,9 @@
       set undoreload=10000                " maximum number lines to save for undo on a buffer reload
       set mousehide                       " hide while typing
       set mouse=a                         " Mouse can click over buffers, but just that.
+      set exrc                            " Execute .vimrc file under current folders ;)
+      set secure                          " Just run .vimrc file that the owner is `whoami`
+      set cm=blowfish2                    " Set the encription method to the best (vim >= 7.4)
 
     " ==> Vim Mappings
       map <leader>ts :set spell!<cr>
@@ -102,9 +110,9 @@
     nnoremap f: /<C-f>
     " Copying pasting
       " Mac Osx Support
-      imap <C-v> <Esc>:set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
+      " imap <C-v> <Esc>:set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
       " Linux support
-      " imap <C-v> <C-o>"+p
+      imap <C-v> <C-o>"+P
     vmap <C-p> "+p<cr>
     vmap <C-C> "+y
     vmap  "+y
@@ -224,6 +232,11 @@
       let g:airline#extensions#branch#enabled = 1
       let g:airline#extensions#tagbar#enabled = 1
 
+    Plugin 'junegunn/limelight.vim'
+      map <leader>l :Limelight!!<cr>
+      let g:limelight_conceal_ctermfg = '243' " Comments color
+      let g:limelight_paragraph_span = 2
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => IDE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -237,8 +250,8 @@
       let NERDRemoveExtraSpaces=1
       map <leader>/ <plug>NERDCommenterToggle
     Plugin 'scrooloose/nerdtree'                  " NERD tree
-      map <leader>n :NERDTreeToggle<cr>
-      map <leader>N :NERDTreeFind<cr>
+      map <leader>N :NERDTreeToggle<cr>
+      map <leader>n :NERDTreeFind<cr>
       let NERDTreeDirArrows=1
       let NERDTreeQuitOnOpen = 1
     Plugin 'tpope/vim-fugitive'                   " Git wrapper
@@ -252,6 +265,11 @@
       nmap <c-t> :TagbarToggle<cr>
     Plugin 'editorconfig/editorconfig-vim'
       let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+    Plugin 'mtth/scratch.vim'                     " A simple Scratch window for tooling
+      nmap <leader>st :Scratch<cr>
+    Plugin 'simnalamburt/vim-mundo'               " See the undo history graphically
+      nnoremap <leader>u :MundoToggle<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Expected Enhancements
@@ -301,23 +319,40 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " ==> Plugins
     Plugin 'sheerun/vim-polyglot'                        " Language Support a TON
-      " Plugin 'webdesus/polymer-ide.vim'                " Since Polymer Project is so new, there's not yet a support for it
-      Plugin 'bendavis78/vim-polymer'                    " Since Polymer Project is so new, there's not yet a support for it
+      " Plugin 'bendavis78/vim-polymer'
+      Plugin 'webdesus/polymer-ide.vim'                  " Since Polymer Project is so new, there's not yet a support for it
+        " Polymer files are always HTML, but heavy in JS
+        let g:NERDCustomDelimiters = {
+            \ 'html': { 'left': '//' }
+        \ }
     Plugin 'marijnh/tern_for_vim'                        " JavaScript Libraries support
       autocmd FileType javascript nmap K :TernDoc<cr>
       autocmd FileType !javascript unmap K :TernDoc<cr>
       let g:tern_show_argument_hints = 'on_hold'
       let g:tern_show_signature_in_pum = 1
+      " For polymer make HTML as JavaScript
+      " setlocal omnifunc=tern#Complete
+      " call tern#Enable()
+      " runtime after/ftplugin/javascript_tern.vim
+      " set ft=html.javascript_tern
+      " set ft=html.javascript
 
-    Plugin 'vim-syntastic/syntastic'                     " Syntax Checker
+    Plugin 'q0LoCo/syntastic'                     " Syntax Checker with Async (vim-syntastic/syntastic)
       " Plugin 'pydave/AsyncCommand'
       " Plugin 'scrooloose/syntastic'                    " Syntax checking
+      " Permormance of the plugin
+      let g:syntastic_enable_async = 1
+      let g:syntastic_async_tmux_if_possible = 1
+      let g:syntastic_async_tmux_new_window = 1
+
       map <leader>e :SyntasticToggleMode<cr>
       let g:airline#extensions#syntastic#enabled = 1
       set statusline+=%{SyntasticStatuslineFlag()}
       let g:syntastic_ignore_files = ['-spec.js$']
-      let g:syntastic_html_checkers=['eslint']
-      let g:syntastic_javascript_checkers = ['eslint']
+      " let g:syntastic_html_checkers=['eslint']
+      " let g:syntastic_javascript_checkers = ['eslint']
+      let g:syntastic_html_checkers=['polylint', 'eslint']
+      let g:syntastic_javascript_checkers = ['polylint', 'eslint']
       let g:syntastic_check_on_open=1
       let g:syntastic_aggregate_errors=1
       let g:syntastic_auto_jump=1
@@ -333,6 +368,9 @@
 
     Plugin 'millermedeiros/vim-esformatter'              " ECMAScript code beautifier/formatter. `npm install -g esformatter`
       nnoremap <silent> <leader>c :EsformatterVisual<CR>
+    Plugin 'Chiel92/vim-autoformat'                      " Try to format with eslint
+      let g:formatdef_eslint = '"eslint-formatter"'
+      let g:formatters_javascript = ['eslint']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc Plugins
@@ -422,7 +460,7 @@
   " ==> Plugins
     Plugin 'mileszs/ack.vim'      " Search in the whole project (folder)
       nnoremap <Leader>f :Ack!<Space>
-      vnoremap <Leader>f :Ack! <cword><Space>
+      vnoremap <Leader>f y:Ack! <C-r>=fnameescape(@")<CR><CR>
       if executable('ag')
         let g:ackprg = 'ag --vimgrep'
       endif
@@ -448,15 +486,21 @@
   endfunction
 
   function! DebugVar()
-    if &ft == 'javascript' || &ft == 'jasmine.javascript' || &ft == 'javascript.jsx'
+    if &ft == 'javascript' || &ft == 'jasmine.javascript' || &ft == 'javascript.jsx' || &ft == 'html'
       exe "normal oconsole.log();"
-      exe "normal hhp"
+      exe "normal hi': ', "
+      exe "normal pg;"
+      exe "normal bblp^j"
     elseif &ft == 'php'
       exe "normal ovar_dump();"
-      exe "normal hhp"
+      exe "normal hi': ', "
+      exe "normal pg;"
+      exe "normal bblp^j"
     elseif &ft == 'sql'
       exe "normal oselect ;"
-      exe "normal hp"
+      exe "normal hi': ', "
+      exe "normal pg;"
+      exe "normal bblp^j"
     else
       echo &ft
       echo "not implemente yet, please do"
@@ -481,6 +525,7 @@
   autocmd VimEnter call AddCycleGroup(['mas', 'menos'])
   autocmd VimEnter call AddCycleGroup(['prev', 'next'])
   autocmd VimEnter call AddCycleGroup(['start', 'end'])
+  autocmd VimEnter call AddCycleGroup(['light', 'dark'])
   autocmd VimEnter call AddCycleGroup(['open', 'close'])
   autocmd VimEnter call AddCycleGroup(['read', 'write'])
   autocmd VimEnter call AddCycleGroup(['truthy', 'falsy'])
