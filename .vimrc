@@ -80,8 +80,8 @@
 
 
   " Strip all trailing whitespace in the current file
-    autocmd BufWritePre * :%s/\s\+$//<CR>:let @/=''<CR>
-    autocmd BufWritePre * :%s/\s\+$//e
+    autocmd BufWritePre * %s/\s\+$//e
+
 
   " Modify all the indents
     nnoremap <leader>= gg=G
@@ -172,7 +172,7 @@
     set relativenumber                                                         " Show line numbers relative
     set number!                                                                " Show the current line number ;)
     set formatoptions+=rnlmM                                                   " Optimize format options
-    set wrap                                                                   " Since horizontal scrolling is such a pain in the A on vi
+    set nowrap                                                                 " Since horizontal scrolling is such a pain in the A on vi
     set textwidth=120                                                          " Change text width
     set list                                                                   " Show these tabs and spaces and so on
     set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮                           " Change listchars Preaty special characters
@@ -321,6 +321,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Plugins
     Plug 'sheerun/vim-polyglot'                                                " Language Support a TON
+      Plug 'polpo/vim-html-js-indent'                                          " This indent plugin restores the inline JavaScript/HTML indenting support which was removed from vim-javascript.
       Plug 'bendavis78/vim-polymer'
       Plug 'moll/vim-node'
       " Plug 'webdesus/polymer-ide.vim', { 'do': 'npm install' }                 " Since Polymer Project is so new, there's not yet a support for it
@@ -328,25 +329,45 @@
         let g:NERDCustomDelimiters = {
             \ 'html': { 'left': '//' }
         \ }
-    Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }                       " JavaScript Libraries support
+    Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }                        " JavaScript Libraries support
       autocmd FileType javascript nmap K :TernDoc<cr>
-      autocmd FileType !javascript unmap K :TernDoc<cr>
+      autocmd FileType html nmap K :TernDoc<cr>
+      " autocmd FileType !(javascript|html) unmap K :TernDoc<cr>
       let g:tern_show_argument_hints = 'on_hold'
       let g:tern_show_signature_in_pum = 1
+      " Set tern in HTML
+      setlocal omnifunc=tern#Complete
+      " call tern#Enable()
+      runtime after/ftplugin/javascript_tern.vim
+      set ft=html.javascript_tern
+      set ft=html.javascript
 
-    Plug 'stgpetrovic/syntastic-async'                                         " Syntax Checker with Async (vim-syntastic/syntastic)
-      Plug 'vim-syntastic/syntastic'
-      Plug 'pydave/AsyncCommand'
+    " Plug 'w0rp/ale'                                                            " A version of Syntactic that works a-sync
+      " let g:ale_fix_on_save = 1
+      " let g:ale_completion_enabled = 1
+      " let g:ale_sign_column_always = 1
+      " let g:ale_sign_error = '✗'
+      " let g:ale_sign_warning = '∆'
+      " let g:airline#extensions#ale#enabled = 1
+      " " highlight clear ALEErrorSign
+      " " highlight clear ALEWarningSign
+      " let g:ale_fixers = {
+      " \   'javascript': ['eslint'],
+      " \   'html': ['eslint'],
+      " \}
+
+    Plug 'scrooloose/syntastic'                                                " Syntax Checker with Async (vim-syntastic/syntastic)
       map <leader>e :SyntasticToggleMode<cr>
       let g:syntastic_enable_async = 1
       let g:syntastic_async_tmux_if_possible = 1
       let g:syntastic_async_tmux_new_window = 1
       let g:airline#extensions#syntastic#enabled = 1
       set statusline+=%{SyntasticStatuslineFlag()}
-      let g:syntastic_html_checkers=['polylint', 'eslint']
-      let g:syntastic_javascript_checkers = ['polylint', 'eslint']
       let g:syntastic_html_checkers=['eslint']
       let g:syntastic_javascript_checkers = ['eslint']
+      let g:syntastic_javascript_eslint_exec = 'eslint_d'
+      " let g:syntastic_html_checkers=['polylint', 'eslint']
+      " let g:syntastic_javascript_checkers = ['polylint', 'eslint']
       let g:syntastic_mode="pasive"
       let g:syntastic_check_on_open=0
       let g:syntastic_aggregate_errors=1
@@ -491,9 +512,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                    Finizalization
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Last Hacks
-    " au BufRead,BufNewFile,BufReadPost *.html set filetype=html
-
     Plug 'zef/vim-cycle'
       autocmd VimEnter call AddCycleGroup(['set', 'get'])
       autocmd VimEnter call AddCycleGroup(['form', 'to'])
