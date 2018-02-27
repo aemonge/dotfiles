@@ -7,7 +7,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   set nocompatible                                                            " be iMproved, required
   filetype off                                                                " required
-  call plug#begin('~/.vim/plugged')
+  call plug#begin('$LOCALAPPDATA/nvim/plugged')                                       " required
+  " call plug#begin('~/AppData/Local/nvim')                              " required
 
   " Relaod VimRc when modified
     function! PlugAll()
@@ -15,7 +16,20 @@
       :PlugInstall
       :PlugUpdate
     endfunction
-    autocmd! BufUnload .vimrc :source ~/.vimrc | exec PlugAll()
+    autocmd! VimLeavePre .vimrc :source ~/.vimrc | exec PlugAll()
+
+  " For windows set the correct shell environments
+  if has('win32')
+    let $CHERE_INVOKING=1                                                     " Makes bash open in the working directory
+    set shell=cmd.exe
+    set shellcmdflag=/c\ powershell.exe\ -NoLogo\ -NoProfile\ -NonInteractive\ -ExecutionPolicy\ Bypass " -Command '$LOCALAPPDATA//nvim/profile.ps1'
+
+    " set shellcmdflag=/c\ PowerShell\ -ExecutionPolicy Bypass\ -NoLogo\ -NoProfile\ -NoExit\ -Command \"Invoke-Expression '. ''%ConEmuDir%\..\profile.ps1'''\"\
+    set shellpipe=|
+    set shellredir=>
+    set shellxquote=\"                                                        " Default value is (, but bash needs "
+    set shellslash                                                            " Paths will use / instead of \
+  endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                             General
@@ -25,8 +39,7 @@
     set timeoutlen=500                                                         " Time to wait for a command
     set noautochdir                                                            " Don't change Dir on file open
     set autoread                                                               " Set autoread when a file is changed outside
-    set autowrite                                                              " Write on make/shell commands
-    au FileChangedShell * echo Warning: File changed on disk
+    set autowrite                                                              " Write on make/shell commands au FileChangedShell * echo Warning: File changed on disk
     set hidden                                                                 " Turn on hidden
     set modeline                                                               " Turn on modeline
     set encoding=utf-8                                                         " Set utf-8 encoding
@@ -37,21 +50,14 @@
     set t_vb=                                                                  " No sound on errors
     set cursorcolumn                                                           " Display vertical and horizontal current line
     set cursorline                                                             " Display vertical and horizontal current line
-    noremap <C-l> :syntax sync fromstart<cr>:redraw!<cr>                       " Since vim looses highlight colors sometimes
+    noremap <C-l> :syntax sync fromstart<cr>:redraw!<cr> :exec FixTheme()<cr>
+                                                                               " Since vim looses highlight colors sometimes
     set spl=en_us,es spell
       map <leader>ts :set spell!<cr>
 
   " Backups
     set noswapfile                                                             " Don't use a .~ swap file
     set undofile                                                               " Use a directory to save undos
-    set undodir=~/.vim/undodir
-    set backupdir=~/.vim/backup
-    if !isdirectory(expand(&undodir))                                          " Create undo directory if it doesn't exist
-      call mkdir(expand(&undodir), 'p')
-    endif
-    if !isdirectory(expand(&backupdir))                                        " Create backup directory if it doesn't exist
-      call mkdir(expand(&backupdir), 'p')
-    endif
     set history=1000                                                           " Increase the lines of history
     set undolevels=10000                                                       " maximum number of changes that can be undone
     set undoreload=10000                                                       " maximum number lines to save for undo on a buffer reload
@@ -59,11 +65,20 @@
     set mouse=a                                                                " Mouse can click over buffers, but just that.
     set exrc                                                                   " Execute .vimrc file under current folders ;)
     set secure                                                                 " Just run .vimrc file that the owner is `whoami`
-    set cm=blowfish2                                                           " Set the encription method to the best (vim >= 7.4)
+    if has('unix')
+      set cm=blowfish2                                                         " Set the encription method to the best (vim >= 7.4)
+      set undodir=~/.vim/undodir
+      set backupdir=~/.vim/backup
+      if !isdirectory(expand(&undodir))                                        " Create undo directory if it doesn't exist
+        call mkdir(expand(&undodir), 'p')
+      endif
+      if !isdirectory(expand(&backupdir))                                      " Create backup directory if it doesn't exist
+        call mkdir(expand(&backupdir), 'p')
+      endif
+    endif
 
   " Extra Mappings
     map <leader>tw :set wrap!<cr>
-    map <leader>x :!!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "           Smart Mappings (aka vim tune, with no plugins)
@@ -80,7 +95,7 @@
 
 
   " Strip all trailing whitespace in the current file
-    autocmd BufWritePre * %s/\s\+$//e
+    au BufWritePre * %s/\s\+$//e
 
 
   " Modify all the indents
@@ -105,7 +120,8 @@
       " Mac Osx Support
       " imap <C-v> <Esc>:set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
       " Linux support
-      imap <C-v> <C-o>"+P
+      imap <C-v> <C-o>"+p
+      set clipboard=unnamed
     vmap <C-p> "+p<cr>
     vmap <C-C> "+y
     vmap  "+y
@@ -122,14 +138,16 @@
     "Omni Completion
     "imap <C-k> <c-x><c-o>
     "Spelling Completion
-    imap <C-h> <c-x>s
+    imap <C-h> <c-x>s<c-n><c-n><c-p>
     "File Completion
     imap <C-f> <c-x><c-f>
 
   " Plugins
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-      let g:ycm_collect_identifiers_from_comments_and_strings = 1
-      let g:ycm_collect_identifiers_from_tags_files = 1
+    if has('unix')
+      Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+        let g:ycm_collect_identifiers_from_comments_and_strings = 1
+        let g:ycm_collect_identifiers_from_tags_files = 1
+    endif
     Plug 'SirVer/ultisnips'
       Plug 'honza/vim-snippets'
       let g:UltiSnipsExpandTrigger="<C-K>"
@@ -141,16 +159,17 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Settings
     set foldlevelstart=0                                                       " Start with all folds closed
+    au User Startified %foldopen! | exec SetTheme()
     set foldmethod=indent
 
   " Mappings
     map <leader>fe :set foldenable!<cr>
 
   " Plugins
-    " Mantain fold when editing @origanl from vimTip
+    " Mantain fold when editing @original from VIM-Tip
     set foldopen=hor,mark,percent,quickfix,search,tag,undo
-    autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-    autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+    au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+    au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                            Fancy
@@ -192,17 +211,18 @@
       endfunction
 
       function! FixTheme()
+        exec SetTheme()
         hi clear SpellBad
         hi clear SpellCap
-        hi SpellBad cterm=underline
-        hi SpellCap cterm=underline
-        hi NonText ctermbg=none
-        hi Normal ctermbg=none
-        hi Folded ctermbg=none
-        hi CursorLine ctermbg=none
-        hi CursorLine cterm=bold
-        hi CursorColumn ctermbg=none
-        hi CursorColumn cterm=bold
+        hi SpellBad gui=underline cterm=underline
+        hi SpellCap gui=underline cterm=underline
+        hi NonText guibg=none ctermbg=none
+        hi Normal guibg=none ctermbg=none
+        hi Folded guibg=none ctermbg=none
+        hi CursorLine guibg=none ctermbg=none
+        hi CursorLine gui=bold cterm=bold
+        hi CursorColumn guibg=none ctermbg=none
+        hi CursorColumn gui=bold cterm=bold
       endfunction
 
     if !exists("g:hybrid_use_Xresources")
@@ -215,14 +235,28 @@
     endif
 
     Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-      let g:hybrid_use_Xresources = 1
-      let g:airline_theme = 'ubaryd'
+      Plug 'vim-airline/vim-airline-themes'
+      " let g:hybrid_use_Xresources = 1
+      let g:airline_theme = 'solarized'
+      let g:airline_solarized_bg='dark'
+      let g:airline_extensions = ['tabline', 'fugitiveline', 'clock']
+      let g:airline#extensions#fugitiveline#enabled = 1
+      let g:airline#extensions#tabline#show_tab_nr = 0
+      let g:airline#extensions#tabline#tabs_label = ''
+      let g:airline#extensions#tabline#buffers_label = ''
+      let g:airline#extensions#tabline#show_tabs = 1
+      let g:airline#extensions#tabline#show_buffers = 0
+      let g:airline#extensions#tabline#buffer_idx_mode = 1
       let g:airline#extensions#tabline#enabled = 1
-      let g:airline#extensions#tabline#show_buffers = 1
-      let g:airline#extensions#tabline#buf_min_count = 1
-      let g:airline#extensions#branch#enabled = 1
+      let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+      let g:airline#extensions#tabline#show_splits = 0
+      let g:airline_detect_spell=0
+      let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+      " let g:airline#extensions#tabline#show_buffers = 1
+      " let g:airline#extensions#tabline#buf_min_count = 1
+      " let g:airline#extensions#branch#enabled = 1
       let g:airline#extensions#tagbar#enabled = 1
+      Plug 'enricobacis/vim-airline-clock'
 
     Plug 'junegunn/limelight.vim'
       map <leader>l :Limelight!!<cr>
@@ -233,6 +267,7 @@
 "                             IDE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Plugins
+    Plug 'mhinz/vim-startify'                                                  " The fancy start screen
     Plug 'ctrlpvim/ctrlp.vim'                                                  " Fuzzy file opener
       let g:ctrlp_map = '<c-p>'
       let g:ctrlp_cmd = 'CtrlP'
@@ -266,18 +301,29 @@
     Plug 'tpope/vim-surround'                                                  " Surround
     Plug 'majutsushi/tagbar'                                                   " Tag bar
       nmap <c-t> :TagbarToggle<cr>
+      let g:tagbar_ctags_bin = '~/Programs/ctags/ctags.exe'
     Plug 'editorconfig/editorconfig-vim'
       let g:EditorConfig_exclude_patterns = ['fugitive://.*']
     Plug 'mtth/scratch.vim'                                                    " A simple Scratch window for tooling
       nmap <leader>st :Scratch<cr>
     Plug 'simnalamburt/vim-mundo'                                              " See the undo history graphically
       nnoremap <leader>u :MundoToggle<CR>
+    Plug 'shougo/vimshell.vim'                                                 " A powerful shell implementation by vim (for windows)
+      let g:vimshell_enable_start_insert = 0                                   " Don't start the SH in insert mode
+      nmap <leader>x :VimShellPop<CR>
+      Plug 'shougo/vimproc.vim', {'do' : 'nmake -f make_msvc.mak'}             " Plug 'shougo/vimproc.vim', {'do' : 'make'}
+        let g:python3_host_prog='C:/Users/xi332412/AppData/Local/Programs/Python/Python36/python.exe'
+        let g:python_host_prog='C:/Users/xi332412/AppData/Local/Programs/Python/Python36/python.exe'
+    Plug 'jeetsukumaran/vim-buffergator'                                       " Vim plugin to list, select and switch between buffers.
+      nmap <leader>b :BuffergatorToggle<cr>
+      let g:buffergator_viewport_split_policy = 'B'
+      let g:buffergator_hsplit_size = 5
+    Plug 'jaxbot/browserlink.vim'                                              " Connect vim with broswer console and edition
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                    Expected Enhancements
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Settings
-    set clipboard=unnamed                                                      " Able to copy an paste between xwindows                       "
     set laststatus=1                                                           " Enables the status line at the bottom of Vim Only when SPLIT
 
   " Mappings
@@ -291,7 +337,6 @@
     Plug 'tmhedberg/matchit'                                                   " Match it
     Plug 'sickill/vim-pasta'                                                   " Paste Aligned to context
     Plug 'vim-scripts/ReplaceWithRegister'
-    Plug 'zef/vim-cycle'                                                       " Add more synonyms to loop from, not only numbers ;)
     Plug 'othree/eregex.vim'                                                   " Use the Perl/Ruby(/JavaScript) Regex engine.
       let g:eregex_default_enable = 0                                          "   Disable eregex, on search use it with :%S// for searchNReplace
 
@@ -300,8 +345,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Plugins
     Plug 'Lokaltog/vim-easymotion'                                             " Easy motion
+      Plug 'haya14busa/incsearch-easymotion.vim'
       let g:EasyMotion_smartcase = 1
-      map  <Plug>(easymotion-sn)
+      map <C-/> <Plug>(incsearch-easymotion-/)
+      omap <C-/> <Plug>(incsearch-easymotion-/)
     Plug 'bkad/CamelCaseMotion'                                                " Camel case motion
       map w <Plug>CamelCaseMotion_w
       map b <Plug>CamelCaseMotion_b
@@ -322,16 +369,16 @@
   " Plugins
     Plug 'sheerun/vim-polyglot'                                                " Language Support a TON
       Plug 'polpo/vim-html-js-indent'                                          " This indent plugin restores the inline JavaScript/HTML indenting support which was removed from vim-javascript.
-      Plug 'bendavis78/vim-polymer'
+      " Plug 'bendavis78/vim-polymer'
       Plug 'moll/vim-node'
       " Plug 'webdesus/polymer-ide.vim', { 'do': 'npm install' }                 " Since Polymer Project is so new, there's not yet a support for it
         " Polymer files are always HTML, but heavy in JS
-        let g:NERDCustomDelimiters = {
-            \ 'html': { 'left': '//' }
-        \ }
+        " let g:NERDCustomDelimiters = {
+            " \ 'html': { 'left': '//' }
+        " \ }
     Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }                        " JavaScript Libraries support
-      autocmd FileType javascript nmap K :TernDoc<cr>
-      autocmd FileType html nmap K :TernDoc<cr>
+      au FileType javascript nmap K :TernDoc<cr>
+      au FileType html nmap K :TernDoc<cr>
       " autocmd FileType !(javascript|html) unmap K :TernDoc<cr>
       let g:tern_show_argument_hints = 'on_hold'
       let g:tern_show_signature_in_pum = 1
@@ -362,10 +409,11 @@
       let g:syntastic_async_tmux_if_possible = 1
       let g:syntastic_async_tmux_new_window = 1
       let g:airline#extensions#syntastic#enabled = 1
-      set statusline+=%{SyntasticStatuslineFlag()}
       let g:syntastic_html_checkers=['eslint']
       let g:syntastic_javascript_checkers = ['eslint']
-      let g:syntastic_javascript_eslint_exec = 'eslint_d'
+      let g:syntastic_typescript_checkers = []
+      " let g:syntastic_typescript_checkers = ['tslint']
+      " let g:syntastic_javascript_eslint_exec = 'eslint_d'
       " let g:syntastic_html_checkers=['polylint', 'eslint']
       " let g:syntastic_javascript_checkers = ['polylint', 'eslint']
       let g:syntastic_mode="pasive"
@@ -377,13 +425,17 @@
       let g:syntastic_style_error_symbol = '✠'
       let g:syntastic_warning_symbol = '∆'
       let g:syntastic_style_warning_symbol = '≈'
-      let g:ycm_show_diagnostics_ui = 0                         " Compabillity with YCM Disable Sytnastic on load
+      let g:ycm_show_diagnostics_ui = 0                                        " Compabillity with YCM Disable Sytnastic on load
+      if has('unix')
+        set statusline+=%{SyntasticStatuslineFlag()}
+      endif
 
     Plug 'millermedeiros/vim-esformatter', { 'do': 'npm install esformatter' } " ECMAScript code beautifier/formatter. `npm install -g esformatter`
       nnoremap <silent> <leader>c :EsformatterVisual<CR>
     Plug 'Chiel92/vim-autoformat'                                              " Try to format with eslint
       let g:formatdef_eslint = '"eslint-formatter"'
       let g:formatters_javascript = ['eslint']
+    Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                        Misc Plugins
@@ -404,12 +456,14 @@
     nmap + :3wincmd +<cr>
     nmap = :3wincmd <<cr>
     nmap - :2wincmd ><cr>
-    nmap <C-j> :wincmd w<cr>
-    nmap <C-k> :wincmd W<cr>
+    map <C-j> :wincmd w<cr>
+    map <C-k> :wincmd W<cr>
 
   " quick tab move [ tab, and shift tab ]
-    nmap <S-Tab> :call TabOrBuffer(0)<cr>
-    nmap <Tab> :call TabOrBuffer(1)<cr>
+    " nmap <S-Tab> :call TabOrBuffer(0)<cr>
+    " nmap <Tab> :call TabOrBuffer(1)<cr>
+    nmap <S-Tab> gT<cr>
+    nmap <Tab> gt<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                   Internal Efficiency
@@ -459,12 +513,23 @@
     nnoremap <Leader><Space> :set hlsearch!<CR>
 
   " Plugins
-    Plug 'mileszs/ack.vim'                                                     " Search in the whole project (folder)
-      nnoremap <Leader>f :Ack!<Space>
-      vnoremap <Leader>f y:Ack! <C-r>=fnameescape(@")<CR><CR>
-      if executable('ag')
-        let g:ackprg = 'ag --vimgrep'
-      endif
+    " Plug 'mileszs/ack.vim'                                                     " Search in the whole project (folder)
+      " nnoremap <Leader>f :Ack!<Space>
+      " vnoremap <Leader>f y:Ack! <C-r>=fnameescape(@")<CR><CR>
+      " if executable('ag')
+        " let g:ackprg = 'ag --vimgrep'
+      " endif
+    Plug 'haya14busa/incsearch.vim'                                            " Improved incremental searching for Vim
+      Plug 'haya14busa/incsearch-fuzzy.vim'
+      map <M-/> <Plug>(incsearch-fuzzy-/)
+      " set hlsearch
+      " let g:incsearch#auto_nohlsearch = 1
+      " map n  <Plug>(incsearch-nohl-n)
+      " map N  <Plug>(incsearch-nohl-N)
+      " map *  <Plug>(incsearch-nohl-*)
+      " map #  <Plug>(incsearch-nohl-#)
+      " map g* <Plug>(incsearch-nohl-g*)
+      " map g# <Plug>(incsearch-nohl-g#)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                     Local Plugins
@@ -487,7 +552,7 @@
   endfunction
 
   function! DebugVar()
-    if &ft == 'javascript' || &ft == 'jasmine.javascript' || &ft == 'javascript.jsx' || &ft == 'html'
+    if &ft == 'javascript' || &ft == 'jasmine.javascript' || &ft == 'javascript.jsx' || &ft == 'html' || &ft == 'typescript'
       exe "normal oconsole.log();"
       exe "normal hi': ', "
       exe "normal pg;"
@@ -513,30 +578,28 @@
 "                    Finizalization
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Plug 'zef/vim-cycle'
-      autocmd VimEnter call AddCycleGroup(['set', 'get'])
-      autocmd VimEnter call AddCycleGroup(['form', 'to'])
-      autocmd VimEnter call AddCycleGroup(['push', 'pop'])
-      autocmd VimEnter call AddCycleGroup(['mas', 'menos'])
-      autocmd VimEnter call AddCycleGroup(['prev', 'next'])
-      autocmd VimEnter call AddCycleGroup(['start', 'end'])
-      autocmd VimEnter call AddCycleGroup(['light', 'dark'])
-      autocmd VimEnter call AddCycleGroup(['open', 'close'])
-      autocmd VimEnter call AddCycleGroup(['read', 'write'])
-      autocmd VimEnter call AddCycleGroup(['truthy', 'falsy'])
-      autocmd VimEnter call AddCycleGroup(['filter', 'reject'])
-      autocmd VimEnter call AddCycleGroup(['internal', 'external'])
-      autocmd VimEnter call AddCycleGroup(['short', 'normal', 'long'])
-      autocmd VimEnter call AddCycleGroup(['subscribe', 'unsubscribe'])
-      autocmd VimEnter call AddCycleGroup(['header', 'body', 'footer'])
-      autocmd VimEnter call AddCycleGroup(['protected', 'private', 'public'])
-      autocmd VimEnter call AddCycleGroup(['red', 'blue', 'green', 'yellow'])
-      autocmd VimEnter call AddCycleGroup(['tiny', 'small', 'medium', 'big', 'huge'])
-      autocmd VimEnter call AddCycleGroup(['pico', 'nano', 'micro', 'mili', 'kilo', 'mega', 'giga', 'tera', 'peta'])
-      autocmd VimEnter call AddCycleGroup(['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday', 'saturday'])
-
-  " Finish Plug system
-    call plug#end()
+      au  GUIEnter call AddCycleGroup(['set', 'get'])
+      au  GUIEnter call AddCycleGroup(['form', 'to'])
+      au  GUIEnter call AddCycleGroup(['push', 'pop'])
+      au  GUIEnter call AddCycleGroup(['mas', 'menos'])
+      au  GUIEnter call AddCycleGroup(['prev', 'next'])
+      au  GUIEnter call AddCycleGroup(['start', 'end'])
+      au  GUIEnter call AddCycleGroup(['light', 'dark'])
+      au  GUIEnter call AddCycleGroup(['open', 'close'])
+      au  GUIEnter call AddCycleGroup(['read', 'write'])
+      au  GUIEnter call AddCycleGroup(['truthy', 'falsy'])
+      au  GUIEnter call AddCycleGroup(['filter', 'reject'])
+      au  GUIEnter call AddCycleGroup(['internal', 'external'])
+      au  GUIEnter call AddCycleGroup(['short', 'normal', 'long'])
+      au  GUIEnter call AddCycleGroup(['subscribe', 'unsubscribe'])
+      au  GUIEnter call AddCycleGroup(['header', 'body', 'footer'])
+      au  GUIEnter call AddCycleGroup(['protected', 'private', 'public'])
+      au  GUIEnter call AddCycleGroup(['red', 'blue', 'green', 'yellow'])
+      au  GUIEnter call AddCycleGroup(['tiny', 'small', 'medium', 'big', 'huge'])
+      au  GUIEnter call AddCycleGroup(['pico', 'nano', 'micro', 'mili', 'kilo', 'mega', 'giga', 'tera', 'peta'])
+      au  GUIEnter call AddCycleGroup(['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday', 'saturday'])
 
   " Theme Should be at last I don't know why
-    exec SetTheme()
-    au BufRead,BufNewFile,BufReadPost * exec FixTheme()
+      call plug#end()
+      exec FixTheme()
+      au VimEnter,BufNewFile,BufReadPost * exec FixTheme() | AirlineRefresh
