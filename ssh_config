@@ -15,3 +15,11 @@ Host github.com
   ProxyCommand /usr/bin/corkscrew http.proxy 8080 %h %p ~/.ssh/myauth
   TCPKeepAlive yes
   IdentitiesOnly yes
+
+Host extern1.work-alias
+  HostName extern1.work-alias
+  Port 443
+  IdentityFile ~/.ssh/id_extern1_rsa
+  ProxyCommand /usr/bin/corkscrew http.proxy 8080 %h %p ~/.ssh/myauth
+  TCPKeepAlive yes
+  IdentitiesOnly yes
