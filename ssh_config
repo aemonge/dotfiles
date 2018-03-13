@@ -1,0 +1,17 @@
+Host ssh.github.com
+  HostName ssh.github.com
+  User git
+  Port 443
+  IdentityFile ~/.ssh/id_aemGh_rsa
+  ProxyCommand /usr/bin/corkscrew http.proxy 8080 %h %p ~/.ssh/myauth
+  TCPKeepAlive yes
+  IdentitiesOnly yes
+
+Host github.com
+  HostName ssh.github.com
+  User git
+  Port 443
+  IdentityFile ~/.ssh/id_aemGh_rsa
+  ProxyCommand /usr/bin/corkscrew http.proxy 8080 %h %p ~/.ssh/myauth
+  TCPKeepAlive yes
+  IdentitiesOnly yes
