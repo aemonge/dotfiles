@@ -7,8 +7,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   set nocompatible                                                            " be iMproved, required
   filetype off                                                                " required
-  call plug#begin('$LOCALAPPDATA/nvim/plugged')                                       " required
-  " call plug#begin('~/AppData/Local/nvim')                              " required
+  " call plug#begin('$LOCALAPPDATA/nvim/plugged')                                       " required
+  call plug#begin('~/.config/nvim/plugged')                              " required
 
   " Relaod VimRc when modified
     function! PlugAll()
@@ -66,7 +66,7 @@
     set exrc                                                                   " Execute .vimrc file under current folders ;)
     set secure                                                                 " Just run .vimrc file that the owner is `whoami`
     if has('unix')
-      set cm=blowfish2                                                         " Set the encription method to the best (vim >= 7.4)
+      " set cm=blowfish2                                                         " Set the encription method to the best (vim >= 7.4)
       set undodir=~/.vim/undodir
       set backupdir=~/.vim/backup
       if !isdirectory(expand(&undodir))                                        " Create undo directory if it doesn't exist
@@ -114,14 +114,12 @@
     imap ;; <C-o>A;<Esc>
     " Don't search for words on selection mode
     vmap K k
-    " símil to quick exec on find
-    nnoremap f: /<C-f>
     " Copying pasting
       " Mac Osx Support
       " imap <C-v> <Esc>:set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
       " Linux support
       imap <C-v> <C-o>"+p
-      set clipboard=unnamed
+      set clipboard+=unnamedplus
     vmap <C-p> "+p<cr>
     vmap <C-C> "+y
     vmap  "+y
@@ -138,13 +136,16 @@
     "Omni Completion
     "imap <C-k> <c-x><c-o>
     "Spelling Completion
-    imap <C-h> <c-x>s<c-n><c-n><c-p>
+      imap <C-h> <c-x>s
+      if has('win32')
+        imap <C-h> <c-x>s<c-n><c-n><c-p>
+      endif
     "File Completion
     imap <C-f> <c-x><c-f>
 
   " Plugins
     if has('unix')
-      Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+      Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer' }
         let g:ycm_collect_identifiers_from_comments_and_strings = 1
         let g:ycm_collect_identifiers_from_tags_files = 1
     endif
@@ -311,9 +312,15 @@
     Plug 'shougo/vimshell.vim'                                                 " A powerful shell implementation by vim (for windows)
       let g:vimshell_enable_start_insert = 0                                   " Don't start the SH in insert mode
       nmap <leader>x :VimShellPop<CR>
-      Plug 'shougo/vimproc.vim', {'do' : 'nmake -f make_msvc.mak'}             " Plug 'shougo/vimproc.vim', {'do' : 'make'}
-        let g:python3_host_prog='C:/Users/xi332412/AppData/Local/Programs/Python/Python36/python.exe'
-        let g:python_host_prog='C:/Users/xi332412/AppData/Local/Programs/Python/Python36/python.exe'
+
+      if has('win32')
+        Plug 'shougo/vimproc.vim', {'do' : 'nmake -f make_msvc.mak'}             " Plug 'shougo/vimproc.vim', {'do' : 'make'}
+      endif
+      if has('unix')
+        Plug 'shougo/vimproc.vim', {'do' : 'make'}                              " Plug 'shougo/vimproc.vim', {'do' : 'make'}
+      endif
+        " let g:python3_host_prog='C:/Users/xi332412/AppData/Local/Programs/Python/Python36/python.exe'
+        " let g:python_host_prog='C:/Users/xi332412/AppData/Local/Programs/Python/Python36/python.exe'
     Plug 'jeetsukumaran/vim-buffergator'                                       " Vim plugin to list, select and switch between buffers.
       nmap <leader>b :BuffergatorToggle<cr>
       let g:buffergator_viewport_split_policy = 'B'
@@ -347,8 +354,8 @@
     Plug 'Lokaltog/vim-easymotion'                                             " Easy motion
       Plug 'haya14busa/incsearch-easymotion.vim'
       let g:EasyMotion_smartcase = 1
-      map <C-/> <Plug>(incsearch-easymotion-/)
-      omap <C-/> <Plug>(incsearch-easymotion-/)
+      map <C-f> <Plug>(incsearch-easymotion-/)
+      omap <C-f> <Plug>(incsearch-easymotion-/)
     Plug 'bkad/CamelCaseMotion'                                                " Camel case motion
       map w <Plug>CamelCaseMotion_w
       map b <Plug>CamelCaseMotion_b

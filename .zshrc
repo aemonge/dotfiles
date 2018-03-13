@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/aemonge/.oh-my-zsh
+export ZSH=/home/aemonge/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -29,7 +29,7 @@ ZSH_THEME="agnoster"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -90,11 +90,14 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
-alias vv='vim $(fzf)'
+# alias vv='vim $(fzf)'
+alias vim='nvim'
+alias open='xdg-open'
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
+bindkey '^l' autosuggest-accept
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/aemonge/.sdkman"
-[[ -s "/home/aemonge/.sdkman/bin/sdkman-init.sh" ]] && source "/home/aemonge/.sdkman/bin/sdkman-init.sh"
+# export SDKMAN_DIR="/home/aemonge/.sdkman"
+# [[ -s "/home/aemonge/.sdkman/bin/sdkman-init.sh" ]] && source "/home/aemonge/.sdkman/bin/sdkman-init.sh"
