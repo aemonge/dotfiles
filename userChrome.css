@@ -1,0 +1,33 @@
+#TabsToolbar {
+  bottom: 0;
+  height: 30px;
+  position: fixed;
+  width: 100%;
+}
+
+#content-deck {
+  margin-bottom: 30px; /* fix the height for the new below space of tabs */
+}
+
+.tabbrowser-tab {
+  width: calc(100% - 35px) !important;
+}
+
+#TabsToolbar .tabbrowser-tab .tab.line{
+  bottom: 0;
+  height: 2px;
+  margin-top: -2px;
+  position: absolute;
+  width: 100%;
+}
+
+#_small-clock-browser-action {
+  position: relative;
+  top: -8px;
+}
+
+#browser-bottombox {
+  margin-top: -30px;
+  padding-bottom: 30px;
+  z-index: 2;
+}
