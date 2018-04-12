@@ -51,12 +51,13 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(autoenv, bower, brew, copybuffer, copydir, copyfile, cp, dircycle,
-          dirhistory, dirpersist, django, gem, git-extras, git-flow-avh,
-          git-flow, git-hubflow, git-prompt, git-remote-branch, git, gitfast,
-          github, gitignore, grunt, gulp, history-substring-search, history,
-          macports, node, npm, nvm, osx, ruby, rvm, sudo, tmux-cssh, tmux, vi-mode,
-          zsh-autosuggestions)
+plugins=(
+  archlinux, autoenv, aws, boot2docker, coffee, dircycle, dirhistory, dirpersist, docker,
+  dotenv, git, git-extras, git-prompt, git-remote-branch, gitfast, github, gitignore,
+  history, history-substring-search, man, mvn, node, node, npm, npm, npx, nvm, nvm, ruby,
+  rvm, sudo, sudo, taskwarrior, tig, tmux, tmux, tmuxinator, vi-mode, vi-mode,
+  vim-interaction, zsh-navigation-tools, zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -94,6 +95,7 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 alias vim='nvim'
 alias open='xdg-open'
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
+unsetopt auto_pushd       # Dont' save to `pushd` stack on every `  cd`
 bindkey '^l' autosuggest-accept
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -101,3 +103,30 @@ bindkey '^l' autosuggest-accept
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 # export SDKMAN_DIR="/home/aemonge/.sdkman"
 # [[ -s "/home/aemonge/.sdkman/bin/sdkman-init.sh" ]] && source "/home/aemonge/.sdkman/bin/sdkman-init.sh"
+
+# BEGIN nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+# END nvm

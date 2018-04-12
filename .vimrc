@@ -118,7 +118,7 @@
       " Mac Osx Support
       " imap <C-v> <Esc>:set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
       " Linux support
-      imap <C-v> <C-o>"+p
+      imap <C-v> <C-o>"+P
       set clipboard+=unnamedplus
     vmap <C-p> "+p<cr>
     vmap <C-C> "+y
@@ -375,9 +375,11 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Plugins
     Plug 'sheerun/vim-polyglot'                                                " Language Support a TON
+      Plug 'vim-scripts/Txtfmt-The-Vim-Highlighter'                            " for Rich-text
       Plug 'polpo/vim-html-js-indent'                                          " This indent plugin restores the inline JavaScript/HTML indenting support which was removed from vim-javascript.
       " Plug 'bendavis78/vim-polymer'
       Plug 'moll/vim-node'
+      Plug 'kylef/apiblueprint.vim'                                            " API Blueprint
       " Plug 'webdesus/polymer-ide.vim', { 'do': 'npm install' }                 " Since Polymer Project is so new, there's not yet a support for it
         " Polymer files are always HTML, but heavy in JS
         " let g:NERDCustomDelimiters = {
@@ -385,16 +387,16 @@
         " \ }
     Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }                        " JavaScript Libraries support
       au FileType javascript nmap K :TernDoc<cr>
-      au FileType html nmap K :TernDoc<cr>
+      " au FileType html nmap K :TernDoc<cr>
       " autocmd FileType !(javascript|html) unmap K :TernDoc<cr>
       let g:tern_show_argument_hints = 'on_hold'
       let g:tern_show_signature_in_pum = 1
       " Set tern in HTML
-      setlocal omnifunc=tern#Complete
+      " setlocal omnifunc=tern#Complete
       " call tern#Enable()
-      runtime after/ftplugin/javascript_tern.vim
-      set ft=html.javascript_tern
-      set ft=html.javascript
+      " runtime after/ftplugin/javascript_tern.vim
+      " set ft=html.javascript_tern
+      " set ft=html.javascript
 
     " Plug 'w0rp/ale'                                                            " A version of Syntactic that works a-sync
       " let g:ale_fix_on_save = 1
@@ -416,9 +418,9 @@
       let g:syntastic_async_tmux_if_possible = 1
       let g:syntastic_async_tmux_new_window = 1
       let g:airline#extensions#syntastic#enabled = 1
-      let g:syntastic_html_checkers=['eslint']
+      " let g:syntastic_html_checkers=['eslint']
       let g:syntastic_javascript_checkers = ['eslint']
-      let g:syntastic_typescript_checkers = []
+      let g:syntastic_typescript_checkers = ['tslint']
       " let g:syntastic_typescript_checkers = ['tslint']
       " let g:syntastic_javascript_eslint_exec = 'eslint_d'
       " let g:syntastic_html_checkers=['polylint', 'eslint']
