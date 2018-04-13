@@ -302,7 +302,7 @@
     Plug 'tpope/vim-surround'                                                  " Surround
     Plug 'majutsushi/tagbar'                                                   " Tag bar
       nmap <c-t> :TagbarToggle<cr>
-      let g:tagbar_ctags_bin = '~/Programs/ctags/ctags.exe'
+      " let g:tagbar_ctags_bin = '~/Programs/ctags/ctags.exe'
     Plug 'editorconfig/editorconfig-vim'
       let g:EditorConfig_exclude_patterns = ['fugitive://.*']
     Plug 'mtth/scratch.vim'                                                    " A simple Scratch window for tooling
