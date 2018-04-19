@@ -438,12 +438,6 @@
       if has('unix')
         set statusline+=%{SyntasticStatuslineFlag()}
       endif
-
-    Plug 'millermedeiros/vim-esformatter', { 'do': 'npm install esformatter' } " ECMAScript code beautifier/formatter. `npm install -g esformatter`
-      nnoremap <silent> <leader>c :EsformatterVisual<CR>
-    Plug 'Chiel92/vim-autoformat'                                              " Try to format with eslint
-      let g:formatdef_eslint = '"eslint-formatter"'
-      let g:formatters_javascript = ['eslint']
     Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
@@ -501,6 +495,9 @@
       vmap <Leader>a :Tab<CR>
       nmap <Leader>t :Tabularize /
       vmap <Leader>t :Tabularize /
+    Plug 'chiel92/vim-autoformat', { 'do': 'npm install -g js-beautify eslint typescript-formatter' }       " Format all code uses js-beautify for JS
+     noremap <leader>f :Autoformat<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                        Search
