@@ -62,6 +62,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# OC logins
+source ~/.oclogins
+
 # User configuration
   source ~/.profile
   set -o vi
@@ -96,7 +99,8 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 alias vim='nvim'
 alias open='xdg-open'
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
-unsetopt auto_pushd       # Dont' save to `pushd` stack on every `  cd`
+# Dont' save to `pushd` stack on every `  cd`
+unsetopt auto_pushd
 bindkey '^l' autosuggest-accept
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
