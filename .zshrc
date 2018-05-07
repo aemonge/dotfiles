@@ -98,6 +98,7 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 # alias vv='vim $(fzf)'
 alias vim='nvim'
 alias open='xdg-open'
+alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
 # Dont' save to `pushd` stack on every `  cd`
 unsetopt auto_pushd
