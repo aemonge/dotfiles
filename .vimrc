@@ -338,6 +338,7 @@
     xnoremap p pgvy
 
   " Plugins
+    Plug 'chrisbra/sudoedit.vim'                                               " Enable sudo CRUD operations with none sudo vim instance
     Plug 'tpope/vim-repeat'                                                    " Repeat
     Plug 'kristijanhusak/vim-multiple-cursors'                                 " Multiple cursors
     Plug 'Raimondi/delimitMate'                                                " Closing of quotes
