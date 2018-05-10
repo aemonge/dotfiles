@@ -52,7 +52,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  copybuffer, copydir, copyfile, cp,
+  copybuffer, copydir, copyfile, cp, oc,
   archlinux, autoenv, aws, boot2docker, coffee, dircycle, dirhistory, dirpersist, docker,
   dotenv, git, git-extras, git-prompt, git-remote-branch, gitfast, github, gitignore,
   history, history-substring-search, man, mvn, node, node, npm, npm, npx, nvm, nvm, ruby,
