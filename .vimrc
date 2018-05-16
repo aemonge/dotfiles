@@ -282,19 +282,8 @@
       map <leader>n :NERDTreeFind<cr>
       let NERDTreeDirArrows=1
       let NERDTreeQuitOnOpen = 1
-    Plug 'tpope/vim-fugitive'                                                  " Git wrapper
-      nmap <leader>g :Gstatus<cr>
-      function! s:vimplug_load_fugitive()
-        if exists('b:git_dir')
-          call plug#load('vim-fugitive')
-          autocmd! vimplug_load_fugitive
-          call fugitive#detect(expand('%:p'))
-        endif
-      endfunction
-      augroup vimplug_load_fugitive
-        au!
-        au BufWinEnter * call s:vimplug_load_fugitive()
-      augroup END
+    " Plug 'tpope/vim-fugitive'                                                  " Git wrapper
+      " nmap <leader>g :Gstatus<cr>
     Plug 'airblade/vim-gitgutter'                                              " Git diff sign
       nmap <leader>tg :GitGutterToggle<cr>
       nmap [h <Plug>GitGutterPrevHunk
@@ -383,7 +372,7 @@
       " Plug 'kylef/apiblueprint.vim'                                            " API Blueprint
       Plug 'othree/javascript-libraries-syntax.vim'                              " The alternative for tern_for_vim. Syntax for JS libs
         let g:used_javascript_libs = 'underscore, angularjs, angularui, angularuirouter, react, jasmine, chai, d3'
-    " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }                        " JavaScript Libraries support
+    Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }                        " JavaScript Libraries support
       " au FileType javascript nmap K :TernDoc<cr>
       " au FileType html nmap K :TernDoc<cr>
       " autocmd FileType !(javascript|html) unmap K :TernDoc<cr>
@@ -397,12 +386,14 @@
       " set ft=html.javascript
     Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Quramy/tsuquyomi', { 'do': 'npm i -g typescript' }
-      Plug 'leafgarland/typescript-vim'                                            " provides syntax highlight.
-      Plug 'Quramy/vim-js-pretty-template'                                         " provides syntax highlight for contents in Template Strings.
-      Plug 'jason0x43/vim-js-indent'                                               " provides function of indent for both JavaScript and TypeScript.
-      Plug 'Quramy/vim-dtsm'                                                       " provides .d.ts management for dtsm users.
-      Plug 'mhartington/vim-typings'                                               " provides .d.ts management for typings users.
-    Plug 'w0rp/ale'                                                            " A version of Syntactic that works a-sync
+    Plug 'leafgarland/typescript-vim'                                            " provides syntax highlight.
+    Plug 'Quramy/vim-js-pretty-template'                                         " provides syntax highlight for contents in Template Strings.
+    Plug 'jason0x43/vim-js-indent'                                               " provides function of indent for both JavaScript and TypeScript.
+    Plug 'Quramy/vim-dtsm'                                                       " provides .d.ts management for dtsm users.
+
+    Plug 'mhartington/vim-typings'                                               " provides .d.ts management for typings users.
+    Plug 'w0rp/ale', { 'do': 'npm i -g ts-server' }                              " A version of Syntactic that works a-sync
+      map <leader>e :ALEToggle<cr>
       let g:ale_fix_on_save = 1
       let g:ale_completion_enabled = 1
       let g:ale_sign_column_always = 1
@@ -411,37 +402,6 @@
       let g:airline#extensions#ale#enabled = 1
       highlight clear ALEErrorSign
       highlight clear ALEWarningSign
-      let g:ale_fixers = {
-      \   'javascript': ['eslint'],
-      \   'typescript': ['tsuquyomi'],
-      \   'html': ['eslint'],
-      \}
-    " Plug 'scrooloose/syntastic'                                                " Syntax Checker with Async (vim-syntastic/syntastic)
-      " map <leader>e :SyntasticToggleMode<cr>
-      " let g:syntastic_enable_async = 1
-      " let g:syntastic_async_tmux_if_possible = 1
-      " let g:syntastic_async_tmux_new_window = 1
-      " let g:airline#extensions#syntastic#enabled = 1
-      " " let g:syntastic_html_checkers=['eslint']
-      " let g:syntastic_javascript_checkers = ['eslint']
-      " let g:syntastic_typescript_checkers = ['tsuquyomi']
-      " " let g:syntastic_typescript_checkers = ['tslint']
-      " " let g:syntastic_javascript_eslint_exec = 'eslint_d'
-      " " let g:syntastic_html_checkers=['polylint', 'eslint']
-      " " let g:syntastic_javascript_checkers = ['polylint', 'eslint']
-      " let g:syntastic_mode="pasive"
-      " let g:syntastic_check_on_open=0
-      " let g:syntastic_aggregate_errors=1
-      " let g:syntastic_auto_jump=0
-      " let g:syntastic_auto_loc_list=1
-      " let g:syntastic_error_symbol = '✗'
-      " let g:syntastic_style_error_symbol = '✠'
-      " let g:syntastic_warning_symbol = '∆'
-      " let g:syntastic_style_warning_symbol = '≈'
-      " let g:ycm_show_diagnostics_ui = 0                                        " Compabillity with YCM Disable Sytnastic on load
-      " if has('unix')
-        " set statusline+=%{SyntasticStatuslineFlag()}
-      " endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                        Misc Plugins
