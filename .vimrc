@@ -385,7 +385,6 @@
       " set ft=html.javascript_tern
       " set ft=html.javascript
     Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'Quramy/tsuquyomi', { 'do': 'npm i -g typescript' }
     Plug 'leafgarland/typescript-vim'                                            " provides syntax highlight.
     Plug 'Quramy/vim-js-pretty-template'                                         " provides syntax highlight for contents in Template Strings.
     Plug 'jason0x43/vim-js-indent'                                               " provides function of indent for both JavaScript and TypeScript.
@@ -393,7 +392,8 @@
 
     Plug 'mhartington/vim-typings'                                               " provides .d.ts management for typings users.
     Plug 'w0rp/ale', { 'do': 'npm i -g ts-server' }                              " A version of Syntactic that works a-sync
-      map <leader>e :ALEToggle<cr>
+      map <leader>e :ALEDetail<cr>
+      map <leader>te :ALEToggle<cr>
       let g:ale_fix_on_save = 1
       let g:ale_completion_enabled = 1
       let g:ale_sign_column_always = 1
