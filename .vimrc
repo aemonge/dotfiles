@@ -392,16 +392,15 @@
 
     Plug 'mhartington/vim-typings'                                               " provides .d.ts management for typings users.
     Plug 'w0rp/ale', { 'do': 'npm i -g ts-server' }                              " A version of Syntactic that works a-sync
-      map <leader>e :ALEDetail<cr>
       map <leader>te :ALEToggle<cr>
+      let g:ale_lint_on_text_changed = 'never'
       let g:ale_fix_on_save = 1
-      let g:ale_completion_enabled = 1
-      let g:ale_sign_column_always = 1
+      Plug 'Valloric/ListToggle'
+        map <script> <silent> <leader>e :call ToggleLocationList()<CR>
+        let g:lt_location_list_toggle_map = '<leader>e'
       let g:ale_sign_error = '✗'
       let g:ale_sign_warning = '∆'
       let g:airline#extensions#ale#enabled = 1
-      highlight clear ALEErrorSign
-      highlight clear ALEWarningSign
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                        Misc Plugins
