@@ -256,7 +256,7 @@
       " let g:airline#extensions#tabline#show_buffers = 1
       " let g:airline#extensions#tabline#buf_min_count = 1
       " let g:airline#extensions#branch#enabled = 1
-      let g:airline#extensions#tagbar#enabled = 1
+      " let g:airline#extensions#tagbar#enabled = 1
       Plug 'enricobacis/vim-airline-clock'
 
     Plug 'junegunn/limelight.vim'
@@ -268,7 +268,7 @@
 "                             IDE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Plugins
-    Plug 'mhinz/vim-startify'                                                  " The fancy start screen
+    " Plug 'mhinz/vim-startify'                                                  " The fancy start screen
     Plug 'ctrlpvim/ctrlp.vim'                                                  " Fuzzy file opener
       let g:ctrlp_map = '<c-p>'
       let g:ctrlp_cmd = 'CtrlP'
@@ -300,8 +300,8 @@
       nmap [h <Plug>GitGutterPrevHunk
       nmap ]h <Plug>GitGutterNextHunk
     Plug 'tpope/vim-surround'                                                  " Surround
-    Plug 'majutsushi/tagbar'                                                   " Tag bar
-      nmap <c-t> :TagbarToggle<cr>
+    " Plug 'majutsushi/tagbar'                                                   " Tag bar
+      " nmap <c-t> :TagbarToggle<cr>
       " let g:tagbar_ctags_bin = '~/Programs/ctags/ctags.exe'
     Plug 'editorconfig/editorconfig-vim'
       let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -325,7 +325,7 @@
       nmap <leader>b :BuffergatorToggle<cr>
       let g:buffergator_viewport_split_policy = 'B'
       let g:buffergator_hsplit_size = 5
-    Plug 'jaxbot/browserlink.vim'                                              " Connect vim with broswer console and edition
+    " Plug 'jaxbot/browserlink.vim'                                              " Connect vim with broswer console and edition
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                    Expected Enhancements
@@ -340,7 +340,7 @@
   " Plugins
     Plug 'chrisbra/sudoedit.vim'                                               " Enable sudo CRUD operations with none sudo vim instance
     Plug 'tpope/vim-repeat'                                                    " Repeat
-    Plug 'kristijanhusak/vim-multiple-cursors'                                 " Multiple cursors
+    " Plug 'kristijanhusak/vim-multiple-cursors'                                 " Multiple cursors
     Plug 'Raimondi/delimitMate'                                                " Closing of quotes
     Plug 'tmhedberg/matchit'                                                   " Match it
     Plug 'sickill/vim-pasta'                                                   " Paste Aligned to context
@@ -380,74 +380,76 @@
       Plug 'polpo/vim-html-js-indent'                                          " This indent plugin restores the inline JavaScript/HTML indenting support which was removed from vim-javascript.
       " Plug 'bendavis78/vim-polymer'
       Plug 'moll/vim-node'
-      Plug 'kylef/apiblueprint.vim'                                            " API Blueprint
-      " Plug 'webdesus/polymer-ide.vim', { 'do': 'npm install' }                 " Since Polymer Project is so new, there's not yet a support for it
-        " Polymer files are always HTML, but heavy in JS
-        " let g:NERDCustomDelimiters = {
-            " \ 'html': { 'left': '//' }
-        " \ }
-    Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }                        " JavaScript Libraries support
-      au FileType javascript nmap K :TernDoc<cr>
+      " Plug 'kylef/apiblueprint.vim'                                            " API Blueprint
+      Plug 'othree/javascript-libraries-syntax.vim'                              " The alternative for tern_for_vim. Syntax for JS libs
+        let g:used_javascript_libs = 'underscore, angularjs, angularui, angularuirouter, react, jasmine, chai, d3'
+    " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }                        " JavaScript Libraries support
+      " au FileType javascript nmap K :TernDoc<cr>
       " au FileType html nmap K :TernDoc<cr>
       " autocmd FileType !(javascript|html) unmap K :TernDoc<cr>
-      let g:tern_show_argument_hints = 'on_hold'
-      let g:tern_show_signature_in_pum = 1
+      " let g:tern_show_argument_hints = 'on_hold'
+      " let g:tern_show_signature_in_pum = 1
       " Set tern in HTML
       " setlocal omnifunc=tern#Complete
       " call tern#Enable()
       " runtime after/ftplugin/javascript_tern.vim
       " set ft=html.javascript_tern
       " set ft=html.javascript
-
-    " Plug 'w0rp/ale'                                                            " A version of Syntactic that works a-sync
-      " let g:ale_fix_on_save = 1
-      " let g:ale_completion_enabled = 1
-      " let g:ale_sign_column_always = 1
-      " let g:ale_sign_error = '✗'
-      " let g:ale_sign_warning = '∆'
-      " let g:airline#extensions#ale#enabled = 1
-      " " highlight clear ALEErrorSign
-      " " highlight clear ALEWarningSign
-      " let g:ale_fixers = {
-      " \   'javascript': ['eslint'],
-      " \   'html': ['eslint'],
-      " \}
-
-    Plug 'scrooloose/syntastic'                                                " Syntax Checker with Async (vim-syntastic/syntastic)
-      map <leader>e :SyntasticToggleMode<cr>
-      let g:syntastic_enable_async = 1
-      let g:syntastic_async_tmux_if_possible = 1
-      let g:syntastic_async_tmux_new_window = 1
-      let g:airline#extensions#syntastic#enabled = 1
-      " let g:syntastic_html_checkers=['eslint']
-      let g:syntastic_javascript_checkers = ['eslint']
-      let g:syntastic_typescript_checkers = ['tslint']
-      " let g:syntastic_typescript_checkers = ['tslint']
-      " let g:syntastic_javascript_eslint_exec = 'eslint_d'
-      " let g:syntastic_html_checkers=['polylint', 'eslint']
-      " let g:syntastic_javascript_checkers = ['polylint', 'eslint']
-      let g:syntastic_mode="pasive"
-      let g:syntastic_check_on_open=0
-      let g:syntastic_aggregate_errors=1
-      let g:syntastic_auto_jump=0
-      let g:syntastic_auto_loc_list=1
-      let g:syntastic_error_symbol = '✗'
-      let g:syntastic_style_error_symbol = '✠'
-      let g:syntastic_warning_symbol = '∆'
-      let g:syntastic_style_warning_symbol = '≈'
-      let g:ycm_show_diagnostics_ui = 0                                        " Compabillity with YCM Disable Sytnastic on load
-      if has('unix')
-        set statusline+=%{SyntasticStatuslineFlag()}
-      endif
     Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Quramy/tsuquyomi', { 'do': 'npm i -g typescript' }
+      Plug 'leafgarland/typescript-vim'                                            " provides syntax highlight.
+      Plug 'Quramy/vim-js-pretty-template'                                         " provides syntax highlight for contents in Template Strings.
+      Plug 'jason0x43/vim-js-indent'                                               " provides function of indent for both JavaScript and TypeScript.
+      Plug 'Quramy/vim-dtsm'                                                       " provides .d.ts management for dtsm users.
+      Plug 'mhartington/vim-typings'                                               " provides .d.ts management for typings users.
+    Plug 'w0rp/ale'                                                            " A version of Syntactic that works a-sync
+      let g:ale_fix_on_save = 1
+      let g:ale_completion_enabled = 1
+      let g:ale_sign_column_always = 1
+      let g:ale_sign_error = '✗'
+      let g:ale_sign_warning = '∆'
+      let g:airline#extensions#ale#enabled = 1
+      highlight clear ALEErrorSign
+      highlight clear ALEWarningSign
+      let g:ale_fixers = {
+      \   'javascript': ['eslint'],
+      \   'typescript': ['tsuquyomi'],
+      \   'html': ['eslint'],
+      \}
+    " Plug 'scrooloose/syntastic'                                                " Syntax Checker with Async (vim-syntastic/syntastic)
+      " map <leader>e :SyntasticToggleMode<cr>
+      " let g:syntastic_enable_async = 1
+      " let g:syntastic_async_tmux_if_possible = 1
+      " let g:syntastic_async_tmux_new_window = 1
+      " let g:airline#extensions#syntastic#enabled = 1
+      " " let g:syntastic_html_checkers=['eslint']
+      " let g:syntastic_javascript_checkers = ['eslint']
+      " let g:syntastic_typescript_checkers = ['tsuquyomi']
+      " " let g:syntastic_typescript_checkers = ['tslint']
+      " " let g:syntastic_javascript_eslint_exec = 'eslint_d'
+      " " let g:syntastic_html_checkers=['polylint', 'eslint']
+      " " let g:syntastic_javascript_checkers = ['polylint', 'eslint']
+      " let g:syntastic_mode="pasive"
+      " let g:syntastic_check_on_open=0
+      " let g:syntastic_aggregate_errors=1
+      " let g:syntastic_auto_jump=0
+      " let g:syntastic_auto_loc_list=1
+      " let g:syntastic_error_symbol = '✗'
+      " let g:syntastic_style_error_symbol = '✠'
+      " let g:syntastic_warning_symbol = '∆'
+      " let g:syntastic_style_warning_symbol = '≈'
+      " let g:ycm_show_diagnostics_ui = 0                                        " Compabillity with YCM Disable Sytnastic on load
+      " if has('unix')
+        " set statusline+=%{SyntasticStatuslineFlag()}
+      " endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                        Misc Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Social Plugins
-    Plug 'vim-scripts/TwitVim'
+    " Plug 'vim-scripts/TwitVim'
   " Text Plugins
-    Plug 'vim-scripts/loremipsum'
+    " Plug 'vim-scripts/loremipsum'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                   Tab, Splits & Navigation
@@ -497,7 +499,7 @@
       nmap <Leader>t :Tabularize /
       vmap <Leader>t :Tabularize /
     Plug 'chiel92/vim-autoformat', { 'do': 'npm install -g js-beautify eslint typescript-formatter' }       " Format all code uses js-beautify for JS
-     noremap <leader>f :Autoformat<CR>
+     noremap <leader>= :Autoformat<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
@@ -585,26 +587,26 @@
 "                    Finizalization
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     Plug 'zef/vim-cycle'
-      au  GUIEnter call AddCycleGroup(['set', 'get'])
-      au  GUIEnter call AddCycleGroup(['form', 'to'])
-      au  GUIEnter call AddCycleGroup(['push', 'pop'])
-      au  GUIEnter call AddCycleGroup(['mas', 'menos'])
-      au  GUIEnter call AddCycleGroup(['prev', 'next'])
-      au  GUIEnter call AddCycleGroup(['start', 'end'])
-      au  GUIEnter call AddCycleGroup(['light', 'dark'])
-      au  GUIEnter call AddCycleGroup(['open', 'close'])
-      au  GUIEnter call AddCycleGroup(['read', 'write'])
-      au  GUIEnter call AddCycleGroup(['truthy', 'falsy'])
-      au  GUIEnter call AddCycleGroup(['filter', 'reject'])
-      au  GUIEnter call AddCycleGroup(['internal', 'external'])
-      au  GUIEnter call AddCycleGroup(['short', 'normal', 'long'])
-      au  GUIEnter call AddCycleGroup(['subscribe', 'unsubscribe'])
-      au  GUIEnter call AddCycleGroup(['header', 'body', 'footer'])
-      au  GUIEnter call AddCycleGroup(['protected', 'private', 'public'])
-      au  GUIEnter call AddCycleGroup(['red', 'blue', 'green', 'yellow'])
-      au  GUIEnter call AddCycleGroup(['tiny', 'small', 'medium', 'big', 'huge'])
-      au  GUIEnter call AddCycleGroup(['pico', 'nano', 'micro', 'mili', 'kilo', 'mega', 'giga', 'tera', 'peta'])
-      au  GUIEnter call AddCycleGroup(['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday', 'saturday'])
+      au VimEnter * call AddCycleGroup(['set', 'get'])
+      au VimEnter * call AddCycleGroup(['form', 'to'])
+      au VimEnter * call AddCycleGroup(['push', 'pop'])
+      au VimEnter * call AddCycleGroup(['mas', 'menos'])
+      au VimEnter * call AddCycleGroup(['prev', 'next'])
+      au VimEnter * call AddCycleGroup(['start', 'end'])
+      au VimEnter * call AddCycleGroup(['light', 'dark'])
+      au VimEnter * call AddCycleGroup(['open', 'close'])
+      au VimEnter * call AddCycleGroup(['read', 'write'])
+      au VimEnter * call AddCycleGroup(['truthy', 'falsy'])
+      au VimEnter * call AddCycleGroup(['filter', 'reject'])
+      au VimEnter * call AddCycleGroup(['internal', 'external'])
+      au VimEnter * call AddCycleGroup(['short', 'normal', 'long'])
+      au VimEnter * call AddCycleGroup(['subscribe', 'unsubscribe'])
+      au VimEnter * call AddCycleGroup(['header', 'body', 'footer'])
+      au VimEnter * call AddCycleGroup(['protected', 'private', 'public'])
+      au VimEnter * call AddCycleGroup(['red', 'blue', 'green', 'yellow'])
+      au VimEnter * call AddCycleGroup(['tiny', 'small', 'medium', 'big', 'huge'])
+      au VimEnter * call AddCycleGroup(['pico', 'nano', 'micro', 'mili', 'kilo', 'mega', 'giga', 'tera', 'peta'])
+      au VimEnter * call AddCycleGroup(['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday', 'saturday'])
 
   " Theme Should be at last I don't know why
       call plug#end()
