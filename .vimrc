@@ -1,4 +1,4 @@
-" " ==> Reminders
+  " " ==> Reminders
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " * Standard Vim protocol for quickfixing is to show you the output of the command then jump to the first result automatically. You can cycle through the results with :cn[ext] and :cp[rev].
 
@@ -237,11 +237,15 @@
 
     Plug 'vim-airline/vim-airline'
       Plug 'vim-airline/vim-airline-themes'
-      " let g:hybrid_use_Xresources = 1
-      let g:airline_theme = 'solarized'
+      Plug 'enricobacis/vim-airline-clock'
+      let g:airline_theme = 'hybridline'
       let g:airline_solarized_bg='dark'
-      let g:airline_extensions = ['tabline', 'fugitiveline', 'clock']
+      let g:airline_detect_spell=0
+      let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+      let g:airline_extensions = ['tabline', 'fugitiveline', 'clock', 'ale']
+      " Fugitive
       let g:airline#extensions#fugitiveline#enabled = 1
+      " Tab-line
       let g:airline#extensions#tabline#show_tab_nr = 0
       let g:airline#extensions#tabline#tabs_label = ''
       let g:airline#extensions#tabline#buffers_label = ''
@@ -251,13 +255,11 @@
       let g:airline#extensions#tabline#enabled = 1
       let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
       let g:airline#extensions#tabline#show_splits = 0
-      let g:airline_detect_spell=0
-      let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-      " let g:airline#extensions#tabline#show_buffers = 1
-      " let g:airline#extensions#tabline#buf_min_count = 1
-      " let g:airline#extensions#branch#enabled = 1
-      " let g:airline#extensions#tagbar#enabled = 1
-      Plug 'enricobacis/vim-airline-clock'
+      " ALE
+      let g:airline#extensions#ale#enabled = 1
+      let airline#extensions#ale#show_line_numbers = 1
+      let airline#extensions#ale#error_symbol = '✗'
+      let airline#extensions#ale#warning_symbol = '∆'
 
     Plug 'junegunn/limelight.vim'
       map <leader>l :Limelight!!<cr>
@@ -397,10 +399,10 @@
       let g:ale_fix_on_save = 1
       Plug 'Valloric/ListToggle'
         map <script> <silent> <leader>e :call ToggleLocationList()<CR>
+        map <leader>ee :ALEDetail<cr><C-W>w
         let g:lt_location_list_toggle_map = '<leader>e'
       let g:ale_sign_error = '✗'
       let g:ale_sign_warning = '∆'
-      let g:airline#extensions#ale#enabled = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                        Misc Plugins
