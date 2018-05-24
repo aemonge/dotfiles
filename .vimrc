@@ -284,7 +284,7 @@
       map <leader>n :NERDTreeFind<cr>
       let NERDTreeDirArrows=1
       let NERDTreeQuitOnOpen = 1
-    " Plug 'tpope/vim-fugitive'                                                  " Git wrapper
+   " Plug 'tpope/vim-fugitive'                                                  " Git wrapper
       " nmap <leader>g :Gstatus<cr>
     Plug 'airblade/vim-gitgutter'                                              " Git diff sign
       nmap <leader>tg :GitGutterToggle<cr>
