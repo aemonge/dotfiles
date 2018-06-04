@@ -275,7 +275,7 @@
       let g:ctrlp_map = '<c-p>'
       let g:ctrlp_cmd = 'CtrlP'
       let g:ctrlp_working_path_mode = 'ra'
-    Plug 'scrooloose/nerdcommenter'                                            " NERD commenter
+    Plug 'aemonge/nerdcommenter'                                            " NERD commenter
       let NERDSpaceDelims=1
       let NERDRemoveExtraSpaces=1
       map <leader>/ <plug>NERDCommenterToggle
@@ -391,7 +391,7 @@
     Plug 'Quramy/vim-js-pretty-template'                                         " provides syntax highlight for contents in Template Strings.
     Plug 'jason0x43/vim-js-indent'                                               " provides function of indent for both JavaScript and TypeScript.
     Plug 'Quramy/vim-dtsm'                                                       " provides .d.ts management for dtsm users.
-
+    Plug 'Quramy/tsuquyomi'                                                      " Make your Vim a TypeScript IDE
     Plug 'mhartington/vim-typings'                                               " provides .d.ts management for typings users.
     Plug 'w0rp/ale', { 'do': 'npm i -g ts-server' }                              " A version of Syntactic that works a-sync
       map <leader>te :ALEToggle<cr>
