@@ -12,9 +12,9 @@
 
   " Relaod VimRc when modified
     function! PlugAll()
-      :PlugClean
-      :PlugInstall
-      :PlugUpdate
+      :PlugClean<cr>
+      :PlugInstall<cr>
+      :PlugUpdate<cr>
     endfunction
     autocmd! VimLeavePre .vimrc :source ~/.vimrc | exec PlugAll()
 
@@ -284,8 +284,14 @@
       map <leader>n :NERDTreeFind<cr>
       let NERDTreeDirArrows=1
       let NERDTreeQuitOnOpen = 1
-   " Plug 'tpope/vim-fugitive'                                                  " Git wrapper
-      " nmap <leader>g :Gstatus<cr>
+    Plug 'tpope/vim-fugitive'                                                  " Git wrapper
+      nmap <leader>g :Gstatus<cr>
+      augroup nvim_term
+        au!
+        au TermOpen * startinsert
+        au TermClose * stopinsert
+      augroup END
+
     Plug 'airblade/vim-gitgutter'                                              " Git diff sign
       nmap <leader>tg :GitGutterToggle<cr>
       nmap [h <Plug>GitGutterPrevHunk

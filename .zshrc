@@ -95,7 +95,7 @@ source ~/.oclogins
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
-# alias vv='vim $(fzf)'
+alias zvi='vim $(fzf)'
 alias vim='nvim'
 alias open='xdg-open'
 alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
