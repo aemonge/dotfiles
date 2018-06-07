@@ -215,15 +215,17 @@
         exec SetTheme()
         hi clear SpellBad
         hi clear SpellCap
-        hi SpellBad gui=underline cterm=underline
-        hi SpellCap gui=underline cterm=underline
-        hi NonText guibg=none ctermbg=none
-        hi Normal guibg=none ctermbg=none
-        hi Folded guibg=none ctermbg=none
-        hi CursorLine guibg=none ctermbg=none
-        hi CursorLine gui=bold cterm=bold
-        hi CursorColumn guibg=none ctermbg=none
-        hi CursorColumn gui=bold cterm=bold
+        hi SpellBad     gui=underline cterm=underline
+        hi SpellCap     gui=underline cterm=underline
+        hi NonText      guibg=none    ctermbg=none
+        hi Normal       guibg=none    ctermbg=none
+        hi Folded       guibg=none    ctermbg=none
+        hi CursorLine   guibg=none    ctermbg=none
+        hi CursorLine   gui=bold      cterm=bold
+        hi CursorColumn guibg=none    ctermbg=none
+        hi CursorColumn gui=bold      cterm=bold
+        hi SignColumn   guibg=none    ctermbg=none
+        hi SignColumn   gui=bold      cterm=bold
       endfunction
 
     if !exists("g:hybrid_use_Xresources")
@@ -275,7 +277,7 @@
       let g:ctrlp_map = '<c-p>'
       let g:ctrlp_cmd = 'CtrlP'
       let g:ctrlp_working_path_mode = 'ra'
-    Plug 'aemonge/nerdcommenter'                                            " NERD commenter
+    Plug 'aemonge/nerdcommenter'                                               " NERD commenter
       let NERDSpaceDelims=1
       let NERDRemoveExtraSpaces=1
       map <leader>/ <plug>NERDCommenterToggle
@@ -306,18 +308,17 @@
       nmap <leader>st :Scratch<cr>
     Plug 'simnalamburt/vim-mundo'                                              " See the undo history graphically
       nnoremap <leader>u :MundoToggle<CR>
-    Plug 'shougo/vimshell.vim'                                                 " A powerful shell implementation by vim (for windows)
-      let g:vimshell_enable_start_insert = 0                                   " Don't start the SH in insert mode
-      nmap <leader>x :VimShellPop<CR>
-
+    Plug 'shougo/deol.nvim'                                                    " A powerful shell implementation by vim (for windows)
+      Plug 'Shougo/deoplete.nvim'
+      Plug 'zchee/deoplete-zsh'
+      tnoremap   <ESC>      <C-\><C-n>
+      nmap <leader>x :Deol -split<CR>
       if has('win32')
         Plug 'shougo/vimproc.vim', {'do' : 'nmake -f make_msvc.mak'}             " Plug 'shougo/vimproc.vim', {'do' : 'make'}
       endif
       if has('unix')
         Plug 'shougo/vimproc.vim', {'do' : 'make'}                              " Plug 'shougo/vimproc.vim', {'do' : 'make'}
       endif
-        " let g:python3_host_prog='C:/Users/xi332412/AppData/Local/Programs/Python/Python36/python.exe'
-        " let g:python_host_prog='C:/Users/xi332412/AppData/Local/Programs/Python/Python36/python.exe'
     Plug 'jeetsukumaran/vim-buffergator'                                       " Vim plugin to list, select and switch between buffers.
       nmap <leader>b :BuffergatorToggle<cr>
       let g:buffergator_viewport_split_policy = 'B'
