@@ -12,15 +12,15 @@ alias caltoday='cal | grep -C6 --color "$(date +%e)"'
 alias tmux='tmux -2'
 
 # TMUX
-if which tmux >/dev/null 2>&1; then
-  # if no session is started, start a new session
-  test -z ${TMUX} && tmux
+# if which tmux >/dev/null 2>&1; then
+  # # if no session is started, start a new session
+  # test -z ${TMUX} && tmux
 
-  # when quitting tmux, try to attach
-  while test -z ${TMUX}; do
-    tmux attach || break
-  done
-fi
+  # # when quitting tmux, try to attach
+  # while test -z ${TMUX}; do
+    # tmux attach || break
+  # done
+# fi
 
 # Install NVM
 # export NVM_DIR="~/.nvm"

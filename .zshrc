@@ -74,6 +74,10 @@ source ~/.oclogins
 # You may need to manually set your language environment
   export LANG=en_US.UTF-8
 
+# My own version of tmux
+alias vmux="nvr -s --remote-send ':Deol<cr>'"
+alias vim='nvr --remote-tab'
+
 # Preferred editor for local and remote sessions
   if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
@@ -95,8 +99,7 @@ source ~/.oclogins
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
-alias vim='nvim'
-alias zvi='nvim $(fzf)'
+alias zvi='vim $(fzf)'
 alias open='xdg-open'
 alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"

@@ -311,7 +311,9 @@
     Plug 'shougo/deol.nvim'                                                    " A powerful shell implementation by vim (for windows)
       Plug 'Shougo/deoplete.nvim'
       Plug 'zchee/deoplete-zsh'
-      tnoremap   <ESC>      <C-\><C-n>
+      tnoremap <ESC><ESC> <C-\><C-n>
+      au FileType deol set nonumber
+      au FileType deol set nospell
       nmap <leader>x :Deol -split<CR>
       if has('win32')
         Plug 'shougo/vimproc.vim', {'do' : 'nmake -f make_msvc.mak'}             " Plug 'shougo/vimproc.vim', {'do' : 'make'}
