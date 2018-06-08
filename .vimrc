@@ -299,9 +299,10 @@
       nmap [h <Plug>GitGutterPrevHunk
       nmap ]h <Plug>GitGutterNextHunk
     Plug 'tpope/vim-surround'                                                  " Surround
-    " Plug 'majutsushi/tagbar'                                                   " Tag bar
-      " nmap <c-t> :TagbarToggle<cr>
-      " let g:tagbar_ctags_bin = '~/Programs/ctags/ctags.exe'
+    Plug 'majutsushi/tagbar'                                                   " Tag bar
+      Plug 'xolox/vim-easytags'
+      Plug 'xolox/vim-misc'
+      nmap <c-t> :TagbarToggle<cr>
     Plug 'editorconfig/editorconfig-vim'
       let g:EditorConfig_exclude_patterns = ['fugitive://.*']
     Plug 'mtth/scratch.vim'                                                    " A simple Scratch window for tooling
@@ -312,8 +313,6 @@
       Plug 'Shougo/deoplete.nvim'
       Plug 'zchee/deoplete-zsh'
       tnoremap <ESC><ESC> <C-\><C-n>
-      au FileType deol set nonumber
-      au FileType deol set nospell
       nmap <leader>x :Deol -split<CR>
       if has('win32')
         Plug 'shougo/vimproc.vim', {'do' : 'nmake -f make_msvc.mak'}             " Plug 'shougo/vimproc.vim', {'do' : 'make'}
@@ -327,11 +326,12 @@
       let g:buffergator_hsplit_size = 5
     " Plug 'jaxbot/browserlink.vim'                                              " Connect vim with broswer console and edition
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                    Expected Enhancements
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Settings
-    set laststatus=1                                                           " Enables the status line at the bottom of Vim Only when SPLIT
+    set laststatus=2                                                           " Enables the status line at the bottom of Vim Only when SPLIT
 
   " Mappings
     " When pasting don't replace the current register.
@@ -529,6 +529,39 @@
       endif
     endif
   endfunction
+
+  function! NewTermTab()
+    exec 'tabnew'
+    exec 'Deol'
+  endfunction
+
+  function! DeolFocus()
+    au FileType deol set nonumber
+    au FileType deol set nospell
+    au FileType deol set laststatus=0
+    au FileType deol set noshowmode
+    au FileType deol set noruler
+    au FileType deol set noshowcmd
+    au FileType deol map <C-T> :exec NewTermTab()<cr>
+
+    au BufEnter * if &ft == 'deol' | set nonumber                     | endif
+    au BufEnter * if &ft == 'deol' | set nospell                      | endif
+    au BufEnter * if &ft == 'deol' | set laststatus=0                 | endif
+    au BufEnter * if &ft == 'deol' | set noshowmode                   | endif
+    au BufEnter * if &ft == 'deol' | set noruler                      | endif
+    au BufEnter * if &ft == 'deol' | set noshowcmd                    | endif
+    au BufEnter * if &ft == 'deol' | map <C-T> :exec NewTermTab()<cr> | endif
+
+    au BufLeave * if &ft == 'deol' | set number                   | endif
+    au BufLeave * if &ft == 'deol' | set spell                    | endif
+    au BufLeave * if &ft == 'deol' | set laststatus=2             | endif
+    au BufLeave * if &ft == 'deol' | set showmode                 | endif
+    au BufLeave * if &ft == 'deol' | set ruler                    | endif
+    au BufLeave * if &ft == 'deol' | set showcmd                  | endif
+    au BufLeave * if &ft == 'deol' | nmap <c-t> :TagbarToggle<cr> | endif
+  endfunction
+  exec DeolFocus()
+
 
   function! DebugVar()
     if &ft == 'javascript' || &ft == 'jasmine.javascript' || &ft == 'javascript.jsx' || &ft == 'html' || &ft == 'typescript'
