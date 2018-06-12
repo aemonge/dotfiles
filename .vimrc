@@ -5,6 +5,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                      Initialization (Vundle)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " set all&                                                                    " This will reset all options to their default setting
   set nocompatible                                                            " be iMproved, required
   filetype off                                                                " required
   " call plug#begin('$LOCALAPPDATA/nvim/plugged')                                       " required
@@ -179,7 +180,6 @@
     set t_Co=256                                                               " Set current terminal to 256 colors
     set title                                                                  " Set title
     set titlestring=%t%(\ %m%)%(\ (%{expand('%:p:h')})%)%(\ %a%)               " Don't show full paths, abbreviate them
-    set showtabline=2                                                          " Always show tab line
     set guitablabel=%m%N:%t[%{tabpagewinnr(v:lnum)}]                           " Don't know this line, sorry.
     set wildmenu                                                               " Show list instead of just completing
     set wildmode=list:longest,full                                             " Use powerful wildmenu
@@ -226,6 +226,8 @@
         hi CursorColumn gui=bold      cterm=bold
         hi SignColumn   guibg=none    ctermbg=none
         hi SignColumn   gui=bold      cterm=bold
+        " Airline Changes this option
+        set showtabline=1                                                          " Only show tabline when more than one tab. This is meant for the :Deol terminal, so when only having that tab hide text-ui to look more like a terminal
       endfunction
 
     if !exists("g:hybrid_use_Xresources")
@@ -352,11 +354,7 @@
 "                           Motions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Plugins
-    Plug 'Lokaltog/vim-easymotion'                                             " Easy motion
-      Plug 'haya14busa/incsearch-easymotion.vim'
-      let g:EasyMotion_smartcase = 1
-      map <C-f> <Plug>(incsearch-easymotion-/)
-      omap <C-f> <Plug>(incsearch-easymotion-/)
+
     Plug 'bkad/CamelCaseMotion'                                                " Camel case motion
       map w <Plug>CamelCaseMotion_w
       map b <Plug>CamelCaseMotion_b
@@ -500,15 +498,23 @@
       " endif
     Plug 'haya14busa/incsearch.vim'                                            " Improved incremental searching for Vim
       Plug 'haya14busa/incsearch-fuzzy.vim'
-      map <M-/> <Plug>(incsearch-fuzzy-/)
-      " set hlsearch
-      " let g:incsearch#auto_nohlsearch = 1
-      " map n  <Plug>(incsearch-nohl-n)
-      " map N  <Plug>(incsearch-nohl-N)
-      " map *  <Plug>(incsearch-nohl-*)
-      " map #  <Plug>(incsearch-nohl-#)
-      " map g* <Plug>(incsearch-nohl-g*)
-      " map g# <Plug>(incsearch-nohl-g#)
+      Plug 'haya14busa/incsearch-easymotion.vim'
+      Plug 'Lokaltog/vim-easymotion'                                             " Easy motion
+      set hlsearch
+      let g:incsearch#auto_nohlsearch = 1
+      let g:EasyMotion_smartcase = 1
+      function! s:config_easyfuzzymotion(...) abort
+        return extend(copy({
+        \   'converters': [incsearch#config#fuzzy#converter()],
+        \   'modules': [incsearch#config#easymotion#module()],
+        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+        \   'is_expr': 0,
+        \   'is_stay': 1,
+        \   'smart_case': 1
+        \ }), get(a:, 1, {}))
+      endfunction
+      noremap <silent><expr> / incsearch#go(<SID>config_easyfuzzymotion())
+      noremap <silent><expr> ? incsearch#go(<SID>config_easyfuzzymotion({'command': '?'}))
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                     Local Plugins
@@ -537,6 +543,7 @@
 
   function! DeolFocus()
     au FileType deol set nonumber
+    au FileType deol set norelativenumber
     au FileType deol set nospell
     au FileType deol set laststatus=0
     au FileType deol set noshowmode
@@ -545,14 +552,17 @@
     au FileType deol map <C-T> :exec NewTermTab()<cr>
 
     au BufEnter * if &ft == 'deol' | set nonumber                     | endif
+    au BufEnter * if &ft == 'deol' | set norelativenumber             | endif
     au BufEnter * if &ft == 'deol' | set nospell                      | endif
     au BufEnter * if &ft == 'deol' | set laststatus=0                 | endif
     au BufEnter * if &ft == 'deol' | set noshowmode                   | endif
     au BufEnter * if &ft == 'deol' | set noruler                      | endif
     au BufEnter * if &ft == 'deol' | set noshowcmd                    | endif
     au BufEnter * if &ft == 'deol' | map <C-T> :exec NewTermTab()<cr> | endif
+    au BufEnter * if &ft == 'deol' | exe 'normal ai' | endif
 
     au BufLeave * if &ft == 'deol' | set number                   | endif
+    au BufLeave * if &ft == 'deol' | set relativenumber           | endif
     au BufLeave * if &ft == 'deol' | set spell                    | endif
     au BufLeave * if &ft == 'deol' | set laststatus=2             | endif
     au BufLeave * if &ft == 'deol' | set showmode                 | endif
