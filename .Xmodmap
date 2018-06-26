@@ -20,10 +20,11 @@ keycode 134 = Mode_switch
 ! add Mod3 = Alt_L
 
 ! !!!!! Navigation: Arrows && Regex !!!!!!!
-keysym i = i I percent Prior
-keysym u = u U asciicircum Home
-keysym p = p P dollar End
-keysym o = o O ampersand Next
+keysym y = y Y asciicircum Home
+keysym u = u U percent Prior
+keysym i = i I ampersand Next
+keysym o = o O dollar End
+
 keysym h = h H Left
 keysym l = l L Right
 keysym k = k K Up
