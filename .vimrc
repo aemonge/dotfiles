@@ -63,7 +63,7 @@
     set undolevels=10000                                                       " maximum number of changes that can be undone
     set undoreload=10000                                                       " maximum number lines to save for undo on a buffer reload
     set mousehide                                                              " hide while typing
-    set mouse=a                                                                " Mouse can click over buffers, but just that.
+    " set mouse=a                                                                " Mouse can click over buffers, but just that.
     set exrc                                                                   " Execute .vimrc file under current folders ;)
     set secure                                                                 " Just run .vimrc file that the owner is `whoami`
     if has('unix')
@@ -95,8 +95,15 @@
     xnoremap & :&&<CR>
 
 
-  " Strip all trailing whitespace in the current file
+  " Strip all trailing white-space in the current file
     au BufWritePre * %s/\s\+$//e
+
+    " Auto Alphabetize CSS
+    Plug 'csscomb/vim-csscomb', { 'do': 'npm install -g csscomb' }
+      " Map bc to run CSScomb. bc stands for beautify css
+      autocmd FileType css noremap <buffer> <leader>bc :CSScomb<CR>
+      " Automatically comb your CSS on save
+      autocmd BufWritePre,FileWritePre *.css,*.less,*.scss,*.sass silent! :CSScomb
 
 
   " Modify all the indents
@@ -275,10 +282,11 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Plugins
     " Plug 'mhinz/vim-startify'                                                  " The fancy start screen
-    Plug 'ctrlpvim/ctrlp.vim'                                                  " Fuzzy file opener
-      let g:ctrlp_map = '<c-p>'
-      let g:ctrlp_cmd = 'CtrlP'
-      let g:ctrlp_working_path_mode = 'ra'
+    " NOTE: Below is a really good and efficient plugin, which I never used :p
+    " Plug 'ctrlpvim/ctrlp.vim'                                                  " Fuzzy file opener
+      " let g:ctrlp_map = '<c-p>'
+      " let g:ctrlp_cmd = 'CtrlP'
+      " let g:ctrlp_working_path_mode = 'ra'
     Plug 'aemonge/nerdcommenter'                                               " NERD commenter
       let NERDSpaceDelims=1
       let NERDRemoveExtraSpaces=1
@@ -290,21 +298,21 @@
       let NERDTreeQuitOnOpen = 1
     Plug 'tpope/vim-fugitive'                                                  " Git wrapper
       nmap <leader>g :Gstatus<cr>
-      augroup nvim_term
-        au!
-        au TermOpen * startinsert
-        au TermClose * stopinsert
-      augroup END
-
+      " augroup nvim_term
+        " au!
+        " au TermOpen * startinsert
+        " au TermClose * stopinsert
+      " augroup END
     Plug 'airblade/vim-gitgutter'                                              " Git diff sign
       nmap <leader>tg :GitGutterToggle<cr>
       nmap [h <Plug>GitGutterPrevHunk
       nmap ]h <Plug>GitGutterNextHunk
-    Plug 'tpope/vim-surround'                                                  " Surround
-    Plug 'majutsushi/tagbar'                                                   " Tag bar
-      Plug 'xolox/vim-easytags'
-      Plug 'xolox/vim-misc'
-      nmap <c-t> :TagbarToggle<cr>
+    " NOTE: Below is are TWO really good and efficient plugin, which I never used :p
+    " Plug 'tpope/vim-surround'                                                  " Surround
+    " Plug 'majutsushi/tagbar'                                                   " Tag bar
+      " Plug 'xolox/vim-easytags'
+      " Plug 'xolox/vim-misc'
+      " nmap <c-t> :TagbarToggle<cr>
     Plug 'editorconfig/editorconfig-vim'
       let g:EditorConfig_exclude_patterns = ['fugitive://.*']
     Plug 'mtth/scratch.vim'                                                    " A simple Scratch window for tooling
@@ -316,16 +324,39 @@
       Plug 'zchee/deoplete-zsh'
       tnoremap <ESC><ESC> <C-\><C-n>
       nmap <leader>x :Deol -split<CR>
+      " To use `ALT+{h,j,k,l}` to navigate windows from any mode:
+        :tnoremap <A-h> <C-\><C-N><C-w>h
+        :tnoremap <A-j> <C-\><C-N><C-w>j
+        :tnoremap <A-k> <C-\><C-N><C-w>k
+        :tnoremap <A-l> <C-\><C-N><C-w>l
+        :tnoremap <A-t> <C-\><C-N>:tabnext<cr>
+        :tnoremap <A-T> <C-\><C-N>:tabprevious<cr>
+
+        :inoremap <A-h> <C-\><C-N><C-w>h
+        :inoremap <A-j> <C-\><C-N><C-w>j
+        :inoremap <A-k> <C-\><C-N><C-w>k
+        :inoremap <A-l> <C-\><C-N><C-w>l
+        :tnoremap <A-t> <C-\><C-N>:tabnext<cr>
+        :tnoremap <A-T> <C-\><C-N>:tabprevious<cr>
+
+        :nnoremap <A-h> <C-w>h
+        :nnoremap <A-j> <C-w>j
+        :nnoremap <A-k> <C-w>k
+        :nnoremap <A-l> <C-w>l
+        :tnoremap <A-t> :tabnext<cr>
+        :tnoremap <A-T> :tabprevious<cr>
+
       if has('win32')
         Plug 'shougo/vimproc.vim', {'do' : 'nmake -f make_msvc.mak'}             " Plug 'shougo/vimproc.vim', {'do' : 'make'}
       endif
       if has('unix')
         Plug 'shougo/vimproc.vim', {'do' : 'make'}                              " Plug 'shougo/vimproc.vim', {'do' : 'make'}
       endif
-    Plug 'jeetsukumaran/vim-buffergator'                                       " Vim plugin to list, select and switch between buffers.
-      nmap <leader>b :BuffergatorToggle<cr>
-      let g:buffergator_viewport_split_policy = 'B'
-      let g:buffergator_hsplit_size = 5
+    " NOTE: Below is a really good and efficient plugin, which I never used :p
+    " Plug 'jeetsukumaran/vim-buffergator'                                       " Vim plugin to list, select and switch between buffers.
+      " nmap <leader>b :BuffergatorToggle<cr>
+      " let g:buffergator_viewport_split_policy = 'B'
+      " let g:buffergator_hsplit_size = 5
     " Plug 'jaxbot/browserlink.vim'                                              " Connect vim with broswer console and edition
 
 
@@ -354,7 +385,6 @@
 "                           Motions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Plugins
-
     Plug 'bkad/CamelCaseMotion'                                                " Camel case motion
       map w <Plug>CamelCaseMotion_w
       map b <Plug>CamelCaseMotion_b
@@ -369,6 +399,11 @@
       omap ie <Plug>CamelCaseMotion_ie
       xmap ie <Plug>CamelCaseMotion_ie
 
+    Plug 'easymotion/vim-easymotion'                                          " EasyMotion provides a much simpler way to use some motions in vim.
+      let g:EasyMotion_smartcase = 1
+      nmap s <Plug>(easymotion-overwin-f2)
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                           Syntax
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -381,18 +416,8 @@
       " Plug 'kylef/apiblueprint.vim'                                            " API Blueprint
       Plug 'othree/javascript-libraries-syntax.vim'                              " The alternative for tern_for_vim. Syntax for JS libs
         let g:used_javascript_libs = 'underscore, angularjs, angularui, angularuirouter, react, jasmine, chai, d3'
-    Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }                        " JavaScript Libraries support
-      " au FileType javascript nmap K :TernDoc<cr>
-      " au FileType html nmap K :TernDoc<cr>
-      " autocmd FileType !(javascript|html) unmap K :TernDoc<cr>
-      " let g:tern_show_argument_hints = 'on_hold'
-      " let g:tern_show_signature_in_pum = 1
-      " Set tern in HTML
-      " setlocal omnifunc=tern#Complete
-      " call tern#Enable()
-      " runtime after/ftplugin/javascript_tern.vim
-      " set ft=html.javascript_tern
-      " set ft=html.javascript
+    Plug 'rhysd/devdocs.vim'                                                     " This is a Vim plugin for devdocs, which is an awesome multiple API documentation service. You can open and search devdocs from Vim.
+      nmap K <Plug>(devdocs-under-cursor)
     Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'leafgarland/typescript-vim'                                            " provides syntax highlight.
     Plug 'Quramy/vim-js-pretty-template'                                         " provides syntax highlight for contents in Template Strings.
@@ -496,25 +521,32 @@
       " if executable('ag')
         " let g:ackprg = 'ag --vimgrep'
       " endif
-    Plug 'haya14busa/incsearch.vim'                                            " Improved incremental searching for Vim
-      Plug 'haya14busa/incsearch-fuzzy.vim'
-      Plug 'haya14busa/incsearch-easymotion.vim'
-      Plug 'Lokaltog/vim-easymotion'                                             " Easy motion
-      set hlsearch
-      let g:incsearch#auto_nohlsearch = 1
-      let g:EasyMotion_smartcase = 1
-      function! s:config_easyfuzzymotion(...) abort
-        return extend(copy({
-        \   'converters': [incsearch#config#fuzzy#converter()],
-        \   'modules': [incsearch#config#easymotion#module()],
-        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-        \   'is_expr': 0,
-        \   'is_stay': 1,
-        \   'smart_case': 1
-        \ }), get(a:, 1, {}))
-      endfunction
-      noremap <silent><expr> / incsearch#go(<SID>config_easyfuzzymotion())
-      noremap <silent><expr> ? incsearch#go(<SID>config_easyfuzzymotion({'command': '?'}))
+    " NOTE: Commenting out the incsearch since it makes things slow and weird.....
+    " Plug 'haya14busa/incsearch.vim'                                            " Improved incremental searching for Vim
+      " Plug 'haya14busa/incsearch-fuzzy.vim'
+      " Plug 'haya14busa/incsearch-easymotion.vim'
+      " Plug 'Lokaltog/vim-easymotion'                                             " Easy motion
+      " set hlsearch
+      " let g:incsearch#auto_nohlsearch = 1
+      " let g:EasyMotion_smartcase = 1
+      " " map n  <Plug>(incsearch-nohl-n)\|zv<cr>
+      " " map N  <Plug>(incsearch-nohl-N)\|zv<cr>
+      " " map *  <Plug>(incsearch-nohl-*)\|zv<cr>
+      " " map #  <Plug>(incsearch-nohl-#)\|zv<cr>
+      " " map g* <Plug>(incsearch-nohl-g*)\|zv<cr>
+      " " map g# <Plug>(incsearch-nohl-g#)\|zv<cr>
+      " function! s:config_easyfuzzymotion(...) abort
+        " return extend(copy({
+        " \   'converters': [incsearch#config#fuzzy#converter()],
+        " \   'modules': [incsearch#config#easymotion#module()],
+        " \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+        " \   'is_expr': 0,
+        " \   'is_stay': 1,
+        " \   'smart_case': 1
+        " \ }), get(a:, 1, {}))
+      " endfunction
+      " noremap <silent><expr> / incsearch#go(<SID>config_easyfuzzymotion()) \|zv<cr>
+      " noremap <silent><expr> ? incsearch#go(<SID>config_easyfuzzymotion({'command': '?'})) \|zv<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                     Local Plugins
@@ -542,33 +574,33 @@
   endfunction
 
   function! DeolFocus()
-    au FileType deol set nonumber
-    au FileType deol set norelativenumber
-    au FileType deol set nospell
-    au FileType deol set laststatus=0
-    au FileType deol set noshowmode
-    au FileType deol set noruler
-    au FileType deol set noshowcmd
-    au FileType deol map <C-T> :exec NewTermTab()<cr>
+    au FileType,TermOpen deol set nonumber
+    au FileType,TermOpen deol set norelativenumber
+    au FileType,TermOpen deol set nospell
+    au FileType,TermOpen deol set laststatus=0
+    au FileType,TermOpen deol set noshowmode
+    au FileType,TermOpen deol set noruler
+    au FileType,TermOpen deol set noshowcmd
+    au FileType,TermOpen deol map <C-T> :exec NewTermTab()<cr>
 
-    au BufEnter * if &ft == 'deol' | set nonumber                     | endif
-    au BufEnter * if &ft == 'deol' | set norelativenumber             | endif
-    au BufEnter * if &ft == 'deol' | set nospell                      | endif
-    au BufEnter * if &ft == 'deol' | set laststatus=0                 | endif
-    au BufEnter * if &ft == 'deol' | set noshowmode                   | endif
-    au BufEnter * if &ft == 'deol' | set noruler                      | endif
-    au BufEnter * if &ft == 'deol' | set noshowcmd                    | endif
-    au BufEnter * if &ft == 'deol' | map <C-T> :exec NewTermTab()<cr> | endif
-    au BufEnter * if &ft == 'deol' | exe 'normal ai' | endif
+    au BufEnter,TermOpen * if &ft == 'deol' | set nonumber                     | endif
+    au BufEnter,TermOpen * if &ft == 'deol' | set norelativenumber             | endif
+    au BufEnter,TermOpen * if &ft == 'deol' | set nospell                      | endif
+    au BufEnter,TermOpen * if &ft == 'deol' | set laststatus=0                 | endif
+    au BufEnter,TermOpen * if &ft == 'deol' | set noshowmode                   | endif
+    au BufEnter,TermOpen * if &ft == 'deol' | set noruler                      | endif
+    au BufEnter,TermOpen * if &ft == 'deol' | set noshowcmd                    | endif
+    au BufEnter,TermOpen * if &ft == 'deol' | map <C-T> :exec NewTermTab()<cr> | endif
+    au BufEnter,TermOpen * if &ft == 'deol' | exe 'normal ai' | endif
 
-    au BufLeave * if &ft == 'deol' | set number                   | endif
-    au BufLeave * if &ft == 'deol' | set relativenumber           | endif
-    au BufLeave * if &ft == 'deol' | set spell                    | endif
-    au BufLeave * if &ft == 'deol' | set laststatus=2             | endif
-    au BufLeave * if &ft == 'deol' | set showmode                 | endif
-    au BufLeave * if &ft == 'deol' | set ruler                    | endif
-    au BufLeave * if &ft == 'deol' | set showcmd                  | endif
-    au BufLeave * if &ft == 'deol' | nmap <c-t> :TagbarToggle<cr> | endif
+    au BufLeave,TermClose * if &ft == 'deol' | set number                   | endif
+    au BufLeave,TermClose * if &ft == 'deol' | set relativenumber           | endif
+    au BufLeave,TermClose * if &ft == 'deol' | set spell                    | endif
+    au BufLeave,TermClose * if &ft == 'deol' | set laststatus=2             | endif
+    au BufLeave,TermClose * if &ft == 'deol' | set showmode                 | endif
+    au BufLeave,TermClose * if &ft == 'deol' | set ruler                    | endif
+    au BufLeave,TermClose * if &ft == 'deol' | set showcmd                  | endif
+    au BufLeave,TermClose * if &ft == 'deol' | nmap <c-t> :TagbarToggle<cr> | endif
   endfunction
   exec DeolFocus()
 
