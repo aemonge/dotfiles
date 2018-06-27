@@ -75,9 +75,10 @@ source ~/.oclogins
   export LANG=en_US.UTF-8
 
 # My own version of tmux
-alias vmux="nvr -s --remote-send ':Deol<cr>'"
-alias vim='nvr --remote-tab'
-alias fgg='nvr -s --remote-send "<Esc><Esc>:tabnext<cr>"'
+# alias vmux="nvr -s --remote-send ':call GoTerm()<cr>'"
+alias vim=nvim
+# alias vim='nvr --remote-tab'
+# alias fgg='nvr -s --remote-send "<Esc><Esc>:tabnext<cr>"'
 
 # Preferred editor for local and remote sessions
   if [[ -n $SSH_CONNECTION ]]; then

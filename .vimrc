@@ -307,8 +307,8 @@
       nmap <leader>tg :GitGutterToggle<cr>
       nmap [h <Plug>GitGutterPrevHunk
       nmap ]h <Plug>GitGutterNextHunk
+    Plug 'tpope/vim-surround'                                                  " Surround
     " NOTE: Below is are TWO really good and efficient plugin, which I never used :p
-    " Plug 'tpope/vim-surround'                                                  " Surround
     " Plug 'majutsushi/tagbar'                                                   " Tag bar
       " Plug 'xolox/vim-easytags'
       " Plug 'xolox/vim-misc'
@@ -319,32 +319,12 @@
       nmap <leader>st :Scratch<cr>
     Plug 'simnalamburt/vim-mundo'                                              " See the undo history graphically
       nnoremap <leader>u :MundoToggle<CR>
-    Plug 'shougo/deol.nvim'                                                    " A powerful shell implementation by vim (for windows)
-      Plug 'Shougo/deoplete.nvim'
-      Plug 'zchee/deoplete-zsh'
-      tnoremap <ESC><ESC> <C-\><C-n>
-      nmap <leader>x :Deol -split<CR>
-      " To use `ALT+{h,j,k,l}` to navigate windows from any mode:
-        :tnoremap <A-h> <C-\><C-N><C-w>h
-        :tnoremap <A-j> <C-\><C-N><C-w>j
-        :tnoremap <A-k> <C-\><C-N><C-w>k
-        :tnoremap <A-l> <C-\><C-N><C-w>l
-        :tnoremap <A-t> <C-\><C-N>:tabnext<cr>
-        :tnoremap <A-T> <C-\><C-N>:tabprevious<cr>
-
-        :inoremap <A-h> <C-\><C-N><C-w>h
-        :inoremap <A-j> <C-\><C-N><C-w>j
-        :inoremap <A-k> <C-\><C-N><C-w>k
-        :inoremap <A-l> <C-\><C-N><C-w>l
-        :tnoremap <A-t> <C-\><C-N>:tabnext<cr>
-        :tnoremap <A-T> <C-\><C-N>:tabprevious<cr>
-
-        :nnoremap <A-h> <C-w>h
-        :nnoremap <A-j> <C-w>j
-        :nnoremap <A-k> <C-w>k
-        :nnoremap <A-l> <C-w>l
-        :tnoremap <A-t> :tabnext<cr>
-        :tnoremap <A-T> :tabprevious<cr>
+    " Default internal terminal for neovim and vim-8 is pretty good. Avoid the Deol Plugin
+    " Plug 'shougo/deol.nvim'                                                    " A powerful shell implementation by vim (for windows)
+      " Plug 'Shougo/deoplete.nvim'
+      " Plug 'zchee/deoplete-zsh'
+      " tnoremap <ESC><ESC> <C-\><C-n>
+      " nmap <leader>x :Deol -split<CR>
 
       if has('win32')
         Plug 'shougo/vimproc.vim', {'do' : 'nmake -f make_msvc.mak'}             " Plug 'shougo/vimproc.vim', {'do' : 'make'}
@@ -401,7 +381,7 @@
 
     Plug 'easymotion/vim-easymotion'                                          " EasyMotion provides a much simpler way to use some motions in vim.
       let g:EasyMotion_smartcase = 1
-      nmap s <Plug>(easymotion-overwin-f2)
+      nmap s <Plug>(easymotion-overwin-f)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
@@ -570,39 +550,69 @@
 
   function! NewTermTab()
     exec 'tabnew'
-    exec 'Deol'
+    :call GoTerm()
   endfunction
 
-  function! DeolFocus()
-    au FileType,TermOpen deol set nonumber
-    au FileType,TermOpen deol set norelativenumber
-    au FileType,TermOpen deol set nospell
-    au FileType,TermOpen deol set laststatus=0
-    au FileType,TermOpen deol set noshowmode
-    au FileType,TermOpen deol set noruler
-    au FileType,TermOpen deol set noshowcmd
-    au FileType,TermOpen deol map <C-T> :exec NewTermTab()<cr>
-
-    au BufEnter,TermOpen * if &ft == 'deol' | set nonumber                     | endif
-    au BufEnter,TermOpen * if &ft == 'deol' | set norelativenumber             | endif
-    au BufEnter,TermOpen * if &ft == 'deol' | set nospell                      | endif
-    au BufEnter,TermOpen * if &ft == 'deol' | set laststatus=0                 | endif
-    au BufEnter,TermOpen * if &ft == 'deol' | set noshowmode                   | endif
-    au BufEnter,TermOpen * if &ft == 'deol' | set noruler                      | endif
-    au BufEnter,TermOpen * if &ft == 'deol' | set noshowcmd                    | endif
-    au BufEnter,TermOpen * if &ft == 'deol' | map <C-T> :exec NewTermTab()<cr> | endif
-    au BufEnter,TermOpen * if &ft == 'deol' | exe 'normal ai' | endif
-
-    au BufLeave,TermClose * if &ft == 'deol' | set number                   | endif
-    au BufLeave,TermClose * if &ft == 'deol' | set relativenumber           | endif
-    au BufLeave,TermClose * if &ft == 'deol' | set spell                    | endif
-    au BufLeave,TermClose * if &ft == 'deol' | set laststatus=2             | endif
-    au BufLeave,TermClose * if &ft == 'deol' | set showmode                 | endif
-    au BufLeave,TermClose * if &ft == 'deol' | set ruler                    | endif
-    au BufLeave,TermClose * if &ft == 'deol' | set showcmd                  | endif
-    au BufLeave,TermClose * if &ft == 'deol' | nmap <c-t> :TagbarToggle<cr> | endif
+  function! TerminalThemeIn()
+    set nonumber
+    set norelativenumber
+    set nospell
+    set laststatus=0
+    set noshowmode
+    set noruler
+    set noshowcmd
+    exe 'normal ai'
   endfunction
-  exec DeolFocus()
+
+  function! TerminalThemeOut()
+    set number
+    set relativenumber
+    set spell
+    set laststatus=2
+    set showmode
+    set ruler
+    set showcmd
+  endfunction
+
+  " To use `ALT+{h,j,k,l}` to navigate windows from any mode:
+  function! TerminalMapping()
+    tnoremap <ESC><ESC> <C-\><C-n>
+    tnoremap <A-h> <C-\><C-N><C-w>h
+    tnoremap <A-j> <C-\><C-N><C-w>j
+    tnoremap <A-k> <C-\><C-N><C-w>k
+    tnoremap <A-l> <C-\><C-N><C-w>l
+    " :tnoremap <A-t> <C-\><C-N>gt
+    " :tnoremap <A-T> <C-\><C-N>gT
+
+    inoremap <A-h> <C-\><C-N><C-w>h
+    inoremap <A-j> <C-\><C-N><C-w>j
+    inoremap <A-k> <C-\><C-N><C-w>k
+    inoremap <A-l> <C-\><C-N><C-w>l
+    " :tnoremap <A-t> <C-\><C-N>gt
+    " :tnoremap <A-T> <C-\><C-N>gT
+
+    nnoremap <A-h> <C-w>h
+    nnoremap <A-j> <C-w>j
+    nnoremap <A-k> <C-w>k
+    nnoremap <A-l> <C-w>l
+    " :tnoremap <A-t> gt
+    " :tnoremap <A-T> gT
+  endfunction
+
+  function! GoTerm()
+    :terminal
+    :call TerminalThemeIn()
+  endfunction
+
+  function! TerminalPlusPlus()
+    au BufEnter * if &buftype == 'terminal' | call TerminalThemeIn()  | endif
+    au BufLeave * if &buftype == 'terminal' | call TerminalThemeOut() | endif
+    nmap <leader>x :split<cr> :call GoTerm()<cr>
+    call TerminalMapping()
+    set shell=/usr/bin/zsh
+    map <C-T> :exec NewTermTab()<cr>
+  endfunction
+  exec TerminalPlusPlus()
 
 
   function! DebugVar()
