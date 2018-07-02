@@ -75,10 +75,12 @@ source ~/.oclogins
   export LANG=en_US.UTF-8
 
 # My own version of tmux
-# alias vmux="nvr -s --remote-send ':call GoTerm()<cr>'"
-alias vim=nvim
-# alias vim='nvr --remote-tab'
-# alias fgg='nvr -s --remote-send "<Esc><Esc>:tabnext<cr>"'
+alias vmux="nvr -s --remote-send ':call GoTerm()<cr>'"
+# alias vim=nvim
+alias vim='nvr --remote-tab'
+alias vvim='nvr -O'
+alias svim='nvr -o'
+alias fgg='nvr -s --remote-send "<Esc><Esc>:tabnext<cr>"'
 
 # Preferred editor for local and remote sessions
   if [[ -n $SSH_CONNECTION ]]; then
@@ -107,7 +109,7 @@ alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
 # Dont' save to `pushd` stack on every `  cd`
 unsetopt auto_pushd
-bindkey '^l' autosuggest-accept
+bindkey '^n' autosuggest-accept
 # Execute command without keeping it in history  (they have to start with space)
 export HISTCONTROL=ignorespace
 setopt histignorespace
@@ -145,4 +147,7 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 # END nvm
 
-#vmux
+# BEGIN oc (open shift) plugin
+fpath=(~/.oh-my-zsh/custom/plugins/oc $fpath)
+autoload -U compinit
+compinit -i

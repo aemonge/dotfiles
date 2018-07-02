@@ -29,7 +29,7 @@
     set shellpipe=|
     set shellredir=>
     set shellxquote=\"                                                        " Default value is (, but bash needs "
-    set shellslash                                                            " Paths will use / instead of \
+    set shellslash                                                            " Paths will use / instead of \ endif
   endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
@@ -51,7 +51,7 @@
     set t_vb=                                                                  " No sound on errors
     set cursorcolumn                                                           " Display vertical and horizontal current line
     set cursorline                                                             " Display vertical and horizontal current line
-    noremap <C-l> :syntax sync fromstart<cr>:redraw!<cr> :exec FixTheme()<cr>
+    noremap <C-L> :syntax sync fromstart<cr>:redraw!<cr> :exec FixTheme()<cr>
                                                                                " Since vim looses highlight colors sometimes
     set spl=en_us,es spell
       map <leader>ts :set spell!<cr>
@@ -439,10 +439,8 @@
     map <C-k> :wincmd W<cr>
 
   " quick tab move [ tab, and shift tab ]
-    " nmap <S-Tab> :call TabOrBuffer(0)<cr>
-    " nmap <Tab> :call TabOrBuffer(1)<cr>
-    nmap <S-Tab> gT<cr>
-    nmap <Tab> gt<cr>
+    nmap <C-l> gt<cr>
+    nmap <C-h> gT<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                   Internal Efficiency
@@ -531,23 +529,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                     Local Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  function! TabOrBuffer(next)
-    let next=a:next
-    if (tabpagenr('$') == 1)
-      if ( next == 1 )
-        exec "bn"
-      else
-        exec "bp"
-      endif
-    else
-      if ( next == 1 )
-        exec "tabn"
-      else
-        exec "tabp"
-      endif
-    endif
-  endfunction
-
   function! NewTermTab()
     exec 'tabnew'
     :call GoTerm()
@@ -577,26 +558,10 @@
   " To use `ALT+{h,j,k,l}` to navigate windows from any mode:
   function! TerminalMapping()
     tnoremap <ESC><ESC> <C-\><C-n>
-    tnoremap <A-h> <C-\><C-N><C-w>h
-    tnoremap <A-j> <C-\><C-N><C-w>j
-    tnoremap <A-k> <C-\><C-N><C-w>k
-    tnoremap <A-l> <C-\><C-N><C-w>l
-    " :tnoremap <A-t> <C-\><C-N>gt
-    " :tnoremap <A-T> <C-\><C-N>gT
-
-    inoremap <A-h> <C-\><C-N><C-w>h
-    inoremap <A-j> <C-\><C-N><C-w>j
-    inoremap <A-k> <C-\><C-N><C-w>k
-    inoremap <A-l> <C-\><C-N><C-w>l
-    " :tnoremap <A-t> <C-\><C-N>gt
-    " :tnoremap <A-T> <C-\><C-N>gT
-
-    nnoremap <A-h> <C-w>h
-    nnoremap <A-j> <C-w>j
-    nnoremap <A-k> <C-w>k
-    nnoremap <A-l> <C-w>l
-    " :tnoremap <A-t> gt
-    " :tnoremap <A-T> gT
+    tnoremap <C-j> <C-\><C-N><C-w>j
+    tnoremap <C-k> <C-\><C-N><C-w>k
+    tnoremap <C-l> <C-\><C-N>gt
+    tnoremap <C-h> <C-\><C-N>gT
   endfunction
 
   function! GoTerm()
