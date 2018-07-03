@@ -51,8 +51,8 @@
     set t_vb=                                                                  " No sound on errors
     set cursorcolumn                                                           " Display vertical and horizontal current line
     set cursorline                                                             " Display vertical and horizontal current line
-    noremap <C-L> :syntax sync fromstart<cr>:redraw!<cr> :exec FixTheme()<cr>
-                                                                               " Since vim looses highlight colors sometimes
+    noremap <C-l><C-l> :syntax sync fromstart<cr>:redraw!<cr> :exec FixTheme()<cr>
+                                                                               " Since vim looses highlight colors sometimes @NOTE: There's double L
     set spl=en_us,es spell
       map <leader>ts :set spell!<cr>
 
@@ -199,7 +199,7 @@
     set relativenumber                                                         " Show line numbers relative
     set number!                                                                " Show the current line number ;)
     set formatoptions+=rnlmM                                                   " Optimize format options
-    set nowrap                                                                 " Since horizontal scrolling is such a pain in the A on vi
+    set wrap                                                                   " We like when we don't have hidden info, lets see it all
     set textwidth=120                                                          " Change text width
     set list                                                                   " Show these tabs and spaces and so on
     set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮                           " Change listchars Preaty special characters
@@ -562,6 +562,8 @@
     tnoremap <C-k> <C-\><C-N><C-w>k
     tnoremap <C-l> <C-\><C-N>gt
     tnoremap <C-h> <C-\><C-N>gT
+    tnoremap <C-l><C-l> clear<cr>
+    tnoremap <C-l><C-l><C-l> reset<cr>
   endfunction
 
   function! GoTerm()
