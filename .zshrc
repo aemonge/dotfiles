@@ -151,3 +151,4 @@ load-nvmrc
 fpath=(~/.oh-my-zsh/custom/plugins/oc $fpath)
 autoload -U compinit
 compinit -i
+alias whats="python ~/usr/lib/whatsapp-web/chat.py"

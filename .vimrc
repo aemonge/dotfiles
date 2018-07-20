@@ -1,6 +1,9 @@
   " " ==> Reminders
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " * Standard Vim protocol for quickfixing is to show you the output of the command then jump to the first result automatically. You can cycle through the results with :cn[ext] and :cp[rev].
+  " BUFFERS !!!
+  " :b <number> 	Display the buffer with the given number.
+  " :b <partial> 	Display the first buffer matching the partial name (or press Tab for name completion).
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                      Initialization (Vundle)
@@ -37,7 +40,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Vim Settings
     let mapleader=','                                                          " Change the mapleader
-    set timeoutlen=500                                                         " Time to wait for a command
+    set timeoutlen=180                                                         " Time to wait for a command
     set noautochdir                                                            " Don't change Dir on file open
     set autoread                                                               " Set autoread when a file is changed outside
     set autowrite                                                              " Write on make/shell commands au FileChangedShell * echo Warning: File changed on disk
@@ -55,6 +58,7 @@
                                                                                " Since vim looses highlight colors sometimes @NOTE: There's double L
     set spl=en_us,es spell
       map <leader>ts :set spell!<cr>
+    set autochdir                                                              " When on, Vim will change the current working directory whenever you open a file
 
   " Backups
     set noswapfile                                                             " Don't use a .~ swap file
@@ -126,7 +130,7 @@
       " Mac Osx Support
       " imap <C-v> <Esc>:set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
       " Linux support
-      imap <C-v> <C-o>"+P
+      imap <C-v> <C-o>"+p
       set clipboard+=unnamedplus
     vmap <C-p> "+p<cr>
     vmap <C-C> "+y
@@ -275,7 +279,7 @@
     Plug 'junegunn/limelight.vim'
       map <leader>l :Limelight!!<cr>
       let g:limelight_conceal_ctermfg = '243'                                  " Comments color
-      let g:limelight_paragraph_span = 2
+      let g:limelight_paragraph_span = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                             IDE
@@ -283,10 +287,10 @@
   " Plugins
     " Plug 'mhinz/vim-startify'                                                  " The fancy start screen
     " NOTE: Below is a really good and efficient plugin, which I never used :p
-    " Plug 'ctrlpvim/ctrlp.vim'                                                  " Fuzzy file opener
-      " let g:ctrlp_map = '<c-p>'
-      " let g:ctrlp_cmd = 'CtrlP'
-      " let g:ctrlp_working_path_mode = 'ra'
+    Plug 'ctrlpvim/ctrlp.vim'                                                  " Fuzzy file opener
+      let g:ctrlp_map = '<c-p>'
+      let g:ctrlp_cmd = 'CtrlP'
+      let g:ctrlp_working_path_mode = 'ra'
     Plug 'aemonge/nerdcommenter'                                               " NERD commenter
       let NERDSpaceDelims=1
       let NERDRemoveExtraSpaces=1
@@ -381,7 +385,7 @@
 
     Plug 'easymotion/vim-easymotion'                                          " EasyMotion provides a much simpler way to use some motions in vim.
       let g:EasyMotion_smartcase = 1
-      nmap s <Plug>(easymotion-overwin-f)
+      nmap s <Plug>(easymotion-overwin-f2)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
@@ -408,13 +412,25 @@
     Plug 'w0rp/ale', { 'do': 'npm i -g ts-server' }                              " A version of Syntactic that works a-sync
       map <leader>te :ALEToggle<cr>
       let g:ale_lint_on_text_changed = 'never'
-      let g:ale_fix_on_save = 1
       Plug 'Valloric/ListToggle'
         map <script> <silent> <leader>e :call ToggleLocationList()<CR>
         map <leader>ee :ALEDetail<cr><C-W>w
         let g:lt_location_list_toggle_map = '<leader>e'
       let g:ale_sign_error = '✗'
       let g:ale_sign_warning = '∆'
+      let g:ale_fixers = {
+      \  'javascript': [ 'eslint' ],
+      \  'typescript': [],
+      \  'json': ['prettier'],
+      \  'css': ['prettier'],
+      \  'markdown': ['prettier'],
+      \}
+      let g:ale_linters = {
+      \  'typescript': [ 'tslint', 'tsserver', 'typecheck' ],
+      \  'javascript': [ 'eslint', 'typecheck' ]
+      \}
+      let g:ale_fix_on_save = 1
+      let g:ale_lint_on_save = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                        Misc Plugins
