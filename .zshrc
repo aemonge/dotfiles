@@ -108,7 +108,7 @@ alias open='xdg-open'
 alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
 # Dont' save to `pushd` stack on every `  cd`
-unsetopt auto_pushd
+# unsetopt auto_pushd
 bindkey '^n' autosuggest-accept
 # Execute command without keeping it in history  (they have to start with space)
 export HISTCONTROL=ignorespace

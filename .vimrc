@@ -22,6 +22,7 @@
     endfunction
     autocmd! VimLeavePre .vimrc :source ~/.vimrc | exec PlugAll()
 
+  set shell=/usr/bin/zsh
   " For windows set the correct shell environments
   if has('win32')
     let $CHERE_INVOKING=1                                                     " Makes bash open in the working directory
@@ -40,7 +41,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Vim Settings
     let mapleader=','                                                          " Change the mapleader
-    set timeoutlen=180                                                         " Time to wait for a command
+    set timeoutlen=150                                                         " Time to wait for a command
     set noautochdir                                                            " Don't change Dir on file open
     set autoread                                                               " Set autoread when a file is changed outside
     set autowrite                                                              " Write on make/shell commands au FileChangedShell * echo Warning: File changed on disk
@@ -364,6 +365,7 @@
     Plug 'vim-scripts/ReplaceWithRegister'
     Plug 'othree/eregex.vim'                                                   " Use the Perl/Ruby(/JavaScript) Regex engine.
       let g:eregex_default_enable = 0                                          "   Disable eregex, on search use it with :%S// for searchNReplace
+    Plug 'vim-scripts/BufOnly.vim'                                             " Delete all the buffers except the current/named buffer
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                           Motions
@@ -431,6 +433,7 @@
       \}
       let g:ale_fix_on_save = 1
       let g:ale_lint_on_save = 0
+      let g:ale_lint_on_enter = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                        Misc Plugins
@@ -465,7 +468,6 @@
     set ttyfast                                                               " Faster Terminal, redraws stuff quicker!
     set linespace=0                                                           " No extra spaces between text lines
     set lazyredraw                                                            " Don't update the display while executing macros
-    set timeoutlen=300
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""|"""""""""""""""""""""""""""""""""""""|
 "                   Indent and formatting
@@ -509,12 +511,12 @@
     nnoremap <Leader><Space> :set hlsearch!<CR>
 
   " Plugins
-    " Plug 'mileszs/ack.vim'                                                     " Search in the whole project (folder)
-      " nnoremap <Leader>f :Ack!<Space>
-      " vnoremap <Leader>f y:Ack! <C-r>=fnameescape(@")<CR><CR>
-      " if executable('ag')
-        " let g:ackprg = 'ag --vimgrep'
-      " endif
+    Plug 'mileszs/ack.vim'                                                     " Search in the whole project (folder)
+      nnoremap <Leader>f :Ack!<Space>
+      vnoremap <Leader>f y:Ack! <C-r>=fnameescape(@")<CR><CR>
+      if executable('ag')
+        let g:ackprg = 'ag --vimgrep'
+      endif
     " NOTE: Commenting out the incsearch since it makes things slow and weird.....
     " Plug 'haya14busa/incsearch.vim'                                            " Improved incremental searching for Vim
       " Plug 'haya14busa/incsearch-fuzzy.vim'
@@ -643,6 +645,7 @@
       au VimEnter * call AddCycleGroup(['protected', 'private', 'public'])
       au VimEnter * call AddCycleGroup(['red', 'blue', 'green', 'yellow'])
       au VimEnter * call AddCycleGroup(['tiny', 'small', 'medium', 'big', 'huge'])
+      au VimEnter * call AddCycleGroup(['debug', 'info', 'warn', 'error', 'silent'])
       au VimEnter * call AddCycleGroup(['pico', 'nano', 'micro', 'mili', 'kilo', 'mega', 'giga', 'tera', 'peta'])
       au VimEnter * call AddCycleGroup(['sunday', 'monday', 'tuesday', 'wensday', 'thursday', 'friday', 'saturday'])
 
