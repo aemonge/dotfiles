@@ -50,6 +50,16 @@
 "xfce4-terminal"
   alt+shift+p
 
+# Toggle transparency
+"transset-df -a -t"
+  alt+shift+l
+
+# inc/dec transparency
+  "transset-df -a --inc 0.03"
+    alt+shift+k
+  "transset-df -a --dec 0.02"
+    alt+shift+j
+
 #"xterm -geom 50x20+20+20"
 #   Shift+Mod2+alt + s
 #
