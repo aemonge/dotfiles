@@ -8,7 +8,7 @@
   st = status
   ch = checkout
   cm = commit -m
-  mm = "!git add -A && git commit -m"
+  ; mm = "!git add -A && git commit -m"
   ca = commit --amend --no-edit
   assume   = update-index --assume-unchanged
   unassume = update-index --no-assume-unchanged
@@ -21,7 +21,5 @@
 [user]
 	email = pedro.monge@extern.isban.com
 
-[https "https://git.gft.com"]
-  sslCAInfo = ~/.certs/gitgftcom.crt
 [core]
 	editor = nvim
