@@ -1,0 +1,2 @@
+xcompmgr &
+devilspie -a &
