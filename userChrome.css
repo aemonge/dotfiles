@@ -1,33 +1,32 @@
-#TabsToolbar {
-  bottom: 0;
-  height: 30px;
-  position: fixed;
-  width: 100%;
+#TabsToolbar{
+  background: var(--lwt-toolbar-field-background-color, hsla(0,0%,100%,.8)) !important;
 }
 
 #content-deck {
-  margin-bottom: 30px; /* fix the height for the new below space of tabs */
+  margin-bottom: 32px !important;
 }
 
-.tabbrowser-tab {
-  width: calc(100% - 35px) !important;
+#nav-bar {
+  bottom: 0 !important;
+  height: 32px !important;
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
 }
 
-#TabsToolbar .tabbrowser-tab .tab.line{
-  bottom: 0;
-  height: 2px;
-  margin-top: -2px;
-  position: absolute;
-  width: 100%;
+#PanelUI-button {
+  display: inline-block !important;
+  height: 32px !important;
+  position: absolute !important;
+  right: 3px;
+  top: 2px !important;
 }
 
-#_small-clock-browser-action {
-  position: relative;
-  top: -8px;
+#nav-bar-overflow-button{
+  display: inline-block !important;
+  height: 32px !important;
 }
 
-#browser-bottombox {
-  margin-top: -30px;
-  padding-bottom: 30px;
-  z-index: 2;
+#nav-bar-customization-target {
+  width: calc(100% - 60px) !important;
 }
