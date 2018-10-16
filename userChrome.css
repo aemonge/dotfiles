@@ -1,5 +1,5 @@
-#TabsToolbar{
-  background: var(--lwt-toolbar-field-background-color, hsla(0,0%,100%,.8)) !important;
+#TabsToolbar {
+  background: var(--lwt-toolbar-field-background-color, hsla(0, 0%, 100%, .8)) !important;
 }
 
 #content-deck {
@@ -22,11 +22,23 @@
   top: 2px !important;
 }
 
-#nav-bar-overflow-button{
+#nav-bar-overflow-button {
   display: inline-block !important;
   height: 32px !important;
 }
 
 #nav-bar-customization-target {
   width: calc(100% - 60px) !important;
+}
+
+/* put suggestions popup on top (because the bar is now in the bottom) */
+#PopupAutoCompleteRichResult {
+  opacity: 0.9;
+  margin-top: -332px;
+  margin-left: 10px;
+  height: 300px;
+}
+
+#PopupAutoCompleteRichResult .autocomplete-richlistbox>scrollbox {
+  overflow-y: auto !important;
 }
