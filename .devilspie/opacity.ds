@@ -1,4 +1,11 @@
 ( if
+  ( contains ( application_name ) "" )
+  ( begin
+    ( spawn_async (str "transset-df -i " (window_xid) " 0.88" ))
+  )
+)
+
+( if
   ( or
     ( contains ( application_name ) "Firefox" )
     ( contains ( application_name ) "Chrome" )
