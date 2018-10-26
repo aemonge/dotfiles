@@ -63,7 +63,6 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # OC logins
-source ~/.oclogins
 
 # User configuration
   source ~/.profile
@@ -75,20 +74,19 @@ source ~/.oclogins
   export LANG=en_US.UTF-8
 
 # My own version of tmux
-alias vmux="nvr -s --remote-send ':call GoTerm()<cr>'"
-# alias vim=nvim
-alias vim='nvr --remote-send "<Esc><Esc>:cd $(pwd)<cr>" && nvr --remote-tab'
-alias vvim='nvr -O'
-alias svim='nvr -o'
-alias fgg='nvr -s --remote-send "<Esc><Esc>:tabnext<cr>"'
-# alias cat='(highlight || cat) <'
+# if [ -n $VIM_TERMINAL ]; then
+  alias vmux="vim --servername VMUX +'call InitTerm()'"
+# fi
+if [[ $VIM_TERMINAL ]]; then
+  alias vim="vim --servername VMUX --remote-tab"
+fi
 
 # Preferred editor for local and remote sessions
-  if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-  else
-    export EDITOR='mvim'
-  fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
