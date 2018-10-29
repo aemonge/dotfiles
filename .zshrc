@@ -73,20 +73,8 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
   export LANG=en_US.UTF-8
 
-# My own version of tmux
-# if [ -n $VIM_TERMINAL ]; then
-  alias vmux="vim --servername VMUX +'call InitTerm()'"
-# fi
-if [[ $VIM_TERMINAL ]]; then
-  alias vim="vim --servername VMUX --remote-tab"
-fi
-
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -151,3 +139,13 @@ fpath=(~/.oh-my-zsh/custom/plugins/oc $fpath)
 autoload -U compinit
 compinit -i
 alias whats="python ~/usr/lib/whatsapp-web/chat.py"
+
+# My own version of tmux
+if [ $NVIM_LISTEN_ADDRESS ]; then
+  # alias vim="vim --servername VMUX --remote-tab"
+  alias vim='nvr --remote-send "<Esc><Esc>:cd $(pwd)<cr>" && nvr --remote-tab'
+  alias fg='nvr -s --remote-send "<Esc><Esc>:tabnext<cr>"'
+fi
+if [ -z $NVIM_LISTEN_ADDRESS ]; then
+  alias vmux="nvr -s --remote-send ':call GoTerm()<cr>'"
+fi

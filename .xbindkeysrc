@@ -43,8 +43,8 @@
   alt+P
 
 # set directly keycode (here control + f with my keyboard)
-# "slock"
-  # control+shift+l
+"slock"
+  control+shift+l
 
 # specify a mouse button
 "xfce4-terminal"
