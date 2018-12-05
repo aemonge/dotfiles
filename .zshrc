@@ -144,11 +144,10 @@ alias whats="python ~/usr/lib/whatsapp-web/chat.py"
 if [ $NVIM_LISTEN_ADDRESS ]; then
   # alias vim="vim --servername VMUX --remote-tab"
   alias vim='nvr --remote-send "<Esc><Esc>:cd $(pwd)<cr>" && nvr --remote-tab'
-  alias fg='nvr -s --remote-send "<Esc><Esc>:tabnext<cr>"'
 fi
 if [ -z $NVIM_LISTEN_ADDRESS ]; then
   alias vim='nvim'
-  # alias vmux="nvr -s --remote-send ':call GoTerm()<cr>'"
+  alias vmux="nvr -s --remote-send ':call GoTerm()<cr>'"
   # MUST PROVIDE A SOLUTION WHEN MULTIPLE TERMINALS ARE OPENED !!
   nvr -s --remote-send ':call GoTerm()<cr>'
 fi
