@@ -5,21 +5,18 @@
 	tool = vimdiff
 
 [alias]
-  st = status
-  ch = checkout
-  cm = commit -m
-  ; mm = "!git add -A && git commit -m"
-  ca = commit --amend --no-edit
-  assume   = update-index --assume-unchanged
-  unassume = update-index --no-assume-unchanged
-  assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
-  ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
-  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+  st           = status
+  ch           = checkout
+  cm           = commit -m
+  cmm          = "!git add -A && git commit -m"
+  ca           = commit --amend --no-edit
+  assume       = update-index --assume-unchanged
+  unassume     = update-index --no-assume-unchanged
+  assumed      = "!git ls-files -v | grep ^h | cut -c 3-"
+  ours         = "!f() { git checkout --ours $@ && git add $@; }; f"
+  theirs       = "!f() { git checkout --theirs $@ && git add $@; }; f"
   clean-merged = "!git branch --merged | egrep -v '(^\\*|mast|dev|stag|prod)' | (xargs git branch -d 2> /dev/null || echo no merged branches found)"
-  clean-orig = "!git st | grep '.*\\.orig' | xargs rm"
-
-[user]
-	email = pedro.monge@extern.isban.com
+  clean-orig   = "!git st | grep '.*\\.orig' | xargs rm"
 
 [core]
 	editor = nvim
