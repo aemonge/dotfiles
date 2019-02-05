@@ -2,12 +2,12 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/aemonge/.oh-my-zsh
+  export ZSH=/home/aemonge/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+  ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -29,15 +29,15 @@ ZSH_THEME="agnoster"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+  ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+  COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+  DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -51,16 +51,15 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  copybuffer, copydir, copyfile, cp, oc,
-  archlinux, autoenv, aws, boot2docker, coffee, dircycle, dirhistory, dirpersist, docker,
-  dotenv, git, git-extras, git-prompt, git-remote-branch, gitfast, github, gitignore,
-  history, history-substring-search, man, mvn, node, node, npm, npm, npx, nvm, nvm, ruby,
-  rvm, sudo, sudo, taskwarrior, tig, tmux, tmux, tmuxinator, vi-mode, vi-mode,
-  vim-interaction, zsh-navigation-tools, zsh-autosuggestions
-)
-
-source $ZSH/oh-my-zsh.sh
+  plugins=(
+    copybuffer, copydir, copyfile, cp, oc,
+    archlinux, autoenv, aws, boot2docker, coffee, dircycle, dirhistory, dirpersist, docker,
+    dotenv, git, git-extras, git-prompt, git-remote-branch, gitfast, github, gitignore,
+    history, history-substring-search, man, mvn, node, node, npm, npm, npx, nvm, nvm, ruby,
+    rvm, sudo, sudo, taskwarrior, tig, tmux, tmux, tmuxinator, vi-mode, vi-mode,
+    vim-interaction, zsh-navigation-tools, zsh-autosuggestions
+  )
+  source $ZSH/oh-my-zsh.sh
 
 # OC logins
 
@@ -74,7 +73,7 @@ source $ZSH/oh-my-zsh.sh
   export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='nvim'
+  export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -89,17 +88,17 @@ export EDITOR='nvim'
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-alias zvi='vim $(fzf)'
-alias open='xdg-open'
-alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
+  alias ohmyzsh="vim ~/.oh-my-zsh"
+  alias zvi='vim $(fzf)'
+  alias open='xdg-open'
+  alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
 # Dont' save to `pushd` stack on every `  cd`
 # unsetopt auto_pushd
-bindkey '^n' autosuggest-accept
+  bindkey '^n' autosuggest-accept
 # Execute command without keeping it in history  (they have to start with space)
-export HISTCONTROL=ignorespace
-setopt histignorespace
+  export HISTCONTROL=ignorespace
+  setopt histignorespace
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -108,46 +107,49 @@ setopt histignorespace
 # [[ -s "/home/aemonge/.sdkman/bin/sdkman-init.sh" ]] && source "/home/aemonge/.sdkman/bin/sdkman-init.sh"
 
 # BEGIN nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
+  autoload -U add-zsh-hook
+  load-nvmrc() {
+    local node_version="$(nvm version)"
+    local nvmrc_path="$(nvm_find_nvmrc)"
 
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    if [ -n "$nvmrc_path" ]; then
+      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
 
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
+      if [ "$nvmrc_node_version" = "N/A" ]; then
+        nvm install
+      elif [ "$nvmrc_node_version" != "$node_version" ]; then
+        nvm use
+      fi
+    elif [ "$node_version" != "$(nvm version default)" ]; then
+      echo "Reverting to nvm default version"
+      nvm use default
     fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+  }
+  add-zsh-hook chpwd load-nvmrc
+  load-nvmrc
 # END nvm
 
 # BEGIN oc (open shift) plugin
-fpath=(~/.oh-my-zsh/custom/plugins/oc $fpath)
-autoload -U compinit
-compinit -i
-alias whats="python ~/usr/lib/whatsapp-web/chat.py"
+  fpath=(~/.oh-my-zsh/custom/plugins/oc $fpath)
+  autoload -U compinit
+  compinit -i
+  alias whats="python ~/usr/lib/whatsapp-web/chat.py"
 
 # My own version of tmux
-if [ $NVIM_LISTEN_ADDRESS ]; then
-  # alias vim="vim --servername VMUX --remote-tab"
-  alias vim='nvr --remote-send "<Esc><Esc>:cd $(pwd)<cr>" && nvr --remote-tab'
-fi
-if [ -z $NVIM_LISTEN_ADDRESS ]; then
-  alias vim='nvim'
-  alias vmux="nvr -s --remote-send ':call GoTerm()<cr>'"
-  # MUST PROVIDE A SOLUTION WHEN MULTIPLE TERMINALS ARE OPENED !!
-  nvr -s --remote-send ':call GoTerm()<cr>'
-fi
+  if [ $NVIM_LISTEN_ADDRESS ]; then
+    # alias vim="vim --servername VMUX --remote-tab"
+    alias vim='nvr --remote-send "<Esc><Esc>:cd $(pwd)<cr>" && nvr --remote-tab'
+  fi
+  if [ -z $NVIM_LISTEN_ADDRESS ]; then
+    alias vim='nvim'
+    alias vmux="nvr -s --remote-send ':call GoTerm()<cr>'"
+    # MUST PROVIDE A SOLUTION WHEN MULTIPLE TERMINALS ARE OPENED !!
+    nvr -s --remote-send ':call GoTerm()<cr>'
+  fi
+
+# EMSKD: https://github.com/juj/emsdk
+  # source ~/usr/lib/emsdk/emsdk_env.sh
