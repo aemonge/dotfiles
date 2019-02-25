@@ -1,5 +1,9 @@
+/*! ===========
+ * @name AeMonge
+ * @description Move the URL-bar (and action bar) to the bottom
+ */
 #TabsToolbar {
-  background: var(--lwt-toolbar-field-background-color, hsla(0, 0%, 100%, .8)) !important;
+  background: var(--lwt-toolbar-field-background-color, hsla(0, 0%, 100%, 0.8)) !important;
 }
 
 #content-deck {
@@ -39,6 +43,6 @@
   height: 300px;
 }
 
-#PopupAutoCompleteRichResult .autocomplete-richlistbox>scrollbox {
+#PopupAutoCompleteRichResult .autocomplete-richlistbox > scrollbox {
   overflow-y: auto !important;
 }
