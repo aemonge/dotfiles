@@ -61,6 +61,15 @@
   )
   source $ZSH/oh-my-zsh.sh
 
+
+# BEGIN Screen Saver Morpho https://github.com/psprint/zsh-morpho
+  source ~/.oh-my-zsh/custom/plugins/zsh-morpho/zsh-morpho.plugin.zsh
+# Screen Saver
+  zstyle ":morpho" screen-saver "cmatrix"
+  zstyle ":morpho" arguments "-s"
+  zstyle ":morpho" delay "300"
+  zstyle ":morpho" check-interval "60"
+
 # OC logins
 
 # User configuration
@@ -94,7 +103,7 @@
   alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
   ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
 # Dont' save to `pushd` stack on every `  cd`
-# unsetopt auto_pushd
+  unsetopt auto_pushd
   bindkey '^n' autosuggest-accept
 # Execute command without keeping it in history  (they have to start with space)
   export HISTCONTROL=ignorespace

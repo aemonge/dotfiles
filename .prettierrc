@@ -4,5 +4,7 @@
   "semi": true,
   "bracketSpacing": true,
   "arrowParens": "avoid",
-  "singleQuote": true
+  "singleQuote": true,
+  "printWidth": 120,
+  "proseWrap": "preserve"
 }
