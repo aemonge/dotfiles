@@ -47,6 +47,9 @@
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Node Environments `yaourt -S nodenv`
+export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -63,9 +66,10 @@
     archlinux, autoenv, aws, boot2docker, coffee, dircycle, dirhistory, dirpersist, docker,
     dotenv, git, git-extras, git-prompt, git-remote-branch, gitfast, github, gitignore,
     history, history-substring-search, mvn, node, node, npm, ruby,
-    sudo, tig, vi-mode, vim-interaction, zsh-autosuggestions, oc
+    sudo, tig, vi-mode, vim-interaction, oc
   )
   source $ZSH/oh-my-zsh.sh
+  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
 # BEGIN Screen Saver Morpho https://github.com/psprint/zsh-morpho
@@ -121,9 +125,13 @@
 # export SDKMAN_DIR="/home/aemonge/.sdkman"
 # [[ -s "/home/aemonge/.sdkman/bin/sdkman-init.sh" ]] && source "/home/aemonge/.sdkman/bin/sdkman-init.sh"
 
+# fnm faster NVM
+# export PATH=$HOME/.fnm:$PATH
+# eval "`fnm env --multi`"
+
 # BEGIN nvm
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  # export NVM_DIR="$HOME/.nvm"
+  # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
   # autoload -U add-zsh-hook
   # load-nvmrc() {
