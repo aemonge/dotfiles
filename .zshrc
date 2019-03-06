@@ -51,13 +51,19 @@
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+  # plugins=(
+    # copybuffer, copydir, copyfile, cp, oc,
+    # archlinux, autoenv, aws, boot2docker, coffee, dircycle, dirhistory, dirpersist, docker,
+    # dotenv, git, git-extras, git-prompt, git-remote-branch, gitfast, github, gitignore,
+    # history, history-substring-search, man, mvn, node, node, npm, npm, npx, ruby,
+    # rvm, sudo, sudo, taskwarrior, tig, tmux, tmux, tmuxinator, vi-mode, vi-mode,
+    # vim-interaction, zsh-navigation-tools, zsh-autosuggestions
+  # )
   plugins=(
-    copybuffer, copydir, copyfile, cp, oc,
     archlinux, autoenv, aws, boot2docker, coffee, dircycle, dirhistory, dirpersist, docker,
     dotenv, git, git-extras, git-prompt, git-remote-branch, gitfast, github, gitignore,
-    history, history-substring-search, man, mvn, node, node, npm, npm, npx, nvm, nvm, ruby,
-    rvm, sudo, sudo, taskwarrior, tig, tmux, tmux, tmuxinator, vi-mode, vi-mode,
-    vim-interaction, zsh-navigation-tools, zsh-autosuggestions
+    history, history-substring-search, mvn, node, node, npm, ruby,
+    sudo, tig, vi-mode, vim-interaction, zsh-autosuggestions, oc
   )
   source $ZSH/oh-my-zsh.sh
 
@@ -82,7 +88,7 @@
   export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-  export EDITOR='nvim'
+  export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -118,28 +124,27 @@
 # BEGIN nvm
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-  autoload -U add-zsh-hook
-  load-nvmrc() {
-    local node_version="$(nvm version)"
-    local nvmrc_path="$(nvm_find_nvmrc)"
+  # autoload -U add-zsh-hook
+  # load-nvmrc() {
+    # local node_version="$(nvm version)"
+    # local nvmrc_path="$(nvm_find_nvmrc)"
 
-    if [ -n "$nvmrc_path" ]; then
-      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    # if [ -n "$nvmrc_path" ]; then
+      # local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
 
-      if [ "$nvmrc_node_version" = "N/A" ]; then
-        nvm install
-      elif [ "$nvmrc_node_version" != "$node_version" ]; then
-        nvm use
-      fi
-    elif [ "$node_version" != "$(nvm version default)" ]; then
-      echo "Reverting to nvm default version"
-      nvm use default
-    fi
-  }
-  add-zsh-hook chpwd load-nvmrc
-  load-nvmrc
+      # if [ "$nvmrc_node_version" = "N/A" ]; then
+        # nvm install
+      # elif [ "$nvmrc_node_version" != "$node_version" ]; then
+        # nvm use
+      # fi
+    # elif [ "$node_version" != "$(nvm version default)" ]; then
+      # echo "Reverting to nvm default version"
+      # nvm use default
+    # fi
+  # }
+  # add-zsh-hook chpwd load-nvmrc
+  # load-nvmrc
 # END nvm
 
 # BEGIN oc (open shift) plugin
@@ -149,15 +154,11 @@
   alias whats="python ~/usr/lib/whatsapp-web/chat.py"
 
 # My own version of tmux
-  if [ $NVIM_LISTEN_ADDRESS ]; then
-    # alias vim="vim --servername VMUX --remote-tab"
-    alias vim='nvr --remote-send "<Esc><Esc>:cd $(pwd)<cr>" && nvr --remote-tab'
+  if [ $VIM_TERMINAL ]; then
+    alias vim="vim --remote-tab";
   fi
-  if [ -z $NVIM_LISTEN_ADDRESS ]; then
-    alias vim='nvim'
-    alias vmux="nvr -s --remote-send ':call GoTerm()<cr>'"
-    # MUST PROVIDE A SOLUTION WHEN MULTIPLE TERMINALS ARE OPENED !!
-    nvr -s --remote-send ':call GoTerm()<cr>'
+  if [ -z $VIM_TERMINAL ]; then
+    vim +':terminal ++curwin' --servername vim
   fi
 
 # EMSKD: https://github.com/juj/emsdk
