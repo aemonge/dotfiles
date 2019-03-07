@@ -19,4 +19,4 @@
   clean-orig   = "!git st | grep '.*\\.orig' | xargs rm"
 
 [core]
-	editor = nvim
+	editor = vim
