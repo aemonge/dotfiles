@@ -51,19 +51,13 @@
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-  # plugins=(
-    # copybuffer, copydir, copyfile, cp, oc,
-    # archlinux, autoenv, aws, boot2docker, coffee, dircycle, dirhistory, dirpersist, docker,
-    # dotenv, git, git-extras, git-prompt, git-remote-branch, gitfast, github, gitignore,
-    # history, history-substring-search, man, mvn, node, node, npm, npm, npx, ruby,
-    # rvm, sudo, sudo, taskwarrior, tig, tmux, tmux, tmuxinator, vi-mode, vi-mode,
-    # vim-interaction, zsh-navigation-tools, zsh-autosuggestions
-  # )
   plugins=(
-    archlinux, autoenv, aws, boot2docker, coffee, dircycle, dirhistory, dirpersist, docker,
-    dotenv, git, git-extras, git-prompt, git-remote-branch, gitfast, github, gitignore,
-    history, history-substring-search, mvn, node, node, npm, ruby,
-    sudo, tig, vi-mode, vim-interaction, oc
+    archlinux, copybuffer, dotenv, history, vim-interaction, autoenv,
+    aws, boot2docker, copydir, copyfile, cp, dircycle, dirhistory,
+    dirpersist, docker, git, git-extras, git-prompt, git-remote-branch,
+    gitfast, github, gitignore, history-substring-search, man, mvn,
+    node, npm, oc, ruby, sudo, tig, vi-mode, zsh-autosuggestions,
+    zsh-navigation-tools
   )
   source $ZSH/oh-my-zsh.sh
   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -76,8 +70,6 @@
   zstyle ":morpho" arguments "-s"
   zstyle ":morpho" delay "300"
   zstyle ":morpho" check-interval "60"
-
-# OC logins
 
 # User configuration
   source ~/.profile
@@ -116,12 +108,6 @@
   export HISTCONTROL=ignorespace
   setopt histignorespace
 
-# BEGIN oc (open shift) plugin
-  fpath=(~/.oh-my-zsh/custom/plugins/oc $fpath)
-  autoload -U compinit
-  compinit -i
-  alias whats="python ~/usr/lib/whatsapp-web/chat.py"
-
 # My own version of tmux
   if [ $VIM_TERMINAL ]; then
     alias vim="vim --remote-tab";
@@ -131,4 +117,4 @@
   fi
 
 # Node Environments `yaourt -S nodenv`
-export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
+# export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
