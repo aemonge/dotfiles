@@ -110,11 +110,12 @@
 
 # My own version of tmux
   if [ $VIM_TERMINAL ]; then
-    alias vim="vim --remote-tab";
+    # First change directory to PWD, then open files. Giving a IDE impression
+    alias vim='vim --servername VMUX --remote-send "<C-\><C-n>:cd $(pwd)<cr>" --remote-tab'
   fi
   if [ -z $VIM_TERMINAL ]; then
-    vim +':terminal ++curwin' --servername vim
+    vim +':terminal ++curwin' --servername vmux
   fi
 
 # Node Environments `yaourt -S nodenv`
-# export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
+export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
