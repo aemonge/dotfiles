@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+  export PATH="$HOME/npm/bin:$HOME/usr/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
   export ZSH=/home/aemonge/.oh-my-zsh
@@ -117,5 +118,6 @@
     vim +':terminal ++curwin' --servername vmux
   fi
 
+
 # Node Environments `yaourt -S nodenv`
-export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
+# export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
