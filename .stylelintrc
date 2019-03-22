@@ -1,0 +1,7 @@
+{
+  "extends": "stylelint-config-recommended"
+    "rules": {
+      "selector-type-no-unknown": false,
+      "no-descending-specificity": false
+    }
+}
