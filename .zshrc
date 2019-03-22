@@ -112,10 +112,12 @@
 # My own version of tmux
   if [ $VIM_TERMINAL ]; then
     # First change directory to PWD, then open files. Giving a IDE impression
-    alias vim='vim --servername VMUX --remote-send "<C-\><C-n>:cd $(pwd)<cr>" --remote-tab'
+    alias vim="vim --servername $VIM_TERMINAL_PARENT_ID --remote-send \"<C-\><C-n>:cd $(pwd)<cr>\" --remote-tab"
   fi
   if [ -z $VIM_TERMINAL ]; then
-    vim +':terminal ++curwin' --servername vmux
+    export VIM_TERMINAL_PARENT_ID="$$-VMUX";
+    # the exit below is to close the terminal when vmux is done.
+    vim +':terminal ++curwin' --servername $VIM_TERMINAL_PARENT_ID && exit
   fi
 
 
