@@ -53,12 +53,10 @@
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
   plugins=(
-    archlinux, copybuffer, dotenv, history, vim-interaction, autoenv,
-    aws, boot2docker, copydir, copyfile, cp, dircycle, dirhistory,
-    dirpersist, docker, git, git-extras, git-prompt, git-remote-branch,
-    gitfast, github, gitignore, history-substring-search, man, mvn,
-    node, npm, oc, ruby, sudo, tig, vi-mode, zsh-autosuggestions,
-    zsh-navigation-tools
+    archlinux aws battery colored-man-pages colorize command-not-found common-aliases
+    cp dircycle dirhistory docker dotenv fzf git gitfast
+    gnu-utils history-substring-search history man ng node npm oc rsync vi-mode
+    vim-interaction zsh-navigation-tools zsh_reload
   )
   source $ZSH/oh-my-zsh.sh
   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -117,7 +115,7 @@
   if [ -z $VIM_TERMINAL ]; then
     export VIM_TERMINAL_PARENT_ID="$$-VMUX";
     # the exit below is to close the terminal when vmux is done.
-    vim +':terminal ++curwin' --servername $VIM_TERMINAL_PARENT_ID && exit
+    vim +':terminal ++curwin ++close' --servername $VIM_TERMINAL_PARENT_ID && exit
   fi
 
 
