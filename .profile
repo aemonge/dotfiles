@@ -9,7 +9,6 @@ export PATH=$PATH:~/usr/bin/
 # alias vi='vim -u NONE'
 # alias vimf='vim $(fzf)'
 alias caltoday='cal | grep -C6 --color "$(date +%e)"'
-alias tmux='tmux -2'
 
 # TMUX
 # if which tmux >/dev/null 2>&1; then

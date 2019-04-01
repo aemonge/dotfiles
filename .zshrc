@@ -53,10 +53,10 @@
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
   plugins=(
-    archlinux aws battery colored-man-pages colorize command-not-found common-aliases
-    cp dircycle dirhistory docker dotenv fzf git gitfast
-    gnu-utils history-substring-search history man ng node npm oc rsync vi-mode
-    vim-interaction zsh-navigation-tools zsh_reload
+    archlinux
+    cp dircycle dirhistory fzf git gitfast
+    history-substring-search history ng node npm vi-mode
+    vim-interaction
   )
   source $ZSH/oh-my-zsh.sh
   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -97,6 +97,8 @@
 # alias zshconfig="mate ~/.zshrc"
   alias ohmyzsh="vim ~/.oh-my-zsh"
   alias zvi='vim $(fzf)'
+  alias pd=pushd
+  alias pdd=popd
   alias open='xdg-open'
   alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
   ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
@@ -110,7 +112,9 @@
 # My own version of tmux
   if [ $VIM_TERMINAL ]; then
     # First change directory to PWD, then open files. Giving a IDE impression
-    alias vim='vim --servername $VIM_TERMINAL_PARENT_ID --remote-send "<C-\><C-n>:cd $PWD <cr>" --remote-tab'
+    alias _vim=/usr/bin/vim
+    alias vcd='_vim --servername $VIM_TERMINAL_PARENT_ID --remote-send "<C-\><C-n>:cd $PWD <cr>a"'
+    alias vim='_vim --servername $VIM_TERMINAL_PARENT_ID --remote-send "<C-\><C-n>:cd $PWD <cr>" --remote-tab'
   fi
   if [ -z $VIM_TERMINAL ]; then
     export VIM_TERMINAL_PARENT_ID="$$-VMUX";
