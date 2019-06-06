@@ -1,1 +1,45 @@
-/home/aemonge/usr/lib/dotFiles/userChrome.css
+#TabsToolbar {
+  background: var(--lwt-toolbar-field-background-color, hsla(0, 0%, 100%, .8)) !important;
+}
+
+#content-deck {
+  margin-bottom: 32px !important;
+}
+
+#nav-bar {
+  bottom: 0 !important;
+  height: 32px !important;
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+}
+
+#PanelUI-button {
+  display: inline-block !important;
+  height: 32px !important;
+  position: absolute !important;
+  right: 3px;
+  top: 2px !important;
+}
+
+#nav-bar-overflow-button {
+  display: inline-block !important;
+  height: 32px !important;
+}
+
+#nav-bar-customization-target {
+  width: calc(100% - 60px) !important;
+}
+
+/* put suggestions popup on top (because the bar is now in the bottom) */
+#PopupAutoCompleteRichResult {
+  opacity: 0.9;
+  margin-top: -332px;
+  margin-left: 10px;
+  height: 300px;
+}
+
+#PopupAutoCompleteRichResult .autocomplete-richlistbox>scrollbox {
+  overflow-y: auto !important;
+}
+

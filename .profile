@@ -1,5 +1,5 @@
 # Path my scripts
-export PATH=$PATH:~/usr/bin/
+export PATH=$PATH:~/usr/lib/bin:~/npm/bin
 
 # Android Dev
 # export ANDROID_HOME=~/Library/Android/sdk
@@ -21,4 +21,4 @@ alias caltoday='cal | grep -C6 --color "$(date +%e)"'
   # done
 # fi
 
-xbindkeys -p
+#xbindkeys -p

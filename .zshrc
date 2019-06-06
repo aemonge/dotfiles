@@ -1,9 +1,9 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-  export PATH="$HOME/npm/bin:$HOME/usr/bin:$PATH"
+export PATH=$HOME/usr/lib/bin:$PATH
+  # export PATH="$HOME/npm/bin:$HOME/usr/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/aemonge/.oh-my-zsh
+  export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -24,7 +24,7 @@
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -52,6 +52,7 @@
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+  # plugins=()
   plugins=(
     archlinux
     cp dircycle dirhistory fzf git gitfast
@@ -59,11 +60,11 @@
     vim-interaction
   )
   source $ZSH/oh-my-zsh.sh
-  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
 
 # BEGIN Screen Saver Morpho https://github.com/psprint/zsh-morpho
-  source ~/.oh-my-zsh/custom/plugins/zsh-morpho/zsh-morpho.plugin.zsh
+  source ~/.oh-my-zsh/custom/plugins/ zsh-morpho/zsh-morpho.plugin.zsh
 # Screen Saver
   zstyle ":morpho" screen-saver "cmatrix"
   zstyle ":morpho" arguments "-s"
@@ -71,7 +72,6 @@
   zstyle ":morpho" check-interval "60"
 
 # User configuration
-  source ~/.profile
   set -o vi
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -99,6 +99,7 @@
   alias zvi='vim $(fzf)'
   alias pd=pushd
   alias pdd=popd
+  alias ls='ls --color'
   alias open='xdg-open'
   alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
   ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
@@ -125,3 +126,12 @@
 
 # Node Environments `yaourt -S nodenv`
 # export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# NVM
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# fnm
+# export PATH=$HOME/.fnm:$PATH
+# eval "`fnm env --multi`"

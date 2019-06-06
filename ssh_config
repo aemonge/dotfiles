@@ -1,24 +1,40 @@
-ProxyCommand /usr/bin/corkscrew http.proxy 8080 %h %p ~/.ssh/myauth
-
 Host ssh.github.com
+  ProxyCommand /usr/bin/corkscrew 172.31.219.30 8080 %h %p ~/.ssh/myauth
   HostName ssh.github.com
   User git
   Port 443
-  IdentityFile ~/.ssh/id_aemGh_rsa
+  IdentityFile ~/.ssh/github_aem
   TCPKeepAlive yes
   IdentitiesOnly yes
 
 Host github.com
+  ProxyCommand /usr/bin/corkscrew 172.31.219.30 8080 %h %p ~/.ssh/myauth
   HostName ssh.github.com
   User git
   Port 443
-  IdentityFile ~/.ssh/id_aemGh_rsa
+  IdentityFile ~/.ssh/github_aem
   TCPKeepAlive yes
   IdentitiesOnly yes
 
-Host extern1.work-alias
-  HostName extern1.work-alias
-  Port 443
-  IdentityFile ~/.ssh/id_extern1_rsa
-  TCPKeepAlive yes
-  IdentitiesOnly yes
+# Host ssh.gitlab.alm.gsnetcloud.corp
+#   HostName ssh.gitlab.alm.gsnetcloud.corp
+#   User git
+#   Port 443
+#   IdentityFile ~/.ssh/id_rsa
+#   TCPKeepAlive yes
+#   IdentitiesOnly yes
+
+# Host gitlab.alm.gsnetcloud.corp
+#   HostName ssh.gitlab.alm.gsnetcloud.corp
+#   User git
+#   Port 443
+#   IdentityFile ~/.ssh/id_rsa
+#   TCPKeepAlive yes
+#   IdentitiesOnly yes
+
+# Host extern1.work-alias
+#   HostName extern1.work-alias
+#   Port 443
+#   IdentityFile ~/.ssh/id_extern1_rsa
+#   TCPKeepAlive yes
+#   IdentitiesOnly yes
