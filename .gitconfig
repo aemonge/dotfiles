@@ -20,10 +20,3 @@
 
 [core]
   editor = vim
-
-[http]
-  proxy =
-  sslVerify = false
-[user]
-  name = AeMonge
-  email = pedro.monge@extern.isban.com
