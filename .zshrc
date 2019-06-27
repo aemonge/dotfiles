@@ -104,7 +104,7 @@ DISABLE_LS_COLORS="true"
   alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
   ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
 # Dont' save to `pushd` stack on every `  cd`
-  unsetopt auto_pushd
+  # unsetopt auto_pushd
   bindkey '^n' autosuggest-accept
 # Execute command without keeping it in history  (they have to start with space)
   export HISTCONTROL=ignorespace
@@ -125,8 +125,8 @@ DISABLE_LS_COLORS="true"
 
 
 # Node Environments `yaourt -S nodenv`
-# export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # NVM
 # export NVM_DIR="$HOME/.nvm"
