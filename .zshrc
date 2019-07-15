@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/usr/lib/bin:$PATH
+  export PATH=$HOME/usr/lib/bin:$PATH
   # export PATH="$HOME/npm/bin:$HOME/usr/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
@@ -24,7 +24,7 @@ export PATH=$HOME/usr/lib/bin:$PATH
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
-DISABLE_LS_COLORS="true"
+  DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -53,26 +53,37 @@ DISABLE_LS_COLORS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
   # plugins=()
-  plugins=(
-    archlinux
-    cp dircycle dirhistory fzf git gitfast
-    history-substring-search history ng node npm vi-mode
-    vim-interaction
-  )
-  source $ZSH/oh-my-zsh.sh
-  source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+  # Core plugins
+  # plugins=(
+    # archlinux
+    # cp dircycle dirhistory fzf git gitfast
+    # history-substring-search history ng node npm vi-mode
+    # vim-interaction
+  # )
 
+  if [ $VIM_TERMINAL ]; then
+    plugins=( archlinux aws bower cargo cloudfoundry coffee colored-man-pages colorize command-not-found
+      common-aliases composer copydir copyfile cp dircycle dirhistory dirpersist docker-compose docker-machine
+      docker dotenv emoji-clock emoji emotty encode64 extract fedora frontend-search fzf gem git-auto-fetch git-extras
+      git-flow-avh git-flow git-hubflow git-prompt git-remote-branch git gitfast github gitignore gnu-utils gradle
+      grunt gulp jira jruby jsontools man marked2 mvn ng node npm npx nvm oc pod python rake react-native rsync
+      ruby rust rvm shrink-path singlechar ssh-agent stack sudo systemadmin systemd tig vi-mode vim-interaction vundle
+      yarn zsh-navigation-tools zsh_reload
+    )
+    source $ZSH/oh-my-zsh.sh
+    source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
-# BEGIN Screen Saver Morpho https://github.com/psprint/zsh-morpho
-  source ~/.oh-my-zsh/custom/plugins/ zsh-morpho/zsh-morpho.plugin.zsh
-# Screen Saver
-  zstyle ":morpho" screen-saver "cmatrix"
-  zstyle ":morpho" arguments "-s"
-  zstyle ":morpho" delay "300"
-  zstyle ":morpho" check-interval "60"
+    # BEGIN Screen Saver Morpho https://github.com/psprint/zsh-morpho
+    source ~/.oh-my-zsh/custom/plugins/ zsh-morpho/zsh-morpho.plugin.zsh
+    # Screen Saver
+    zstyle ":morpho" screen-saver "cmatrix"
+    zstyle ":morpho" arguments "-s"
+    zstyle ":morpho" delay "300"
+    zstyle ":morpho" check-interval "60"
 
-# User configuration
-  set -o vi
+    # User configuration
+    set -o vi
+  fi;
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
