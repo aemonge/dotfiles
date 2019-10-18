@@ -131,7 +131,7 @@
   if [ -z $VIM_TERMINAL ]; then
     export VIM_TERMINAL_PARENT_ID="$$-VMUX";
     # the exit below is to close the terminal when vmux is done.
-    vim +':terminal ++curwin ++close' --servername $VIM_TERMINAL_PARENT_ID && exit
+    vim +':terminal ++curwin ++close' --servername $VIM_TERMINAL_PARENT_ID && exit # || exit
   fi
 
 
