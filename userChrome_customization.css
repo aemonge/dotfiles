@@ -13,6 +13,7 @@
   height: 32px !important;
   overflow: hidden !important;
   position: fixed !important;
+  display: block;
   width: 100% !important;
 }
 /* Make it full width, after re-position */
