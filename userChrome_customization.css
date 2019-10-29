@@ -35,6 +35,7 @@
 /* position the result list above (not below) the address bar */
 #urlbar-results {
   background: #333333;
+  position: fixed;
   color: #cecece;
   bottom: 32px;
   right: 0px;

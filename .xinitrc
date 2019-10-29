@@ -2,8 +2,8 @@
 
 # Happy Pet around my desktop
 # oneko -sakura -bg palevioletred -tofocus -speed 30 -idle 20 &
-oneko -sakura -bg palevioletred -speed 10 -idle 20 &
-# oneko -bg snow -idle 5 -speed 15 &
+# oneko -sakura -bg palevioletred -speed 10 -idle 20 &
+oneko -bg snow -idle 5 -speed 15 &
 
 # Load my key-maps and binding.
 xmodmap ~/.Xmodmap
