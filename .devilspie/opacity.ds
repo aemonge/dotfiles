@@ -15,3 +15,10 @@
     ( spawn_async (str "transset-df -i " (window_xid) " 0.92" ))
   )
 )
+
+( if
+  ( contains ( application_name ) "Termina" )
+  ( begin
+    ( spawn_async (str "transset-df -i " (window_xid) " 0.82" ))
+  )
+)
