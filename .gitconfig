@@ -16,6 +16,8 @@
   ours         = "!f() { git checkout --ours $@ && git add $@; }; f"
   theirs       = "!f() { git checkout --theirs $@ && git add $@; }; f"
   clean-merged = "!git branch --merged | egrep -v '(^\\*|mast|dev|stag|prod|release)' | (xargs git branch -d 2> /dev/null || echo no merged branches found)"
+  remove-tags  = "!git tag | xargs git tag -d"
+  remove-tags-remote  = "!git tag -l | xargs -n 1 git push --delete origin"
 
 [core]
   editor = vim
@@ -23,3 +25,5 @@
 [fetch]
   prune = true
   all = true
+[user]
+	name = aemonge
