@@ -1,6 +1,6 @@
 # Path my scripts
 export PATH=$PATH:~/usr/lib/bin:~/npm/bin
-export CHROME_BIN=/usr/bin/chromium
+# export CHROME_BIN=/usr/bin/chromium
 
 # Android Dev
 # export ANDROID_HOME=~/Library/Android/sdk

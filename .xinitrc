@@ -15,5 +15,6 @@ xcompmgr &
 
 # Load SSH key and virtual-box hard drive
 eval `ssh-agent -s`
-sudo umount -t vboxsf wsr
-sudo mount -t vboxsf wsr ~/wsr
+ssh-add ~/.ssh/id_rsa
+# sudo umount -t vboxsf wsr
+# sudo mount -t vboxsf wsr ~/wsr
