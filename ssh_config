@@ -3,7 +3,7 @@ Host ssh.github.com
   HostName ssh.github.com
   User git
   Port 443
-  IdentityFile ~/.ssh/github_aem
+  IdentityFile ~/.ssh/id_rsa
   TCPKeepAlive yes
   IdentitiesOnly yes
 
@@ -12,29 +12,6 @@ Host github.com
   HostName ssh.github.com
   User git
   Port 443
-  IdentityFile ~/.ssh/github_aem
+  IdentityFile ~/.ssh/id_rsa
   TCPKeepAlive yes
   IdentitiesOnly yes
-
-# Host ssh.gitlab.alm.gsnetcloud.corp
-#   HostName ssh.gitlab.alm.gsnetcloud.corp
-#   User git
-#   Port 443
-#   IdentityFile ~/.ssh/id_rsa
-#   TCPKeepAlive yes
-#   IdentitiesOnly yes
-
-# Host gitlab.alm.gsnetcloud.corp
-#   HostName ssh.gitlab.alm.gsnetcloud.corp
-#   User git
-#   Port 443
-#   IdentityFile ~/.ssh/id_rsa
-#   TCPKeepAlive yes
-#   IdentitiesOnly yes
-
-# Host extern1.work-alias
-#   HostName extern1.work-alias
-#   Port 443
-#   IdentityFile ~/.ssh/id_extern1_rsa
-#   TCPKeepAlive yes
-#   IdentitiesOnly yes
