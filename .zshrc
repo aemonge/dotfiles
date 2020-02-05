@@ -74,10 +74,11 @@
     source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
     # BEGIN Screen Saver Morpho https://github.com/psprint/zsh-morpho
-    source ~/.oh-my-zsh/custom/plugins/ zsh-morpho/zsh-morpho.plugin.zsh
+    source ~/.oh-my-zsh/custom/plugins/zsh-morpho/zsh-morpho.plugin.zsh
+    source ~/.oh-my-zsh/custom/plugins/zsh-vimode-visual/zsh-vimode-visual.zsh
     # Screen Saver
     zstyle ":morpho" screen-saver "cmatrix"
-    zstyle ":morpho" arguments "-s"
+    zstyle ":morpho" arguments "-abs"
     zstyle ":morpho" delay "300"
     zstyle ":morpho" check-interval "60"
 
@@ -121,6 +122,13 @@
   export HISTCONTROL=ignorespace
   setopt histignorespace
 
+# NVM
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# NPX local+global runner https://www.npmjs.com/package/npx
+  source <(npx --shell-auto-fallback zsh)
+
 # My own version of tmux
   if [ $VIM_TERMINAL ]; then
     # First change directory to PWD, then open files. Giving a IDE impression
@@ -136,12 +144,8 @@
 
 
 # Node Environments `yaourt -S nodenv`
-export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# NVM
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # fnm
 # export PATH=$HOME/.fnm:$PATH
