@@ -1,19 +1,22 @@
 #TabsToolbar {
-  background: var(--lwt-toolbar-field-background-color, hsla(0, 0%, 100%, .8)) !important;
+  background: var(
+    --lwt-toolbar-field-background-color,
+    hsla(0, 0%, 100%, 0.8)
+  ) !important;
 }
 
 /**
  * Move the action bar to the bottom to emulate a vim interface
  */
-#browser {
-  margin-bottom: 32px !important;
+#main-window{
+  height: calc(100% - 32px) !important;
 }
 #nav-bar {
   bottom: 0 !important;
   height: 32px !important;
   overflow: hidden !important;
   position: fixed !important;
-  display: block;
+  display: block !important;
   width: 100% !important;
 }
 /* Make it full width, after re-position */
@@ -31,14 +34,18 @@
 #nav-bar-overflow-button {
   display: inline-block !important;
   height: 32px !important;
+  position: sticky;
+  left: 100%;
+  margin-right: 30px !important;
+  bottom: 0;
 }
 /* position the result list above (not below) the address bar */
-#urlbar-results {
-  background: #333333;
-  position: fixed;
-  color: #cecece;
-  bottom: 32px;
-  right: 0px;
-  width: 100%;
+.urlbarView-results, #urlbar-results, #urlbarView-results {
+  background: #333333 !important;
+  position: fixed !important;
+  color: #cecece !important;
+  bottom: 32px !important;
+  right: 0px !important;
+  width: 100% !important;
   margin-top: -410px !important;
 }
