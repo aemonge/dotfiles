@@ -1,6 +1,6 @@
-foreground color. #C5C8C6
-background color. #1D1F21
-link color. #2aa198
-visited link color. #657b83
-active link color. #268bd2
-selection color. #cb4b16
+* foreground color   : #E7E8EB
+* background color   : #2D2D2D
+* link color         : #2AA198
+* visited link color : #657B83
+* active link color  : #378AD3
+* selection color    : #393939
