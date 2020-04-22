@@ -27,3 +27,7 @@
   all = true
 [user]
 	name = aemonge
+
+; How to use REBASE ?
+; git rebase -i HEAD~11
+; LC_ALL=C GIT_COMMITTER_DATE="$(date --date="4 day ago")" git commit --amend --no-edit --date "$(date --date="4 day ago")"
