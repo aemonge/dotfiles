@@ -1,8 +1,8 @@
 [diff]
-  tool = vimdiff
+  tool = vim -d
 
 [merge]
-  tool = vimdiff
+  tool = vimd -d
 
 [alias]
   st           = status
@@ -21,12 +21,26 @@
 
 [core]
   editor = vim
+  filemode = false
+  ignorecase = true
+  autocrlf = true
+  safecrlf = false
+
+[fsck]
+  missingEmail = ignore
 
 [fetch]
   prune = true
   all = true
+
 [user]
 	name = aemonge
+
+[http]
+  sslVerify = false
+
+[https]
+  sslVerify = false
 
 ; How to use REBASE ?
 ; git rebase -i HEAD~11
