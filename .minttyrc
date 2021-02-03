@@ -1,5 +1,5 @@
 FontHeight=13
-Font=Ubuntu Mono derivative Powerlin
+Font=UbuntuMono NF
 FontSmoothing=full
 Locale=
 Charset=
@@ -11,5 +11,5 @@ Transparency=none
 OpaqueWhenFocused=no
 CursorType=line
 ThemeFile=dracula
-Background=C:\Users\xi332412\wsr\aem-media\gitBashBg.jpg,85
+Background=C:\Users\xi332412\wsr\aem-media\gitBashBg.jpg,255
 BellType=0

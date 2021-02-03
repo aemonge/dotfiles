@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "globals": {
     "require": true,
@@ -18,18 +19,16 @@
     "noUnusedParameters": true
   },
   "rules": {
-    "indent": ["error", 2],
+    "indent": [2, 2, {"SwitchCase": 1}],
     "linebreak-style": [0],
-    "quotes": ["error", "single"],
+    "quotes": ["error", "double"],
     "semi": ["error", "always"],
     "no-console": ["warn"]
   },
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx"],
-      "rules": {
-        "no-unused-vars": "off"
-      }
+  "overrides": [{
+    "files": ["*.ts", "*.tsx"],
+    "rules": {
+      "no-unused-vars": "off"
     }
-  ]
+  }]
 }
