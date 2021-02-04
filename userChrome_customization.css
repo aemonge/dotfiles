@@ -1,14 +1,11 @@
 #TabsToolbar {
-  background: var(
-    --lwt-toolbar-field-background-color,
-    hsla(0, 0%, 100%, 0.8)
-  ) !important;
+  background: var(--lwt-toolbar-field-background-color, hsla(0, 0%, 100%, 0.8)) !important;
 }
 
 /**
  * Move the action bar to the bottom to emulate a vim interface
  */
-#main-window{
+#main-window {
   height: calc(100% - 32px) !important;
 }
 #nav-bar {
@@ -40,7 +37,9 @@
   bottom: 0;
 }
 /* position the result list above (not below) the address bar */
-.urlbarView-results, #urlbar-results, #urlbarView-results {
+.urlbarView-results,
+#urlbar-results,
+#urlbarView-results {
   background: #333333 !important;
   position: fixed !important;
   color: #cecece !important;
@@ -48,4 +47,29 @@
   right: 0px !important;
   width: 100% !important;
   margin-top: -410px !important;
+}
+
+/**
+ * Add a permanent background image
+ * https://superuser.com/questions/1495946/how-do-i-change-the-background-image-of-home-page-in-firefox
+ */
+@-moz-document url(about:home), url(about:newtab), url(about:privatebrowsing) {
+  .click-target-container *, .top-sites-list * {
+      color: #fff !important ;
+      text-shadow: 2px 2px 2px #222 !important ;
+  }
+
+  body::before {
+    display: block;
+    content: '';
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.88;
+    background: no-repeat url(img/firefoxBg.jpg) center;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+  }
 }
