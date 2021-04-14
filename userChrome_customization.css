@@ -4,16 +4,24 @@
   padding-bottom: 0px !important;
 }
 
+#titlebar {
+  margin-bottom: 32px;
+  width: 100vw;
+  background-color: #323234 !important;
+}
+
 #titlebar, #TabsToolbar {
   position: fixed !important;
   bottom: 0 !important;
   display: block !important;
 }
 
-#titlebar-buttonbox-container {
+.titlebar-buttonbox-container {
   right: 0 !important;
   position: fixed !important;
   display: block !important;
+  width: 90px !important;
+  margin: 10px auto !important;
 }
 
 #TabsToolbar {
@@ -23,7 +31,12 @@
   top: 0 !important;
 }
 #TabsToolbar .toolbar-items {
-  width: 100vh !important;
+  width: 100vw !important;
+  background-color: #323234 !important;
+}
+#tabbrowser-arrowscrollbox {
+  width: calc(100vw - 100px) !important; /* subsctract the .titlebar-buttonbox-container and margin */
+  margin-left: 10px;
 }
 
 #tabbrowser-tabs{
