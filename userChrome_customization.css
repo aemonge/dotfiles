@@ -20,8 +20,9 @@
   right: 0 !important;
   position: fixed !important;
   display: block !important;
-  width: 90px !important;
-  margin: 10px auto !important;
+  width: 140px !important;
+  margin: 5px auto !important;
+  bottom: 0 !important;
 }
 
 #TabsToolbar {
@@ -35,7 +36,7 @@
   background-color: #323234 !important;
 }
 #tabbrowser-arrowscrollbox {
-  width: calc(100vw - 100px) !important; /* subsctract the .titlebar-buttonbox-container and margin */
+  width: calc(100vw - 150px) !important; /* subsctract the .titlebar-buttonbox-container and margin */
   margin-left: 10px;
 }
 
@@ -45,6 +46,7 @@
   width: calc(100% - 120px) !important;
   left: 0 !important;
   bottom: 0 !important;
+  position: fixed !important;
 }
 
 #main-window {
