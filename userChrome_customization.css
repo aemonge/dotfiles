@@ -1,56 +1,35 @@
-/* Tab bar on bottom */
-#navigator-toolbox {
-  padding-top: 6px !important;
-  padding-bottom: 0px !important;
+#main-window[sizemode="maximized"]  {
+  height: calc(100% - 28px) !important;
 }
-
-#titlebar {
-  margin-bottom: 32px;
-  width: 100vw;
-  background-color: #323234 !important;
+#main-window[sizemode="fullscreen"]  {
+  height: 100% !important;
 }
-
-#titlebar, #TabsToolbar {
-  position: fixed !important;
-  bottom: 0 !important;
-  display: block !important;
+#main-window {
+  height: calc(100% - 30px) !important;
+  background-color: #323234;
+  margin-bottom: -20px;
 }
-
-.titlebar-buttonbox-container {
-  right: 0 !important;
-  position: fixed !important;
-  display: block !important;
-  width: 140px !important;
-  margin: 5px auto !important;
-  bottom: 0 !important;
+#main-window[sizemode="maximized"] #titlebar {
+  margin-bottom: -20px;
+}
+#main-window #titlebar {
+  margin-bottom: -28px;
 }
 
 #TabsToolbar {
-  display: inline-grid !important;
-  position: absolute !important;
-  width: 100% !important;
-  top: 0 !important;
+  display: grid;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  grid-template-columns: repeat(3, auto);
+}
+
+#TabsToolbar .titlebar-spacer {
+  display: none;
 }
 #TabsToolbar .toolbar-items {
-  width: 100vw !important;
-  background-color: #323234 !important;
+  grid-column: 1 / 100;
 }
-#tabbrowser-arrowscrollbox {
-  width: calc(100vw - 150px) !important; /* subsctract the .titlebar-buttonbox-container and margin */
-  margin-left: 10px;
+#TabsToolbar .titlebar-buttonbox-container {
+  grid-column: 100;
 }
-
-#tabbrowser-tabs{
-  display: grid !important;
-  z-index: 99999 !important;
-  width: calc(100% - 120px) !important;
-  left: 0 !important;
-  bottom: 0 !important;
-  position: fixed !important;
-}
-
-#main-window {
-  height: calc(100% - 32px) !important;
-  background-color: #323234 !important;
-}
-/* END: Tab bar on bottom */
