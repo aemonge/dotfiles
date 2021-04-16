@@ -18,6 +18,7 @@
   clean-merged = "!git branch --merged | egrep -v '(^\\*|mast|dev|stag|prod|release)' | (xargs git branch -d 2> /dev/null || echo no merged branches found)"
   remove-tags  = "!git tag | xargs git tag -d"
   remove-tags-remote  = "!git tag -l | xargs -n 1 git push --delete origin"
+  clean-ignored =  "!f() { for dir in $(git ls-files -i --exclude-from=.gitignore $@); do git rm -r --cached $dir; done; }; f"
 
 [core]
   editor = vim
