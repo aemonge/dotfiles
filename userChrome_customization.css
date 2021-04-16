@@ -1,10 +1,3 @@
-/* :root { */
-/*   --bottom-tabs-tab-height: 30px; */
-/* } */
-
-#main-window[sizemode="maximized"] {
-  /* height: calc(100% - calc(var(--tab-min-height) + 8px)) !important; */
-}
 #main-window[sizemode="maximized"] #titlebar {
   height: calc(var(--tab-min-height) - 10px);
 }
@@ -12,7 +5,7 @@
   height: 100vh !important;
 }
 #main-window {
-  height: calc(100% - calc(var(--tab-min-height) + 10px)) !important;
+  height: calc(100% - var(--tab-min-height)) !important;
   background-color: #323234;
   margin-bottom: calc(10px - var(--tab-min-height));
 }
@@ -48,4 +41,12 @@
 
 #main-window[sizemode="normal"] #titlebar #toolbar-menubar .titlebar-buttonbox-container[skipintoolbarset="true"] {
   display: none;
+}
+
+
+/**
+ * OS Compatibillity
+ */
+#main-window { /* only for linux */
+  height: calc(100% - calc(var(--tab-min-height) + 10px)) !important;
 }
