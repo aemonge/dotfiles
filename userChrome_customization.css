@@ -6,7 +6,7 @@
 }
 #main-window {
   height: calc(100% - var(--tab-min-height)) !important;
-  background-color: #323234;
+  background-color: #323234 !important;
   margin-bottom: calc(10px - var(--tab-min-height));
 }
 #main-window[sizemode="maximized"] #titlebar {
@@ -26,6 +26,7 @@
   width: 100%;
   bottom: 0;
   grid-template-columns: repeat(3, auto);
+  background-color: #323234 !important;
 }
 
 #TabsToolbar .titlebar-spacer {
