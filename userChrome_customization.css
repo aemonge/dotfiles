@@ -1,19 +1,30 @@
-#main-window[sizemode="maximized"]  {
-  height: calc(100% - 28px) !important;
-}
-#main-window[sizemode="fullscreen"]  {
-  height: 100% !important;
-}
-#main-window {
-  height: calc(100% - 30px) !important;
-  background-color: #323234;
-  margin-bottom: -20px;
+/* :root { */
+/*   --bottom-tabs-tab-height: 30px; */
+/* } */
+
+#main-window[sizemode="maximized"] {
+  /* height: calc(100% - calc(var(--tab-min-height) + 8px)) !important; */
 }
 #main-window[sizemode="maximized"] #titlebar {
-  margin-bottom: -20px;
+  height: calc(var(--tab-min-height) - 10px);
+}
+#main-window[sizemode="fullscreen"]  {
+  height: 100vh !important;
+}
+#main-window {
+  height: calc(100% - calc(var(--tab-min-height) + 10px)) !important;
+  background-color: #323234;
+  margin-bottom: calc(10px - var(--tab-min-height));
+}
+#main-window[sizemode="maximized"] #titlebar {
+  margin-bottom: calc(10px - var(--tab-min-height));
 }
 #main-window #titlebar {
-  margin-bottom: -28px;
+  margin-bottom: calc(2px - var(--tab-min-height));
+}
+
+#main-window[sizemode="normal"] #toolbar-menubar[autohide="true"] {
+  height: calc(var(--tab-min-height) + var(--space-above-tabbar)) !important;
 }
 
 #TabsToolbar {
@@ -30,6 +41,11 @@
 #TabsToolbar .toolbar-items {
   grid-column: 1 / 100;
 }
+#TabsToolbar #window-controls,
 #TabsToolbar .titlebar-buttonbox-container {
   grid-column: 100;
+}
+
+#main-window[sizemode="normal"] #titlebar #toolbar-menubar .titlebar-buttonbox-container[skipintoolbarset="true"] {
+  display: none;
 }
