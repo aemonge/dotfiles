@@ -13,3 +13,12 @@
 * visited link color : #657B83
 * active link color  : #378AD3
 * selection color    : #7A5656
+
+# Dark Sepia
+* foreground color   : #FFD7AF
+* background color   : #303030
+* link color         : #87AF87
+* visited link color : #949494
+* active link color  : #AFAF00
+* selection color    : #FFD7AF
+
