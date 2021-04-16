@@ -64,23 +64,13 @@
   if [ $VIM_TERMINAL ]; then
     plugins=( archlinux aws bower cargo cloudfoundry coffee colored-man-pages colorize command-not-found
       common-aliases composer copydir copyfile cp dircycle dirhistory dirpersist docker-compose docker-machine
-      docker dotenv emoji-clock emoji emotty encode64 extract fedora frontend-search fzf gem git-auto-fetch git-extras
-      git-flow-avh git-flow git-hubflow git-prompt git-remote-branch git gitfast github gitignore gnu-utils gradle
-      grunt gulp jira jruby jsontools man marked2 mvn ng node npm npx nvm oc pod python rake react-native rsync
+      docker dotenv emoji-clock emoji emotty encode64 extract frontend-search fzf gem git-auto-fetch git-extras
+      git-flow-avh git-flow git-hubflow git-prompt git gitfast github gitignore gnu-utils gradle
+      grunt gulp jira jruby jsontools man marked2 mvn ng node npm oc pod python rake react-native rsync
       ruby rust rvm shrink-path singlechar ssh-agent stack sudo systemadmin systemd tig vi-mode vim-interaction vundle
       yarn zsh-navigation-tools zsh_reload
     )
     source $ZSH/oh-my-zsh.sh
-    source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-
-    # BEGIN Screen Saver Morpho https://github.com/psprint/zsh-morpho
-    source ~/.oh-my-zsh/custom/plugins/zsh-morpho/zsh-morpho.plugin.zsh
-    source ~/.oh-my-zsh/custom/plugins/zsh-vimode-visual/zsh-vimode-visual.zsh
-    # Screen Saver
-    zstyle ":morpho" screen-saver "cmatrix"
-    zstyle ":morpho" arguments "-abs"
-    zstyle ":morpho" delay "300"
-    zstyle ":morpho" check-interval "60"
 
     # User configuration
     set -o vi
@@ -114,39 +104,17 @@
   alias ls='ls --color'
   alias open='xdg-open'
   alias lsports='echo "$> netstat -plunt;" && echo && netstat -plunt'
-  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
 # Dont' save to `pushd` stack on every `  cd`
-  # unsetopt auto_pushd
-  bindkey '^n' autosuggest-accept
 # Execute command without keeping it in history  (they have to start with space)
   export HISTCONTROL=ignorespace
   setopt histignorespace
 
-# NVM
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# NPX local+global runner https://www.npmjs.com/package/npx
-  source <(npx --shell-auto-fallback zsh)
 
 # My own version of tmux
   if [ $VIM_TERMINAL ]; then
-    # First change directory to PWD, then open files. Giving a IDE impression
-    alias _vim=/usr/bin/vim
-    alias vcd='_vim --servername $VIM_TERMINAL_PARENT_ID --remote-send "<C-\><C-n>:cd $PWD <cr>a"'
-    alias vim='_vim --servername $VIM_TERMINAL_PARENT_ID --remote-send "<C-\><C-n>:cd $PWD <cr>" --remote-tab'
+    alias vim=~/.vim/_vim
+    alias vcd=~/.vim/_vcd
   fi
   if [ -z $VIM_TERMINAL ]; then
-    export VIM_TERMINAL_PARENT_ID="$$-VMUX";
-    # the exit below is to close the terminal when vmux is done.
-    vim +':terminal ++curwin ++close' --servername $VIM_TERMINAL_PARENT_ID && exit # || exit
+    vim +':terminal ++curwin ++close' && exit # || exit
   fi
-
-
-# Node Environments `yaourt -S nodenv`
-# export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# fnm
-# export PATH=$HOME/.fnm:$PATH
-# eval "`fnm env --multi`"
