@@ -35,6 +35,15 @@
 #TabsToolbar .toolbar-items {
   grid-column: 1 / 100;
 }
+
+#main-window[privatebrowsingmode="temporary"] #TabsToolbar .toolbar-items {
+  margin-bottom: -25px;
+}
+
+.private-browsing-indicator {
+  grid-column: 99;
+}
+
 #TabsToolbar #window-controls,
 #TabsToolbar .titlebar-buttonbox-container {
   grid-column: 100;
